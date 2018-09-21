@@ -8,7 +8,7 @@
 
 [Eloquent JavaScript](http://eloquentjavascript.net/) our textbook
 
-[Outline](https://github.com/maeyler/BLM305/blob/master/BLM 305 Outline.xls?raw=true) weekly planning of the course 
+[Outline](https://github.com/maeyler/BLM305/blob/master/BLM_305_Outline.xls?raw=true) weekly planning of the course 
 
 
 **Attendance and regular class work is required** <br>
