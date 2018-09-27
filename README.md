@@ -8,7 +8,7 @@
 
 [Eloquent JavaScript](http://eloquentjavascript.net/): our textbook
 
-[Outline](Course_outline): weekly planning of the course
+[Outline](Course_outline.md): weekly planning of the course
 
 Tools: [Chrome](https://wikiwand.com/en/Google_Chrome), [git](https://wikiwand.com/en/Git), [GitHub](https://github.com/), [GitKraken](https://gitkraken.com/)
 
