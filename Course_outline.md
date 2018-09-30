@@ -1,6 +1,5 @@
 ﻿## Course Outline
 
-
 | Week | Topic                 | Chap | API         |
 |------|-----------------------|------|-------------|
 | 1    | Numbers and Strings   | 1, 2 | [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)  |
@@ -20,7 +19,19 @@
 | 15   | Final                 |      |           |
 
 
-[Eloquent JavaScript](http://eloquentjavascript.net/): our textbook
+**Links**
 
-[API](https://developer.mozilla.org/)
+* [Eloquent JavaScript](http://eloquentjavascript.net/): our textbook
+* [GitHub repo](https://github.com/maeyler/BLM305/): programmer view
+* [GitHub docs](https://maeyler.github.io/BLM305/): public view
+
+
+**Grading**
+
+Midterm	20% <br>	
+Quiz	10 <br>	
+4xHW	10 <br>	
+10xCW	10 <br>	
+Project	15 <br>	
+Final	35
 
