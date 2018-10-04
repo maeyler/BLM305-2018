@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="c4_data.js"></script>
+    <title>Data Analysis</title>
+</head>
+
+<body>
+
+<h2 id=title></h2>
+
+<p>Minimum correlation =
+<input type=number id=inp value="0.0"
+  style="width:50px" onChange="analyze()">
+</p>
+<p id=out></p>
+
+<hr />
+<b>Sample code</b>
+<pre id=sample></pre>
+
+<hr />
+<p>Ref: <a href="http://eloquentjavascript.net/04_data.html#p_LI+01yIQON" 
+   target="ExternalDocument">JS Tutorial</a>
+</p>
+
+<script>
+const JE = journalEvents(JOURNAL);  //returns a Set -- not Array
+function report(a) {
+  out.innerText = JOURNAL.length+" journal entries and "
+                + a.length+" events\n" + a.join("\n")
+}
+function correlation(evt) { 
+  return phi(tableFor(evt, JOURNAL)) 
+}
+function analyze() {
+  let a = [];
+  for (let evt of JE) {
+    let cor = correlation(evt);
+    if (Math.abs(cor) > inp.value)
+      a.push(evt +": "+cor.toFixed(4))
+  }
+  report(a)
+}
+    sample.innerText = correlation+"\n"+analyze+"\n"+journalEvents;
+    title.innerText = document.title; 
+    report([...JE])  //Set to Array
+</script>
+
+</body>
+</html>
