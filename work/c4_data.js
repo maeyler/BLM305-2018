@@ -12,20 +12,30 @@ function phi(table) {   not used
               (table[0] + table[2]));
 }
 */
-function tableFor(event, journal) {
+function tableFor(evt, J=JOURNAL) {
   let table = [0, 0, 0, 0];
-  for (let i = 0; i < journal.length; i++) {
-    let entry = journal[i], index = 0;
-    if (entry.events.includes(event)) index += 1;
+  for (let entry of J) {
+    let index = 0;
+    if (entry.events.includes(evt)) index += 1;
     if (entry.squirrel) index += 2;
     table[index] += 1;
   }
   return table;
 }
 
-function journalEvents(journal) {
+function analyze(min=0, J=JOURNAL) {
+  let a = [];
+  for (let evt of EVENTS) {
+    let cor = phi(tableFor(evt, J));
+    if (Math.abs(cor) > min)
+      a.push(evt +": "+cor.toFixed(4))
+  }
+  return a
+}
+
+function journalEvents(J=JOURNAL) {
   let events = new Set();  //[];
-  for (let entry of journal) {
+  for (let entry of J) {
     for (let e of entry.events) {
       events.add(e);
       //if (!events.includes(e)) events.push(e);
@@ -34,96 +44,109 @@ function journalEvents(journal) {
   return events;
 }
 
+class Entry {
+  constructor(evt, sq) {
+    this.events = evt; this.squirrel = sq
+  }
+  toString() {
+    let s = this.events.length;
+    if (this.squirrel) s += " ✘";
+    return "[object Entry] " + s
+  }
+}
+
 const JOURNAL = [
-  {events:["carrot","exercise","weekend"], squirrel:false},
-  {events:["bread","pudding","brushed teeth","weekend","touched tree"], squirrel:false},
-  {events:["carrot","nachos","brushed teeth","cycling","weekend"], squirrel:false},
-  {events:["brussel sprouts","ice cream","brushed teeth","computer","weekend"], squirrel:false},
-  {events:["potatoes","candy","brushed teeth","exercise","weekend","dentist"], squirrel:false},
-  {events:["brussel sprouts","pudding","brushed teeth","running","weekend"], squirrel:false},
-  {events:["pizza","brushed teeth","computer","work","touched tree"], squirrel:false},
-  {events:["bread","beer","brushed teeth","cycling","work"], squirrel:false},
-  {events:["cauliflower","brushed teeth","work"], squirrel:false},
-  {events:["pizza","brushed teeth","cycling","work"], squirrel:false},
-  {events:["lasagna","nachos","brushed teeth","work"], squirrel:false},
-  {events:["brushed teeth","weekend","touched tree"], squirrel:false},
-  {events:["lettuce","brushed teeth","television","weekend"], squirrel:false},
-  {events:["spaghetti","brushed teeth","work"], squirrel:false},
-  {events:["brushed teeth","computer","work"], squirrel:false},
-  {events:["lettuce","nachos","brushed teeth","work"], squirrel:false},
-  {events:["carrot","brushed teeth","running","work"], squirrel:false},
-  {events:["brushed teeth","work"], squirrel:false},
-  {events:["cauliflower","reading","weekend"], squirrel:false},
-  {events:["bread","brushed teeth","weekend"], squirrel:false},
-  {events:["lasagna","brushed teeth","exercise","work"], squirrel:false},
-  {events:["spaghetti","brushed teeth","reading","work"], squirrel:false},
-  {events:["carrot","ice cream","brushed teeth","television","work"], squirrel:false},
-  {events:["spaghetti","nachos","work"], squirrel:false},
-  {events:["cauliflower","ice cream","brushed teeth","cycling","work"], squirrel:false},
-  {events:["spaghetti","peanuts","computer","weekend"], squirrel:true},
-  {events:["potatoes","ice cream","brushed teeth","computer","weekend"], squirrel:false},
-  {events:["potatoes","ice cream","brushed teeth","work"], squirrel:false},
-  {events:["peanuts","brushed teeth","running","work"], squirrel:false},
-  {events:["potatoes","exercise","work"], squirrel:false},
-  {events:["pizza","ice cream","computer","work"], squirrel:false},
-  {events:["lasagna","ice cream","work"], squirrel:false},
-  {events:["cauliflower","candy","reading","weekend"], squirrel:false},
-  {events:["lasagna","nachos","brushed teeth","running","weekend"], squirrel:false},
-  {events:["potatoes","brushed teeth","work"], squirrel:false},
-  {events:["carrot","work"], squirrel:false},
-  {events:["pizza","beer","work","dentist"], squirrel:false},
-  {events:["lasagna","pudding","cycling","work"], squirrel:false},
-  {events:["spaghetti","brushed teeth","reading","work"], squirrel:false},
-  {events:["spaghetti","pudding","television","weekend"], squirrel:false},
-  {events:["bread","brushed teeth","exercise","weekend"], squirrel:false},
-  {events:["lasagna","peanuts","work"], squirrel:true},
-  {events:["pizza","work"], squirrel:false},
-  {events:["potatoes","exercise","work"], squirrel:false},
-  {events:["brushed teeth","exercise","work"], squirrel:false},
-  {events:["spaghetti","brushed teeth","television","work"], squirrel:false},
-  {events:["pizza","cycling","weekend"], squirrel:false},
-  {events:["carrot","brushed teeth","weekend"], squirrel:false},
-  {events:["carrot","beer","brushed teeth","work"], squirrel:false},
-  {events:["pizza","peanuts","candy","work"], squirrel:true},
-  {events:["carrot","peanuts","brushed teeth","reading","work"], squirrel:false},
-  {events:["potatoes","peanuts","brushed teeth","work"], squirrel:false},
-  {events:["carrot","nachos","brushed teeth","exercise","work"], squirrel:false},
-  {events:["pizza","peanuts","brushed teeth","television","weekend"], squirrel:false},
-  {events:["lasagna","brushed teeth","cycling","weekend"], squirrel:false},
-  {events:["cauliflower","peanuts","brushed teeth","computer","work","touched tree"], squirrel:false},
-  {events:["lettuce","brushed teeth","television","work"], squirrel:false},
-  {events:["potatoes","brushed teeth","computer","work"], squirrel:false},
-  {events:["bread","candy","work"], squirrel:false},
-  {events:["potatoes","nachos","work"], squirrel:false},
-  {events:["carrot","pudding","brushed teeth","weekend"], squirrel:false},
-  {events:["carrot","brushed teeth","exercise","weekend","touched tree"], squirrel:false},
-  {events:["brussel sprouts","running","work"], squirrel:false},
-  {events:["brushed teeth","work"], squirrel:false},
-  {events:["lettuce","brushed teeth","running","work"], squirrel:false},
-  {events:["candy","brushed teeth","work"], squirrel:false},
-  {events:["brussel sprouts","brushed teeth","computer","work"], squirrel:false},
-  {events:["bread","brushed teeth","weekend"], squirrel:false},
-  {events:["cauliflower","brushed teeth","weekend"], squirrel:false},
-  {events:["spaghetti","candy","television","work","touched tree"], squirrel:false},
-  {events:["carrot","pudding","brushed teeth","work"], squirrel:false},
-  {events:["lettuce","brushed teeth","work"], squirrel:false},
-  {events:["carrot","ice cream","brushed teeth","cycling","work"], squirrel:false},
-  {events:["pizza","brushed teeth","work"], squirrel:false},
-  {events:["spaghetti","peanuts","exercise","weekend"], squirrel:true},
-  {events:["bread","beer","computer","weekend","touched tree"], squirrel:false},
-  {events:["brushed teeth","running","work"], squirrel:false},
-  {events:["lettuce","peanuts","brushed teeth","work","touched tree"], squirrel:false},
-  {events:["lasagna","brushed teeth","television","work"], squirrel:false},
-  {events:["cauliflower","brushed teeth","running","work"], squirrel:false},
-  {events:["carrot","brushed teeth","running","work"], squirrel:false},
-  {events:["carrot","reading","weekend"], squirrel:false},
-  {events:["carrot","peanuts","reading","weekend"], squirrel:true},
-  {events:["potatoes","brushed teeth","running","work"], squirrel:false},
-  {events:["lasagna","ice cream","work","touched tree"], squirrel:false},
-  {events:["cauliflower","peanuts","brushed teeth","cycling","work"], squirrel:false},
-  {events:["pizza","brushed teeth","running","work"], squirrel:false},
-  {events:["lettuce","brushed teeth","work"], squirrel:false},
-  {events:["bread","brushed teeth","television","weekend"], squirrel:false},
-  {events:["cauliflower","peanuts","brushed teeth","weekend"], squirrel:false}
+  new Entry(["carrot","exercise","weekend"], false),
+  new Entry(["bread","pudding","brushed teeth","weekend","touched tree"], false),
+  new Entry(["carrot","nachos","brushed teeth","cycling","weekend"], false),
+  new Entry(["brussel sprouts","ice cream","brushed teeth","computer","weekend"], false),
+  new Entry(["potatoes","candy","brushed teeth","exercise","weekend","dentist"], false),
+  new Entry(["brussel sprouts","pudding","brushed teeth","running","weekend"], false),
+  new Entry(["pizza","brushed teeth","computer","work","touched tree"], false),
+  new Entry(["bread","beer","brushed teeth","cycling","work"], false),
+  new Entry(["cauliflower","brushed teeth","work"], false),
+  new Entry(["pizza","brushed teeth","cycling","work"], false),
+  new Entry(["lasagna","nachos","brushed teeth","work"], false),
+  new Entry(["brushed teeth","weekend","touched tree"], false),
+  new Entry(["lettuce","brushed teeth","television","weekend"], false),
+  new Entry(["spaghetti","brushed teeth","work"], false),
+  new Entry(["brushed teeth","computer","work"], false),
+  new Entry(["lettuce","nachos","brushed teeth","work"], false),
+  new Entry(["carrot","brushed teeth","running","work"], false),
+  new Entry(["brushed teeth","work"], false),
+  new Entry(["cauliflower","reading","weekend"], false),
+  new Entry(["bread","brushed teeth","weekend"], false),
+  new Entry(["lasagna","brushed teeth","exercise","work"], false),
+  new Entry(["spaghetti","brushed teeth","reading","work"], false),
+  new Entry(["carrot","ice cream","brushed teeth","television","work"], false),
+  new Entry(["spaghetti","nachos","work"], false),
+  new Entry(["cauliflower","ice cream","brushed teeth","cycling","work"], false),
+  new Entry(["spaghetti","peanuts","computer","weekend"], true),
+  new Entry(["potatoes","ice cream","brushed teeth","computer","weekend"], false),
+  new Entry(["potatoes","ice cream","brushed teeth","work"], false),
+  new Entry(["peanuts","brushed teeth","running","work"], false),
+  new Entry(["potatoes","exercise","work"], false),
+  new Entry(["pizza","ice cream","computer","work"], false),
+  new Entry(["lasagna","ice cream","work"], false),
+  new Entry(["cauliflower","candy","reading","weekend"], false),
+  new Entry(["lasagna","nachos","brushed teeth","running","weekend"], false),
+  new Entry(["potatoes","brushed teeth","work"], false),
+  new Entry(["carrot","work"], false),
+  new Entry(["pizza","beer","work","dentist"], false),
+  new Entry(["lasagna","pudding","cycling","work"], false),
+  new Entry(["spaghetti","brushed teeth","reading","work"], false),
+  new Entry(["spaghetti","pudding","television","weekend"], false),
+  new Entry(["bread","brushed teeth","exercise","weekend"], false),
+  new Entry(["lasagna","peanuts","work"], true),
+  new Entry(["pizza","work"], false),
+  new Entry(["potatoes","exercise","work"], false),
+  new Entry(["brushed teeth","exercise","work"], false),
+  new Entry(["spaghetti","brushed teeth","television","work"], false),
+  new Entry(["pizza","cycling","weekend"], false),
+  new Entry(["carrot","brushed teeth","weekend"], false),
+  new Entry(["carrot","beer","brushed teeth","work"], false),
+  new Entry(["pizza","peanuts","candy","work"], true),
+  new Entry(["carrot","peanuts","brushed teeth","reading","work"], false),
+  new Entry(["potatoes","peanuts","brushed teeth","work"], false),
+  new Entry(["carrot","nachos","brushed teeth","exercise","work"], false),
+  new Entry(["pizza","peanuts","brushed teeth","television","weekend"], false),
+  new Entry(["lasagna","brushed teeth","cycling","weekend"], false),
+  new Entry(["cauliflower","peanuts","brushed teeth","computer","work","touched tree"], false),
+  new Entry(["lettuce","brushed teeth","television","work"], false),
+  new Entry(["potatoes","brushed teeth","computer","work"], false),
+  new Entry(["bread","candy","work"], false),
+  new Entry(["potatoes","nachos","work"], false),
+  new Entry(["carrot","pudding","brushed teeth","weekend"], false),
+  new Entry(["carrot","brushed teeth","exercise","weekend","touched tree"], false),
+  new Entry(["brussel sprouts","running","work"], false),
+  new Entry(["brushed teeth","work"], false),
+  new Entry(["lettuce","brushed teeth","running","work"], false),
+  new Entry(["candy","brushed teeth","work"], false),
+  new Entry(["brussel sprouts","brushed teeth","computer","work"], false),
+  new Entry(["bread","brushed teeth","weekend"], false),
+  new Entry(["cauliflower","brushed teeth","weekend"], false),
+  new Entry(["spaghetti","candy","television","work","touched tree"], false),
+  new Entry(["carrot","pudding","brushed teeth","work"], false),
+  new Entry(["lettuce","brushed teeth","work"], false),
+  new Entry(["carrot","ice cream","brushed teeth","cycling","work"], false),
+  new Entry(["pizza","brushed teeth","work"], false),
+  new Entry(["spaghetti","peanuts","exercise","weekend"], true),
+  new Entry(["bread","beer","computer","weekend","touched tree"], false),
+  new Entry(["brushed teeth","running","work"], false),
+  new Entry(["lettuce","peanuts","brushed teeth","work","touched tree"], false),
+  new Entry(["lasagna","brushed teeth","television","work"], false),
+  new Entry(["cauliflower","brushed teeth","running","work"], false),
+  new Entry(["carrot","brushed teeth","running","work"], false),
+  new Entry(["carrot","reading","weekend"], false),
+  new Entry(["carrot","peanuts","reading","weekend"], true),
+  new Entry(["potatoes","brushed teeth","running","work"], false),
+  new Entry(["lasagna","ice cream","work","touched tree"], false),
+  new Entry(["cauliflower","peanuts","brushed teeth","cycling","work"], false),
+  new Entry(["pizza","brushed teeth","running","work"], false),
+  new Entry(["lettuce","brushed teeth","work"], false),
+  new Entry(["bread","brushed teeth","television","weekend"], false),
+  new Entry(["cauliflower","peanuts","brushed teeth","weekend"], false)
 ]
+
+const EVENTS = journalEvents();  //returns a Set -- not Array
 

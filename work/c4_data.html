@@ -13,7 +13,7 @@
 
 <p>Minimum correlation =
 <input type=number id=inp value="0.0"
-  style="width:50px" onChange="analyze()">
+  style="width:50px" onChange="report(analyze(value))">
 </p>
 <p id=out></p>
 
@@ -23,30 +23,17 @@
 
 <hr />
 <p>Ref: <a href="http://eloquentjavascript.net/04_data.html#p_LI+01yIQON" 
-   target="ExternalDocument">JS Tutorial</a>
+   target="ExternalDocument">Chap 4, Final analysis</a>
 </p>
 
 <script>
-const JE = journalEvents(JOURNAL);  //returns a Set -- not Array
 function report(a) {
   out.innerText = JOURNAL.length+" journal entries and "
                 + a.length+" events\n" + a.join("\n")
 }
-function correlation(evt) { 
-  return phi(tableFor(evt, JOURNAL)) 
-}
-function analyze() {
-  let a = [];
-  for (let evt of JE) {
-    let cor = correlation(evt);
-    if (Math.abs(cor) > inp.value)
-      a.push(evt +": "+cor.toFixed(4))
-  }
-  report(a)
-}
-    sample.innerText = correlation+"\n"+analyze+"\n"+journalEvents;
     title.innerText = document.title; 
-    report([...JE])  //Set to Array
+    report([...EVENTS])  //Set to Array
+    sample.innerText = analyze+"\n"+journalEvents;
 </script>
 
 </body>
