@@ -1,20 +1,12 @@
-function phi([n00, n01, n10, n11]) {
+﻿function phi([n00, n01, n10, n11]) {
   return (n11 * n00 - n10 * n01) /
     Math.sqrt((n10 + n11) * (n00 + n01) *
               (n01 + n11) * (n00 + n10));
 }
-/* replaced by the code shown above 
-function phi(table) {   not used
-  return (table[3] * table[0] - table[2] * table[1]) /
-    Math.sqrt((table[2] + table[3]) *
-              (table[0] + table[1]) *
-              (table[1] + table[3]) *
-              (table[0] + table[2]));
-}
-*/
-function tableFor(evt, J=JOURNAL) {
+
+function tableFor(evt) {
   let table = [0, 0, 0, 0];
-  for (let entry of J) {
+  for (let entry of JOURNAL) {
     let index = 0;
     if (entry.events.includes(evt)) index += 1;
     if (entry.squirrel) index += 2;
@@ -23,25 +15,21 @@ function tableFor(evt, J=JOURNAL) {
   return table;
 }
 
-function analyze(min=0, J=JOURNAL) {
+function analyze(min=0) {
   let a = [];
   for (let evt of EVENTS) {
-    let cor = phi(tableFor(evt, J));
+    let cor = phi(tableFor(evt));
     if (Math.abs(cor) > min)
       a.push(evt +": "+cor.toFixed(4))
   }
   return a
 }
 
-function journalEvents(J=JOURNAL) {
-  let events = new Set();  //[];
-  for (let entry of J) {
-    for (let e of entry.events) {
-      events.add(e);
-      //if (!events.includes(e)) events.push(e);
-    }
-  }
-  return events;
+function journalEvents() {
+  EVENTS.clear();
+  for (let entry of JOURNAL)
+    for (let e of entry.events)
+      EVENTS.add(e);
 }
 
 class Entry {
@@ -54,6 +42,8 @@ class Entry {
     return "[object Entry] " + s
   }
 }
+
+const EVENTS = new Set();  //use Set -- not Array
 
 const JOURNAL = [
   new Entry(["carrot","exercise","weekend"], false),
@@ -148,5 +138,4 @@ const JOURNAL = [
   new Entry(["cauliflower","peanuts","brushed teeth","weekend"], false)
 ]
 
-const EVENTS = journalEvents();  //returns a Set -- not Array
-
+journalEvents()  //determine the set of events

@@ -29,10 +29,24 @@ class Menu {
     return s
   }
   correlation(evt) { 
-    return phi(tableFor(evt)) 
+    return phi(window.tableFor(evt)) 
   }
   analyze(val) {
     return window.analyze(val)
+  }
+  tableFor(evt) {
+    return window.tableFor(evt)
+  }
+  max(...numbers) {
+    let result = -Infinity;
+    for (let n of numbers)
+      if (n > result) result = n;
+    return result;
+  }
+  pointOnCircle(radius=1) {
+    let angle = Math.random() * 2 * Math.PI;
+    return {x: radius * Math.cos(angle),
+            y: radius * Math.sin(angle)};
   }
   toString() {
     return "[object Menu]"
@@ -52,7 +66,7 @@ function init() {
 }
     docName.innerText = document.title+" "+VERSION;
     try {
-        inspect(document.body, init);
+        inspect(document.body, init); //makes the table
         //inp.value = "new Number(c.pi)";
         code = document.createElement("pre");
         document.body.appendChild(code);
