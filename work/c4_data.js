@@ -32,6 +32,32 @@ function journalEvents() {
       EVENTS.add(e);
 }
 
+class Chap4 extends Menu {
+  correlation(evt) { 
+    return phi(window.tableFor(evt)) 
+  }
+  analyze(val) {
+    return window.analyze(val)
+  }
+  tableFor(evt) {
+    return window.tableFor(evt)
+  }
+  max(...numbers) {
+    let result = -Infinity;
+    for (let n of numbers)
+      if (n > result) result = n;
+    return result;
+  }
+  pointOnCircle(radius=1) {
+    let angle = Math.random() * 2 * Math.PI;
+    return {x: radius * Math.cos(angle),
+            y: radius * Math.sin(angle)};
+  }
+  toString() {
+    return "[object Menu] Chap4"
+  }
+}
+
 class Entry {
   constructor(evt, sq) {
     this.events = evt; this.squirrel = sq
