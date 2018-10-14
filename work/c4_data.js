@@ -143,6 +143,15 @@ const JOURNAL = [
 journalEvents()  //determine the set of events
 
 class Chap4 extends Menu {
+  constructor() {
+    super();
+    this.s = "Small is beautiful";
+    this.d = new Date(),
+    this.a = a; this.c = c; //global
+    this.window = window;
+    this.JOURNAL = JOURNAL;
+    this.EVENTS = EVENTS;
+  }
   correlation(evt) { 
     return phi(window.tableFor(evt)) 
   }

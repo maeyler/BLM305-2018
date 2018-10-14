@@ -80,6 +80,26 @@ class SymmetricMatrix extends Matrix {
   }
 }
 
+class Temperature {
+  constructor(celsius=0) {
+    this.celsius = Math.round(celsius);
+  }
+  get fahrenheit() {
+    return Math.round(this.celsius * 1.8 + 32);
+  }
+  set fahrenheit(value=32) {
+    this.celsius = Math.round((value - 32) / 1.8);
+  }
+  toString() {
+    return this.celsius+"°C"
+  }
+  static fromFahrenheit(value) {
+    let t = new Temperature();
+    t.fahrenheit = value;
+    return t;
+  }
+}
+
 class Chap6 extends Menu {
   constructor() {
     super();
@@ -90,6 +110,7 @@ class Chap6 extends Menu {
     this.rabbits[2].teeth = "long & sharp";
     this.matrix = new Matrix(3, 4, (x,y) => ""+x+y);
     this.symMat = new SymmetricMatrix(3, (x,y) => 10*x+y);
+    this.temp = new Temperature(25);
   }
   journalArray() {
     let a = [];
