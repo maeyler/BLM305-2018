@@ -141,8 +141,5 @@ class Chap6 extends Menu {
     for (let k in x) m.set(k, x[k]);
     return m;
   }
-  toString() {
-    return "[object Menu] Chap6"
-  }
 }
 

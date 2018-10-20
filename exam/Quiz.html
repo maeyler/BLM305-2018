@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://maeyler.github.io/JS/sss/inspector.js"></script>
+    <script src="Quiz.js"></script>
+    <title>Quiz Solution </title>
+</head>
+
+<body>
+
+<h2 id=title></h2>
+
+<hr />
+<pre id=out1></pre>
+<img src="diagram.png" width="400px">
+<pre id=out2></pre>
+<hr />
+
+<script>
+    title.innerText = document.title;
+    let Q = new Quiz()
+    out1.innerText = Author+"\n"+Book
+    out2.innerText = Q.solution+"\n\n"+Q.morePagesThan+
+       "\n\n"+Q.convertToMap+"\n\n"+reportBooks(Q, 200)
+</script>
+
+</body>
+</html>

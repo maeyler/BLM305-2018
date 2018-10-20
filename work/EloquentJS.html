@@ -8,6 +8,7 @@
     <script src="https://maeyler.github.io/JS/sss/inspector.js"></script>
     <script src="c4_data.js"></script>
     <script src="c6_object.js"></script>
+    <script src="../exam/Quiz.js"></script>
     <title>Eloquent JavaScript </title>
 </head>
 
@@ -26,16 +27,16 @@ function init() {
        sqrt = Math.sqrt, power = Math.pow;
     a = [0, 11, "22", "abc"];
     c = {len, name, pi, sqrt, power};
-    MENU = new Chap6(); //global
-    display(MENU); display(new Chap4()); 
+    MENU = new Quiz(); //global
+    display(MENU); 
+    display(new Chap6()); 
+    display(new Chap4()); 
+    display(MENU);
 }
     docName.innerText = "Inspector "+VERSION;
     try {
         inspect(document.body, init); //makes the table
         //inp.value = "new Number(c.pi)";
-        code = document.createElement("pre");
-        document.body.appendChild(code);
-        code.innerText = Rabbit+NL+Temperature;
     } catch(e) {
         reportError(e);
     }
