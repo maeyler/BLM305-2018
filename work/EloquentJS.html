@@ -9,6 +9,7 @@
     <script src="c4_data.js"></script>
     <script src="c6_object.js"></script>
     <script src="../exam/Quiz.js"></script>
+    <script src="async.js"></script>
     <title>Eloquent JavaScript </title>
 </head>
 
@@ -27,8 +28,9 @@ function init() {
        sqrt = Math.sqrt, power = Math.pow;
     a = [0, 11, "22", "abc"];
     c = {len, name, pi, sqrt, power};
-    MENU = new Quiz(); //global
+    MENU = new Async(); //global
     display(MENU); 
+    display(new Quiz());
     display(new Chap6()); 
     display(new Chap4()); 
     display(MENU);
@@ -41,6 +43,14 @@ function init() {
         reportError(e);
     }
 </script>
+
+<p><input type=file multiple onChange='fileSelect(this)' />
+</p><p>
+<a href="https://maeyler.github.io/BLM305/exam/Quiz.html">Quiz solution</a> &emsp;
+<a href="https://maeyler.github.io/JS/hard/Fetch%20remote.html">Fetch remote</a>
+</p>
+<pre id=disp1></pre>
+<img id=disp2 />
 
 </body>
 </html>
