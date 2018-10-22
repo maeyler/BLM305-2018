@@ -25,22 +25,6 @@ class Book {
     }
 }
 
-function reportBooks(q, num=100) {
-  let c = q.data.length
-  if (!c) return ""
-  let t = q.rumi+"\n"
-  t += "\n• Start with "+c+" books:\n"
-  for (let b of q.data) t += b+"\n"
-  t += "\n• morePagesThan("+num+"):\n"
-  for (let b of q.morePagesThan(num)) 
-    t += b+"\n"
-  t += "\n• convertToMap():\n"
-  let m = q.convertToMap()
-  for (let k of m.keys()) 
-    t += k+" -- "+m.get(k).size+" books\n"
-  return t
-}
-
 class Quiz extends Menu {
   constructor() {
     super();
@@ -74,8 +58,20 @@ class Quiz extends Menu {
     }
     return m
   }
-  report(num) {
-    return reportBooks(this, num).split(NL)
+  report(num=100) {
+    let c = this.data.length
+    if (!c) return ""
+    let t = this.rumi+"\n"
+    t += "\n• Start with "+c+" books:\n"
+    for (let b of this.data) t += b+"\n"
+    t += "\n• morePagesThan("+num+"):\n"
+    for (let b of this.morePagesThan(num)) 
+      t += b+"\n"
+    t += "\n• convertToMap():\n"
+    let m = this.convertToMap()
+    for (let k of m.keys()) 
+      t += k+" -- "+m.get(k).size+" books\n"
+    return t
   }
 }
 
