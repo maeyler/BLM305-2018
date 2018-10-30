@@ -9,7 +9,7 @@
     <script src="c4_data.js"></script>
     <script src="c6_object.js"></script>
     <script src="../exam/Quiz.js"></script>
-    <script src="async.js"></script>
+    <script src="Async.js"></script>
     <title>Eloquent JavaScript </title>
 </head>
 
@@ -28,12 +28,11 @@ function init() {
        sqrt = Math.sqrt, power = Math.pow;
     a = [0, 11, "22", "abc"];
     c = {len, name, pi, sqrt, power};
+    display(new Chap4());
+    display(new Chap6());
+    display(new Quiz());
     MENU = new Async(); //global
     display(MENU); 
-    display(new Quiz());
-    display(new Chap6()); 
-    display(new Chap4()); 
-    display(MENU);
 }
     docName.innerText = "Inspector "+VERSION;
     try {
