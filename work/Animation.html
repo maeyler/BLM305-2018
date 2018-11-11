@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Animations </title>
+
+  <style>
+    #clock {
+        font-size: 48px;
+        background-color: blue;
+        color: white;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+<h2 id=title></h2>
+<p id=clock></p>
+<p>
+<button onClick="this.animate(t1, 5000)">translate</button>
+<button onClick="this.animate(t2, 5000)">rotate</button>
+<button onClick="this.animate(t3, 6000)">background</button>
+<button onClick="out.animate(t4, 6000)">fontSize</button>
+</p>
+<p id=out>Animations in CSS are powerful and simple</p>
+
+<script>
+"use strict";
+var hm, time;  //for clock
+function twoDigits(t) {
+    if (t>9) return ""+t;
+    return "0"+t;
+}
+function setHourMin() {
+    const d = new Date();
+    hm = twoDigits(d.getHours())+":"
+        +twoDigits(d.getMinutes());
+    document.title = "Clock "+hm; 
+    //console.log(hm);
+}
+function count() {
+    const d = new Date();
+    let sec = twoDigits(d.getSeconds());
+    if (sec == "00") setHourMin();
+    clock.innerText = hm+":"+sec;
+    time = setTimeout(count, 1000);
+}
+const 
+  t1 = { transform: ["translateX(0)", "translateX(300px)", "translateX(0)"] },
+  t2 = { transform: ["rotate(0)", "rotate(90deg)", "rotate(0)"] },
+  t3 = { background: ["yellow", "cyan", "magenta", "yellow"] },
+  t4 = { fontSize: ["100%", "150%", "100%", "75%", "100%"] };
+  title.innerText = document.title;
+  setHourMin(); count();
+</script>
+
+</body>
+</html>
