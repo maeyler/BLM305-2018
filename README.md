@@ -6,6 +6,8 @@
 
 [Examples](https://maeyler.github.io/JS/): sample JavaScript pages
 
+[Inspector](https://maeyler.github.io/BLM305/inspect.html): inspect objects
+
 [Eloquent JavaScript](http://eloquentjavascript.net/): our textbook
 
 [Outline](Course_outline.md): weekly planning of the course
