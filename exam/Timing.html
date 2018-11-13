@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="../work/Database.js"></script>
+    <title>Set Intersection </title>
+
+<script>
+"use strict";
+const url = "https://maeyler.github.io/JS/data/";
+const array = [], set = new Set();
+function readData(file) {
+    console.log("readData "+file);
+    fetch(url+file)
+        .then(r => r.text(), console.log)
+        .then(addStudents, console.log);
+}
+function parseStudent(line) {
+    let b = line.split("\t");
+    let id = b[0], name = b[1], gpa = b[2];
+    let std = new Student(id, name, gpa);
+    let list = [];
+    for (let i=3; i<b.length; i++) 
+        list.push(b[i]);
+    std.addCourses(list);
+    return std
+}
+function addStudents(txt) {
+    let msg = "\nData contains ";
+    msg += txt.length+" chars, ";
+    let a = txt.split("\n");
+    msg += a.length+" lines \n";
+    for (let s of a) {
+      let std = parseStudent(s);
+      array.push(std); set.add(std.name);
+    }
+    msg += array.length+" students, "
+    msg += set.size+" distinct names"
+    out.innerText += msg
+}
+function intersect1(a, b) { //fast
+    let s = new Set()
+    for (let x of a)
+      if (b.has(x)) s.add(x)
+    return s
+}
+function intersect2(a, b) { //slow
+    let s = new Set()
+    for (let x of a)
+      for (let y of b)
+        if (x == y) s.add(x)
+    return s
+}
+function timing(f) {
+    let t = performance.now()
+    let x = f(set, set)  //calculate intersection by itself
+    t = performance.now() - t
+    let s = f.name+": "+t.toPrecision(3)+" msec "+x.size
+    out.innerText += "\n"+s; console.log(s)
+}
+</script>
+</head>
+
+<body>
+<h2 id=title></h2>
+<button onClick='timing(intersect1)'>Method 1</button>
+<button onClick='timing(intersect2)'>Method 2</button>
+<p id=out>Question 3 in the exam</p>
+<hr />
+<b>Sample code</b>
+<pre id=sample></pre>
+<hr />
+
+<script>
+    title.innerText = document.title;
+    sample.innerText = intersect1+"\n"+intersect2;
+    readData("Students.txt")
+</script>
+
+</body>
+</html>
