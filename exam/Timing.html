@@ -23,7 +23,7 @@ function parseStudent(line) {
     let list = [];
     for (let i=3; i<b.length; i++) 
         list.push(b[i]);
-    std.addCourses(list);
+    std.courses = list
     return std
 }
 function addStudents(txt) {
@@ -33,7 +33,7 @@ function addStudents(txt) {
     msg += a.length+" lines \n";
     for (let s of a) {
       let std = parseStudent(s);
-      array.push(std); set.add(std.name);
+      array.push(std.id); set.add(std.name);
     }
     msg += array.length+" students, "
     msg += set.size+" distinct names"
