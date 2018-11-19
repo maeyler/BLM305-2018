@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width">
     <link rel="manifest" href="manifest.json"> 
     <title>BLM 305 </title>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/BLM305/sw.js')
+        .then((reg) => { console.log('başla', reg) })
+        .catch(console.log)
+    }
+  </script>
 </head>
 <body>
 <h2 id="advanced-programming">Advanced Programming</h2>
