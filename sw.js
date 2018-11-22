@@ -1,14 +1,19 @@
-function installCB(e) {
-  console.log('install oldu', e.request);
-}
-self.addEventListener('install', installCB)
+const CACHE ='JS'
 
-function fetchCB(e) { //fetch first no cache
+function save(req, resp) {
+  return caches.open(CACHE)
+  .then(cache => {
+    cache.put(req, resp.clone());
+    return resp;
+  }) 
+  .catch(console.log)
+}
+function fetchCB(e) { //fetch first
   let req = e.request
-  console.log('fetch', req.url);
+  console.log('BLM', req.url);
   e.respondWith(
-    fetch(req).then(r2 => r2)
-    .catch(console.log)
+    fetch(req).then(r2 => save(req, r2))
+    .catch(() => { return caches.match(req).then(r1 => r1) })
   )
 }
 self.addEventListener('fetch', fetchCB)

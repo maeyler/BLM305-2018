@@ -9,7 +9,7 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/BLM305/sw.js')
-        .then((reg) => { console.log('başla', reg) })
+        .then((reg) => { console.log('SW starts', reg) })
         .catch(console.log)
     }
   </script>
