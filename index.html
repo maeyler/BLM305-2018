@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="theme-color" content="cyan" />
+    <meta name="theme-color" content="yellow" />
     <meta name="author" content="M A Eyler, Istanbul, 2018" />
     <meta name="description" content="BLM305 FSMV University" />
+    <link rel="icon" href="images/305.png">
     <link rel="manifest" href="manifest.json"> 
     <title>BLM 305 </title>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/BLM305/sw.js')
-        .then((reg) => { console.log('SW starts', reg) })
+        .then((reg) => { console.log('SW starts', reg.active) })
         .catch(console.log)
     }
   </script>

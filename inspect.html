@@ -41,7 +41,7 @@ function init() {
     docName.innerText = "Inspector "+VERSION;
     try {
         inspect(document.body, init); //makes the table
-        //inp.value = "new Number(c.pi)";
+        inp.value = "caches.open('JS')";
     } catch(e) {
         reportError(e);
     }
