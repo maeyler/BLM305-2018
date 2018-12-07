@@ -87,9 +87,6 @@ function render(t) {
 <span id=out>t =</span>
 </p>
 <hr />
-<b>Sample code</b>
-<pre id=sample></pre>
-<hr />
 
 <p>Ref: 
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations" 
@@ -98,7 +95,6 @@ function render(t) {
 
 <script>
     title.innerText = document.title;
-    sample.innerText = draw.toString();
     canvas.width = SIZE; canvas.height = SIZE;
     const ctx = canvas.getContext("2d");
     ctx.drawImage(sun, 0, 0, SIZE, SIZE);
