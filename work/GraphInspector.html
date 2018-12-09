@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://maeyler.github.io/JS/sss/inspector.css" 
+          rel="stylesheet" media="all">
+    <script src="https://maeyler.github.io/JS/sss/inspector.js"></script>
+    <title>Graphics Inspector </title>
+</head>
+
+<body>
+<canvas id="canvas"></canvas>
+<p style="margin:0">
+<div id="color" style="width:120px;height:50px;float:left"></div>
+&emsp; <b id=docName></b> &emsp;
+<a href="https://maeyler.github.io/JS/sss/">Read me</a>
+</p>
+
+<script>
+"use strict";
+//Ref: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas
+const cx = canvas.getContext('2d');
+const img = new Image();
+img.style.display = 'none';
+img.crossOrigin = 'anonymous';
+img.src = "https://avatars2.githubusercontent.com/u/36419031";
+//'https://avatars1.githubusercontent.com/u/14038292';
+function start() {
+  canvas.width = img.width
+  canvas.height = img.height
+  cx.drawImage(img, 0, 0)
+  MENU.W = canvas.width
+  MENU.H = canvas.height
+}
+img.onload = start;
+function pick(evt) {
+  let x = evt.layerX, y = evt.layerY;
+  let rgb, avg;
+  try {
+    let pixel = cx.getImageData(x, y, 1, 1);
+    let data = pixel.data;
+    rgb = 'rgb('+data[0]+', '+data[1]+', '+data[2]+')';
+         //rgba:  ', ' + (data[3] / 255) + ')';
+    avg = (data[0]+data[1]+data[2])/3;
+  } catch {
+    rgb = 'gray'; avg = 127;
+  }
+  color.style.background = rgb;
+  color.style.color = avg < 127? "white" : "black";
+  if (rgb == 'gray') rgb = '';
+  color.innerText = 'xy('+x+', '+y+')\n'+rgb;
+}
+canvas.addEventListener('mousemove', pick);
+
+class Graph extends Menu {
+  constructor() {
+    super()
+    this.canvas = canvas
+    this.context = cx
+    this.image = img
+    this.W = canvas.width
+    this.H = canvas.height
+  }
+  loadImage(url) {
+    img.src = url
+  }
+  invert() {
+    let id = this.context.getImageData(0, 0, this.W, this.H);
+    let data = id.data;
+    for (let i = 0; i < data.length; i += 4) {
+      data[i]   = 255 - data[i];   // red
+      data[i+1] = 255 - data[i+1]; // green
+      data[i+2] = 255 - data[i+2]; // blue
+    }
+    this.context.putImageData(id, 0, 0);
+  }
+  grayscale() {
+    let id = this.context.getImageData(0, 0, this.W, this.H);
+    let data = id.data;
+    for (let i = 0; i < data.length; i += 4) {
+      var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      data[i]   = avg; // red
+      data[i+1] = avg; // green
+      data[i+2] = avg; // blue
+    }
+    this.context.putImageData(id, 0, 0);
+  }
+  getPixelAt(x, y) {
+    return this.context.getImageData(x, y, 1, 1).data;
+  }
+}
+
+function init() {
+    MENU = new Graph(); //global
+    display(MENU); display(cx); display(img)
+}
+    docName.innerText = "Inspector "+VERSION;
+    try {
+        inspect(document.body, init); //makes the table
+        inp.value = "";
+    } catch(e) {
+        reportError(e);
+    }
+</script>
+
+</body>
+</html>
