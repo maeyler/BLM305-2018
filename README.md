@@ -6,7 +6,7 @@
 
 [Examples](https://maeyler.github.io/JS/): sample JavaScript pages
 
-[Inspector](https://maeyler.github.io/BLM305/inspect.html): inspect objects
+[Class work](https://maeyler.github.io/BLM305/inspect.html): using the Inspector
 
 [Eloquent JavaScript](http://eloquentjavascript.net/): our textbook
 
