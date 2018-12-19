@@ -1,42 +1,81 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <meta name="theme-color" content="yellow" />
-    <meta name="author" content="M A Eyler, Istanbul, 2018" />
-    <meta name="description" content="BLM305 FSMV University" />
-    <link rel="icon" href="images/305.png">
-    <link rel="manifest" href="manifest.json"> 
-    <title>BLM 305 </title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="yellow" />
+  <meta name="author" content="M A Eyler & Bedirhan Yildirim, Istanbul, 2018" />
+  <meta name="description" content="BLM305 FSMV University" />
+  <!-- Css Start -->
+  <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <style>
     table {
-        width: 450px;
-        border-collapse: collapse; 
+      border-collapse: collapse; 
+      width: -webkit-fill-available;
     }
-    th { 
-        color: blue; 
-        padding: 5px 5px; 
+    thead {
+      text-align: left;
     }
-    td { 
-        width: 47%;
-        border: 1px solid blue; 
-        padding: 5px 5px; 
-        text-align: left; 
+    thead tr {
+      color: #00000099;
+      font-size: 12px;
+      font-family: 'Roboto';
+      border-bottom: 2px solid #dddddd;
     }
-    a:hover  .tip { visibility: visible; }
-    th:hover .tip { visibility: visible; }
+    thead th {
+      padding: 14px 0;
+      position: relative;
+    }
+    tbody {
+      text-align: left;
+    }
+    tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+    tbody th { 
+      color: #00000099;
+      text-align: center;
+    }
+    tbody td { 
+      padding: 14px 0;
+      padding-left: 5px;
+      position: relative;
+    }
+    tbody td a {
+      font-size: 14px;
+      color: #000000de;
+    }
+    tbody td a:hover {
+      color: #363636de;
+    }
+    tbody tr a:hover .tip {
+      display: block;
+    }
+    tbody tr th:hover .tip {
+      display: block;
+    }
     .tip {
-        visibility: hidden;
-        font-size: small;
-        background: brown;
-        color: white;
-        text-align: center;
-        padding: 5px 5px;
-        position: absolute;
+      top: 35px;
+      z-index: 1;
+      left: 35px;
+      display: none;
+      color: white;
+      font-size: 12px;
+      padding: 6px 10px;
+      text-align: center;
+      border-radius: 3px;
+      position: absolute;
+      background: #aeaeae;
     }
   </style>
+  <!--#Css End -->
+  <link rel="icon" href="images/305.png">
+  <link rel="manifest" href="manifest.json"> 
+  <title>BLM 305</title>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
@@ -47,24 +86,72 @@
   </script>
 </head>
 <body>
-<h3>BLM 305 -- Advanced Programming</h3>
-
-<p>&emsp; &emsp;
-<a href="https://github.com/maeyler/BLM305/">GitHub
-    <span class="tip">Repository</span></a> 
-&emsp; &emsp;
-<a href="Readme.html">Readme
-    <span class="tip">Course information</span></a>
-&emsp; &emsp;
-<a href="inspect.html">Class work
-    <span class="tip">using the Inspector</span></a>
-</p>
-
+  <!-- Header Start -->
+  <header>
+    <div class="header-top">
+        <div class="container">
+            <div class="logo">
+                <h2>Advanced Programming</h2>
+                <h5>by M. Akif Eyler</h5>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <div class="navbar">
+                <ul>
+                    <li class="external"><a href="https://github.com/maeyler/BLM305/">GitHub</a></li>
+                    <li class="external"><a href="Readme.html">Readme</a></li>
+                    <li class="external"><a href="inspect.html">Class work</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header-mobile">
+      <div class="container">
+          <div class="navbar">
+              <ul>
+                <li>
+                  <a href="https://github.com/maeyler/BLM305/">
+                    <img src="images/github.svg" height="25px"/>
+                  </a>
+                </li>
+                <li>
+                  <a href="Readme.html">
+                    <img src="images/readme.svg" height="25px"/>
+                  </a>
+                </li>
+                <li>
+                  <a href="inspect.html">
+                    <img src="images/list.svg" height="25px"/>
+                  </a>
+                </li>
+              </ul>
+          </div>
+      </div>
+    </div>
+  </header>
+  <!--#Header End -->
+  <!-- Content Start -->
+  <div class="content">
+      <div class="container">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-text">
+              <div class="card-title">
+                Term Projects
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-desc">
 <table>
+  <thead>
   <tr>
     <th></th><th>Weekly Work<span class="tip">Absolute address</span></th>
     <th>Term Project<span class="tip">Relative address</span></th>
   </tr>
+</thead>
   <tr><th>0</th>
     <td>
       <a href="https://smallsimplesafe.github.io/ProgWork/">Small Simple
@@ -408,8 +495,20 @@
     </td>
   </tr>
 </table>
-
-<p><b></b> <br /><em></em></p>
-
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--#Content End -->
+  <!-- Footer Start -->
+  <footer>
+      <div class="container">
+          <div class="footer-bottom">
+              <h3>© Copyrights 2018. All rights reserved.<br>This website made by <a href="https://github.com/bedirhanyildirim">Bedirhan Yıldırım</a>.</h3>
+          </div>
+      </footer>
+  </footer>
+  <!--#Footer End -->
 </body>
 </html>
