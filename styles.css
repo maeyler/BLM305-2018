@@ -153,6 +153,33 @@ header .header-bottom {
     font-size: 14px;
     color: #00000099;
 }
+
+.card .card-footer .card-links{
+    margin: 16px;
+    display: flex;
+    font-size: 14px;
+    color: #fbc02d;
+}
+
+.card .card-footer .card-links ul{
+    display: flex;
+}
+
+.card .card-footer .card-links ul li{
+    float: left;
+}
+
+.card .card-footer .card-links ul li a{
+    display: block;
+    font-size: 14px;
+    font-weight: 900;
+    color: #fbc02d;
+    margin-right: 20px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.5s ease 0s;
+}
 /* Content End */
 
 /* Footer Start */
