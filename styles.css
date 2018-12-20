@@ -9,7 +9,7 @@ html {scroll-behavior: smooth;}
 /* Main Css */
 .container {
     padding: 0;
-    width: 1024px;
+    width: 800px;
     margin: 0 auto;
 }
 
@@ -66,11 +66,12 @@ header .header-bottom {
 
 .navbar ul li a{
     padding: 20px;
-    display: block;
+    display: flex;
     font-size: 13px;
     color: #101010;
-    letter-spacing: 1px;
     font-weight: 900;
+    letter-spacing: 1px;
+    align-items: center;
     text-decoration: none;
     font-family: 'Comfortaa';
     text-transform: uppercase;
@@ -87,14 +88,50 @@ header .header-bottom {
     color: #79590a;
 }
 
+.navbar ul li.github a::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    float: left;
+    display: block;
+    margin-right: 5px;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-image: url("images/github.svg");
+}
+
+.navbar ul li.readme a::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    float: left;
+    display: block;
+    margin-right: 5px;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-image: url("images/readme.svg");
+}
+
+.navbar ul li.cw a::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    float: left;
+    display: block;
+    margin-right: 5px;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-image: url("images/list.svg");
+}
+
 .navbar ul li.external a::after{
     content: '';
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     float: right;
     display: block;
     margin-left: 5px;
-    background-size: 15px 15px;
+    background-size: 10px 10px;
     background-repeat: no-repeat;
     background-image: url("images/external.png");
 }
@@ -202,13 +239,18 @@ footer .footer-bottom h3{
 }
 
 footer .footer-bottom h3 a{
-    color: #fbc02d;
-}
-
-footer .footer-bottom h3 a:hover{
+    color: #ffffff;
     text-decoration: underline;
 }
 /* Footer End  */
+
+/*CSS For Tablet Start*/
+@media (max-width: 1024px) and (min-width: 768px) {
+    .content .container {
+        width: 100%;
+    }
+}
+/*CSS For Tablet End*/
 
 /* CSS For Mobile Start */
 @media only screen and (max-width: 767px) {
@@ -217,7 +259,7 @@ footer .footer-bottom h3 a:hover{
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-        width: calc(100vw - 30px);
+        width: 100vw;
     }
 
     header .header-top {
@@ -322,6 +364,12 @@ footer .footer-bottom h3 a:hover{
         font-size: 12px;
         color: #2d2d2d;
         font-weight: normal;
+    }
+    footer .footer-bottom h3 a{
+        font-size: 12px;
+        color: #2d2d2d;
+        font-weight: bold;
+        text-decoration: none;
     }
 
     .tip {
