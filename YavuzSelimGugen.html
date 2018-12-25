@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <title>Tetris Game JS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://yavuzselimgugen.github.io/advanced_homework/Tetris/main.css">
+    <script>
+        window.addEventListener("keydown", function (e) {
+            // space and arrow keys
+            if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, false);
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu jumbotron">
+          <div id="gameMenu">
+            <button id="startButton" class="button" type="button" onclick="startGame()" name="button">Start Game</button>
+            <br><br>
+            <input id="nameInput" type="text" class="button" name="" placeholder="Your Name">
+          </div>
+          <div id="stats">
+            <p id="level">b</p>
+            <p id="score">v</p>
+          </div>
+          <canvas id="tetris" width="200" height="400">
+            Your browser does not support canvas element.
+          </canvas>
+        <p id="referans" style="font-size: 12px; font-style: italic">
+            <a href="https://codeincomplete.com/posts/javascript-tetris/">
+                Referans
+            </a>
+        </p>
+        </div>
+
+
+    </div>
+
+    <script src="https://yavuzselimgugen.github.io/advanced_homework/Tetris/tetrominoes.js"></script>
+    <script src="https://yavuzselimgugen.github.io/advanced_homework/Tetris/tetris.js"></script>
+    <!-- <script type="text/javascript">
+      document.getElementById("startButton").disabled = true;
+    </script> -->
+</body>
+
+</html>
