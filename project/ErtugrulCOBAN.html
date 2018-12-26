@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>Tic Tac Toe</title>
+<style>
+body{  background-color:#FFEFD5	;
+}
+	table {
+			border-collapse:collapse;
+			}
+		td {
+		background-color: 	#FF7F50;
+		border: 3px solid white;
+		font-size:80px;
+		color:#FFFF00;
+		border-radius: 10px 10px 10px 10px;
+	}
+</style>
+	</head>
+<body> <h1 style="color:#FF7F50; font-weight: bold;"align="center"> Tic Tac Toe </h1>
+
+		<div align="center" id="tictactoe">
+
+
+
+
+		</div>
+		<div align="center">
+
+
+
+
+			<span style="color:#FF7F50; font-weight: bold; font-size:25px" id='turn'>Player X</span>
+		</div></br>
+		<div style="color:#FF7F50; font-weight: bold; font-size:25px" align="center" id="gscore">--Scores--
+
+		<p style="color:#FF7F50; font-weight: bold; font-size:25px" id="xScore">Player X : 0</p>
+		<p style="color:#FF7F50; font-weight: bold; font-size:25px" id="oScore">Player O : 0</p>
+
+		</div>
+		<p style="color:#FF7F50; font-weight: bold; font-size:15px">Ref:<a style="color:#FF7F50; font-weight: bold; font-size:15px"  href="https://github.com/vasanthk/tic-tac-toe-js" target="ExternalDocument"> Github.com </a> </p>
+
+<script>
+ var xScore=0;
+  var oScore=0;
+  var N_SIZE = 3,
+  EMPTY = '&nbsp;',
+  boxes = [],
+  turn = 'X',
+  score,
+  moves;
+
+/**
+ * Initializes the Tic Tac Toe board and starts the game.
+ */
+function init() {
+  var board = document.createElement('table');
+  board.setAttribute('border', 1);
+  board.setAttribute('cellspacing', 0);
+
+  var identifier = 1;
+  for (var i = 0; i < N_SIZE; i++) {
+    var row = document.createElement('tr');
+    board.appendChild(row);
+    for (var j = 0; j < N_SIZE; j++) {
+      var cell = document.createElement('td');
+      cell.setAttribute('height', 120);
+      cell.setAttribute('width', 120);
+      cell.setAttribute('align', 'center');
+      cell.setAttribute('valign', 'center');
+      cell.classList.add('col' + j, 'row' + i);
+      if (i == j) {
+        cell.classList.add('diagonal0');
+      }
+      if (j == N_SIZE - i - 1) {
+        cell.classList.add('diagonal1');
+      }
+      cell.identifier = identifier;
+      cell.addEventListener('click', set);
+      row.appendChild(cell);
+      boxes.push(cell);
+      identifier += identifier;
+    }
+  }
+
+  document.getElementById('tictactoe').appendChild(board);
+  startNewGame();
+}
+
+/**
+ * New game
+ */
+function startNewGame() {
+  score = {
+    'X': 0,
+    'O': 0
+  };
+  moves = 0;
+  turn = 'X';
+  boxes.forEach(function (square) {
+    square.innerHTML = EMPTY;
+  });
+}
+
+/**
+ * Check if a win or not
+ */
+function win(clicked) {
+  // Get all cell classes
+  var memberOf = clicked.className.split(/\s+/);
+  for (var i = 0; i < memberOf.length; i++) {
+    var testClass = '.' + memberOf[i];
+    var items = contains('#tictactoe ' + testClass, turn);
+    // winning condition: turn == N_SIZE
+    if (items.length == N_SIZE) {
+
+
+	  return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Helper function to check if NodeList from selector has a particular text
+ */
+function contains(selector, text) {
+  var elements = document.querySelectorAll(selector);
+  return [].filter.call(elements, function (element) {
+    return RegExp(text).test(element.textContent);
+  });
+}
+
+/**
+ * Sets clicked square and also updates the turn.
+ */
+function set() {
+  if (this.innerHTML !== EMPTY) {
+    return;
+  }
+  this.innerHTML = turn;
+  moves += 1;
+  score[turn] += this.identifier;
+  if (win(this)) {
+
+    alert('Winner: Player ' + turn);
+	if(turn=='X'){
+	xScore++;
+	document.getElementById('xScore').textContent = 'Player X :  ' +xScore;
+
+	;}
+	else if( turn=='O'){ oScore++;
+	document.getElementById('oScore').textContent = 'Player O :  ' +oScore;}
+
+    startNewGame();
+  } else if (moves === N_SIZE * N_SIZE) {
+    alert('Draw');
+    startNewGame();
+  } else {
+    turn = turn === 'X' ? 'O' : 'X';
+    document.getElementById('turn').textContent = 'Player ' + turn;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
