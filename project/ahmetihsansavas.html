@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Midterm Project</title>
+<header style="color:white;font-size:60px" align="center">Calculator</header>
+<style type="text/css">
+	html{
+		background:#085078;
+	}
+
+	table{
+		width: 460px;
+		margin:50px auto;
+		border:auto;
+		border-radius: 10px;
+		padding: 0px 20px 20px;
+		background: #085078;
+	}
+	#girdi,#cevap{
+		height: 43px;
+		width: 392px;
+		font: sans-serif;
+		font-size: 30px;
+		text-align: right;
+		border:none;
+	}
+	#girdi{
+		border-radius: 5px 5px 0px 0px;
+		background:rgba(154, 185, 188, 0.8); 
+		/*box-shadow: 2px 2px 2px black;*/
+		color: white;
+	}
+	#cevap{
+		border-radius: 0px 0px 5px 5px;
+		background:rgba(154, 185, 188, 0.8);
+	/*	box-shadow: 2px 2px 2px black; */
+		color: #1e1e1e;
+	}
+	input[type=button]{
+		font-size: 23px;
+		font: sans-serif;
+		height: 62px;
+		width: 62px;
+		color: yellow;
+		border-radius: 45px;
+		box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+		background:#523d98;
+		background-size: 100px;
+		/**/
+	}
+	input[type=button]:hover{
+		background: black;
+		cursor: pointer; 
+		
+
+	} 
+	
+</style>
+
+<script type="text/javascript">
+	var bleep = new Audio();
+	bleep.src="https://ahmetihsansavas.github.io/Ileri_Programlama/yazarkasa.wav";
+
+
+function tan(form) {
+	form.display.value = Math.tan(form.display.value);
+}
+
+function sqrt(form) {
+	form.display.value = Math.sqrt(form.display.value);
+}
+
+
+	function ekranSıfırlama(){
+		//window.alert("you broke it!!!");
+		document.getElementById('girdi').value="0";
+		document.getElementById('cevap').value="";
+		window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
+	}
+
+	function sayı(num){
+	var input = document.getElementById('girdi');
+	if (input.value==0) {
+	input.value=num;
+
+	}
+	else{
+
+	input.value+=num;	
+	}
+
+	}
+	function operand(opr){
+	let operator = [];
+	let sayac=0;	
+	var input =document.getElementById('girdi');
+	var deger=input.value;
+	
+
+	while(true){
+	if (opr=='+') {
+		if (deger.substring(deger.length,deger.length-1)=='+' || 
+			deger.substring(deger.length,deger.length-1)=='-'
+			|| 
+			deger.substring(deger.length,deger.length-1)=='*'
+			|| 
+			deger.substring(deger.length,deger.length-1)=='/'|| 
+			deger.substring(deger.length,deger.length-1)=='+/-') {
+			window.alert('please enter a number !!');
+				window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
+			break;
+		}
+		input.value+='+';	
+		break;	
+				
+	}
+	if (opr=='-') {
+		if (deger.substring(deger.length,deger.length-1)=='+' || 
+			deger.substring(deger.length,deger.length-1)=='-'
+			|| 
+			deger.substring(deger.length,deger.length-1)=='*'
+			|| 
+			deger.substring(deger.length,deger.length-1)=='/'|| 
+			deger.substring(deger.length,deger.length-1)=='+/-') {
+			window.alert('please enter a number !!');
+				window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
+			break;
+		}
+		input.value+='-';
+		
+		break;
+
+	}
+	if (opr=='*') {
+		if (deger.substring(deger.length,deger.length-1)=='+' || 
+			deger.substring(deger.length,deger.length-1)=='-'
+			|| 
+			deger.substring(deger.length,deger.length-1)=='*'
+			|| 
+			deger.substring(deger.length,deger.length-1)=='/'|| 
+			deger.substring(deger.length,deger.length-1)=='+/-') {
+			window.alert('please enter a number !!')
+				window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
+			break;
+		}
+		input.value+='*';
+		
+		break;
+
+	}
+	if (opr=='/') {
+		if (deger.substring(deger.length,deger.length-1)=='+' || 
+			deger.substring(deger.length,deger.length-1)=='-'
+			|| 
+			deger.substring(deger.length,deger.length-1)=='*'
+			|| 
+			deger.substring(deger.length,deger.length-1)=='/'|| 
+			deger.substring(deger.length,deger.length-1)=='+/-') {
+			window.alert('please enter a number !!')
+				window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
+			break;
+		}
+		input.value+='/';
+		
+		break;
+
+	}
+
+	if (opr=='+/-') {
+		if (deger.substring(deger.length,deger.length-1)=='+' || 
+			deger.substring(deger.length,deger.length-1)=='-'
+			|| 
+			deger.substring(deger.length,deger.length-1)=='*'
+			|| 
+			deger.substring(deger.length,deger.length-1)=='/'|| 
+			deger.substring(deger.length,deger.length-1)=='+/-') {
+			window.alert('please enter a number !!')
+			window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
+			break;
+		}
+		input.value+='-' + input.value;
+		
+		break;
+
+	}
+		
+
+}
+}
+		
+
+	function silme(){
+		var input =document.getElementById('girdi');
+		var deger=input.value;
+		if (deger.length>0) {
+			deger = deger.substring(0, deger.length-1);
+			input.value=deger;
+		}
+		window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
+	}
+	function hesap(){
+		var input =document.getElementById('girdi');
+	
+	
+		var ans = Math.floor(+eval(input.value));
+		document.getElementById('cevap').value= '='+ans;
+		var output = document.getElementById('cevap');
+
+
+		var deger=output.value;
+		//input.animate(t4,5000);
+		output.animate(t3,39000);
+		if (isNaN(ans)==true) {
+			window.alert("error");
+			window.navigator.vibrate(200);
+		}
+
+		
+	}
+	var i=0;
+	function parantez(){
+		var deger=document.getElementById('girdi');
+
+
+		if (i==0) {
+			if (deger.value=='0') {
+				deger.value ='(';
+				i=1;
+			}else{
+			deger.value+='(';
+			i=1;
+			}
+			
+		}
+		else if(i==1){
+			deger.value+=')';
+			i=0;
+		}
+	
+	
+}
+	function sin() {
+	var input =document.getElementById('girdi');
+	var output =document.getElementById('cevap');	
+	output.value = Math.sin(input.value);
+	output.animate(t3,39000);
+
+
+	input.value = 'sin('+input.value+')';
+}
+	function ln() {
+	var input =document.getElementById('girdi');
+	var output =document.getElementById('cevap');
+	output.value = Math.log(input.value);
+	output.animate(t3,39000);
+
+	input.value = 'ln('+input.value+')';
+}
+function cos() {
+	var input =document.getElementById('girdi');
+	var output =document.getElementById('cevap');
+
+	output.value = Math.cos(input.value);
+	output.animate(t3,39000);
+
+	input.value = 'cos('+input.value+')';
+}
+function tan() {
+	var input =document.getElementById('girdi');
+	var output =document.getElementById('cevap');
+	var deger = input.value;
+	output.value = Math.tan(input.value)
+
+	
+	var sonuc = output.value;
+	output.animate(t3,39000);	
+
+	input.value = 'tan('+input.value+')';
+
+}
+function cot() {
+	var input =document.getElementById('girdi');
+	var output =document.getElementById('cevap');
+	output.value = Math.cot(input.value);
+	var sonuc = output.value;
+	output.animate(t3,39000);	
+
+	input.value = 'tan('+input.value+')';
+
+}
+function sqrt() {
+	var input =document.getElementById('girdi');
+	var output =document.getElementById('cevap');
+	var deger = input.value;
+	while(true){
+	if (deger.substring(deger.length,deger.length-1)=='+' || 
+			deger.substring(deger.length,deger.length-1)=='-'
+			|| 
+			deger.substring(deger.length,deger.length-1)=='*'
+			|| 
+			deger.substring(deger.length,deger.length-1)=='/'|| 
+			deger.substring(deger.length,deger.length-1)=='+/-') {
+			window.alert('please enter a number !!')
+			input.value = deger.substring(0,deger.length-1);
+				output.animate(t3,39000);	
+			break;
+		}
+
+	if (input.value>"0") {
+		output.value = Math.sqrt(input.value);
+		input.value=output.value;
+			output.animate(t3,39000);	
+		break;
+	}
+	if (input.value=="0") {
+	input.value = '√'+input.value;
+		output.value="infinity";
+		output.animate(t3,39000);	
+		break;
+	
+	}
+	if (deger=="") {
+		deger="hata";
+		break;
+	}
+
+	}
+	
+
+	
+
+}
+function square() {
+	var input =document.getElementById('girdi');
+	var output =document.getElementById('cevap');	
+	if (input.value>"0") {
+		output.value = input.value*input.value;
+	
+		}
+	input.value = input.value*input.value;
+	
+	output.animate(t3,39000);		
+	
+}
+function percent() {
+	var input =document.getElementById('girdi');
+	var output =document.getElementById('cevap');	
+	output.value = Math.floor(input.value/input)*100;
+	input.value = +'%'+ input.value ;
+	output.animate(t3,39000);		
+	
+}
+function pi() {
+	var input =document.getElementById('girdi');
+	var output =document.getElementById('cevap');	
+	
+if (input.value> "0") {
+	input.value+= Math.PI; 
+	//output.value += Math.PI+input.value;
+}
+else{
+	input.value= Math.PI; 
+	output.value += Math.PI+input.value;
+}	
+	
+	output.animate(t3,39000);		
+	
+}
+	function exp() {
+	var input =document.getElementById('girdi');
+	var output =document.getElementById('cevap');	
+	output.value = Math.exp(input.value);
+	output.animate(t3,39000);
+
+	input.value = 'e^'+input.value+'';
+}
+	function abs() {
+	var input =document.getElementById('girdi');
+	var output =document.getElementById('cevap');	
+	output.value = Math.abs(input.value);
+	output.animate(t3,39000);
+
+	input.value = input.value;
+}
+
+const t4 = { fontSize: ["100%", "150%", "180%", "75%", "100%"] };
+const t3 = { color: ["yellow", "cyan", "magenta", "yellow"] };
+const t2 = { transform: ["rotate(0)", "rotate(180deg)"] };
+	
+	document.onkeyup=function(event){
+		var rakamlar = [0,1,2,3,4,5,6,7,8,9]
+		var key_press =String.fromCharCode(event.keyCode);
+		var input =document.getElementById('girdi');
+		var islemler =["+","-","/","*"];
+		for (var i = rakamlar.length - 1; i >= 0; i--) {
+			if(rakamlar[i]==key_press ){
+				if (input.value==0) {
+					input.value=key_press;
+
+				}
+				else{
+
+					input.value+=key_press;	
+					}
+				
+			}
+			
+		}
+		
+	}
+
+
+</script>
+</head>
+<body>
+
+<table>
+	<tr>
+		<td>
+			<input type="text" id="girdi" value="0" readonly="readonly" draggable>
+			<input type="text" id="cevap" readonly="readonly" draggable>
+			</td>
+
+		</tr>	
+		<tr>
+			<td>
+				<input id="cee" type="button" value="CE" onclick="ekranSıfırlama();this.animate(t2,5000);" style="color:white; background:red;">
+				<input type="button" value=" &#247 " onclick="operand('/');this.animate(t2,2000);" 
+				style="color:black;background:orange;">
+				<input type="button" value="x" onclick="operand('*');this.animate(t2,2000);" style="color: black;
+		background: orange; ">
+				<input type="button" value="ln" onclick="ln();this.animate(t2,2000);" style="color: black;
+		background: orange; ">
+				<input type="button" value="√" onclick="sqrt();this.animate(t2,2000);" style="color: black;
+		background: orange; ">
+				<input type="button" value="&#8592" onclick="silme()" style="color: black;
+		background: purple; ">
+			
+			
+				<br>
+				<input type="button" value="1" onclick="sayı(1)">
+				<input type="button" value="2"onclick="sayı(2)">
+				<input type="button" value="3" onclick="sayı(3)">
+				<input type="button" value="+" onclick="operand('+');this.animate(t2,2000);" style="color:black;background:orange;">
+				<input type="button" value="sin" onclick="sin();this.animate(t2,2000);" style="color: black;
+		background: orange; ">
+				<input type="button" value="*2" onclick="square();this.animate(t2,2000);" style="color: black;
+		background: orange; ">
+				<br>
+				<input type="button" value="4" onclick="sayı(4)">
+				<input type="button" value="5"onclick="sayı(5)">
+				<input type="button" value="6"onclick="sayı(6)">
+				<input type="button" value="-"  onclick="operand('-');this.animate(t2,2000);" style="color:black;background:orange;">
+				<input type="button" value="cos" onclick="cos();this.animate(t2,2000);" style="color: black;
+		background: orange; ">
+				<input type="button" value="&#928;" onclick="pi();this.animate(t2,2000);" style="color:black;background:orange;">
+				<br>
+				<input type="button" value="7" onclick="sayı(7)" >
+				<input type="button" value="8" onclick="sayı(8)">
+				<input type="button" value="9"onclick="sayı(9)">
+				<input type="button" value="()"  onclick="parantez();this.animate(t2,2000);"   style="color:black;background:orange;">
+				<input type="button" value="tan" onclick="tan();this.animate(t2,2000);" style="color: black;
+		background: orange; ">
+				<input type="button" value="cot" onclick="cot();this.animate(t2,2000);" style="color: black;
+		background: orange; ">
+				<br>
+				<input type="button" value="+/-" onclick="operand('+/-');this.animate(t2,2000);" onclick="ekranSıfırlama()" style="color:black;background:orange;">
+				<input type="button" value="0" onclick="sayı(0)">
+				<input type="button" value="=" onclick="hesap();this.animate(t2,1000);bleep.play();" style="width:263px;color:white;background:green;">
+			</td>
+			
+		</tr>
+
+</table>
+
+
+<p style="font-size:20px;color:white">Ref: 
+	<a href="https://www.w3schools.com/tags/ref_av_dom.asp" 
+   target="ExternalDocument" style="color:white;font-size: 20px">Audio ,</a> <br>
+	<a href="https://www.w3schools.com/html/html_symbols.asp" 
+   target="ExternalDocument" style="color:white;font-size: 20px">Symbols ,</a> <br>
+   <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/vibrate" 
+   target="ExternalDocument" style="color:white;font-size: 20px">Vibrate ,</a> <br>
+    <a href="https://maeyler.github.io/JS/simple/CSS%20Animation.html" 
+   target="ExternalDocument" style="color:white;font-size: 20px">Animation ,</a> <br>    
+   <a href="https://maeyler.github.io/JS/simple/CSS%20Animation.html" 
+   target="ExternalDocument" style="color:white;font-size: 20px">Math Object</a> <br>
+    <a href="https://www.youtube.com/watch?v=TX30jTaPs28" 
+   target="ExternalDocument" style="color:white;font-size: 20px">Simple Structure</a> 
+</p>
+
+
+</body>
+</html>
