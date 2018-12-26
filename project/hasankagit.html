@@ -1,0 +1,95 @@
+<!-- Referanslar:
+	https://foundation.zurb.com/templates.html
+	-->
+<!doctype html>
+<html  lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HOŞGELDİNİZ</title>
+<link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+<script src="https://hasankagit.github.io/Odevler/Proje/Database.js"> </script>
+
+<script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDlmzOZ8wreTUfnkvB_ktaq-W9TgFKR7LQ",
+    authDomain: "hasan-kagit-blog.firebaseapp.com",
+    databaseURL: "https://hasan-kagit-blog.firebaseio.com",
+    projectId: "hasan-kagit-blog",
+    storageBucket: "hasan-kagit-blog.appspot.com",
+    messagingSenderId: "786345331005"
+  };
+  firebase.initializeApp(config);
+
+// veritabanına yazılar eklendi.
+var firebaseRef = firebase.database().ref("YAZILAR");  
+  firebaseRef.child(y.id).set(y);
+  firebaseRef.child(y1.id).set(y1);
+  firebaseRef.child(y2.id).set(y2);
+  firebaseRef.child(y3.id).set(y3);
+
+	//var commentsRef = firebase.database().ref("YAZILAR");
+	//commentsRef.on('child_added', snap => {
+	  //let name = snap.val();
+	 
+	  //yazilar.push(name);
+	//});
+	
+</script>
+
+</head>
+<body style=" background-image:url(https://hasankagit.github.io/Odevler/Proje/resimler/f.jpg);" onload="pressAll()" >
+	<div class="top-bar"  >
+		<div class="top-bar-left"  >
+			<ul class="menu" >
+				<li class="menu-text" >
+					<img src="https://hasankagit.github.io/Odevler/Proje/resimler/hasankagit.png">
+				</li>
+			</ul>
+		</div>
+		<div class="top-bar-right" style=" margin: auto;    padding: 10px;">
+				<ul class="menu" >
+				<li ><a href="https://hasankagit.github.io/Odevler/Proje/hasankagit.html">ANASAYFA</a></li>
+				<li ><a href="https://hasankagit.github.io/Odevler/Proje/yazi_ekle.html">YAZI EKLE</a></li>
+				<li><a href="https://hasankagit.github.io/Odevler/Proje/iletisim.html">İLETİŞİM </a></li>
+				</ul>
+		</div>
+	</div>
+	<div class="callout large primary"  style="overflow: hidden; background-color: #17A589  ">
+	
+		 <div class="row column text-center">
+			<h1>REKLAM ALANI</h1>
+		</div>
+	</div>
+	<div class="row" id="content">
+		<div id="innerContent" class="medium-8 columns">
+			
+		</div>
+		<div class="medium-3 columns" data-sticky-container>
+			<div class="sticky" data-sticky data-anchor="content">
+				<h4>Kategoriler</h4>
+					<ul>
+						<li onclick="pressKategori('Android')">Android</li>
+						<li onclick="pressKategori('Apple - IOS')">Apple - IOS</li>
+						<li onclick="pressKategori('İnternet')">İnternet</li>
+						<li onclick="pressKategori('Nasıl Yapılır?')">Nasıl Yapılır?</li>
+						<li onclick="pressKategori('Oyun')">Oyun</li>
+						<li onclick="pressKategori('Teknoloji')">Teknoloji Haberleri</li>
+					</ul>
+				<h4>Yazarlar</h4>
+					<ul>
+						<li onclick="yazarYazilari('Hasan Kağıt')">Hasan Kağıt</li>
+						<li onclick="yazarYazilari('Furkan Çankaya')">Furkan Çankaya</li>
+						<li onclick="yazarYazilari('Mustafa Kıyga')">Mustafa Kıyga</li>
+					</ul>
+			</div>
+		</div>
+	</div>
+	
+
+	
+
+</body>
+</html>
