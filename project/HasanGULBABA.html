@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<title>Advance Kütüphane</title>
+<head>
+<meta name="theme-color" content="white" />
+ <meta name="author" content="Hasan GULBABA, 2018" />
+    <meta name="description" content="Fatih Sultan Mehmet Vakif University, Computer Engineering" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<link rel="stylesheet" type="text/css" href="site_theme.css">
+<meta charset="UTF-8"/>
+<script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('sw.js')
+          .then((reg) => { console.log('SW Registered', reg) })
+          .catch(console.log)
+      }
+    </script>
+    <link rel="icon" href="https://hasangulbaba.github.io/firstRepo/ileriProje/icon.jpg">
+    <link rel="manifest" href="https://hasangulbaba.github.io/firstRepo/ileriProje/manifest.json">
+    <link rel="stylesheet" type="text/css" href="https://hasangulbaba.github.io/firstRepo/ileriProje/site_theme.css">
+<script src="database.js"></script>
+<center>
+
+
+<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+  box-sizing: border-box;
+}
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+html {
+  font-family: "Lucida Sans", sans-serif;
+}
+.header {
+  background-color: black;
+  color: #ffffff;
+  padding: 14px;
+}
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.menu li {
+  padding: 8px;
+  margin-bottom: 7px;
+  background-color: #33b5e5;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.menu li:hover {
+  background-color: #0099cc;
+}
+  table {
+  
+  width:100%;
+}
+table, th, td {
+  border: 1px  black;
+  color:white;
+ 
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+   text-decoration: underline;
+}
+table#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+ background-color: #fff;
+}
+table#t01 th {
+  background-color: white;
+  color: white;
+}
+h1 {
+  text-decoration: underline;
+  color:white;
+}
+h3 {
+  color:white;
+}
+body  {
+    background-image: url("https://wallpapers.wallhalla.com/74ZlzkW3iGa7_noTmxpn_fc2a66db/aHR0cHM6Ly9hbHBoYS53YWxsaGF2ZW4uY2Mvd2FsbHBhcGVyLzMyNzU3MA==");
+}
+.button {
+  background-color: #000000;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button3 {border-radius: 8px;}
+.button3:hover {
+  background-color: #555555;
+  color: white;
+}
+[class^="top"] {
+  background: yellow;
+}
+</style>
+
+</head>
+<body>
+<div class="header">
+  <h1>ADVANCE KÜTÜPHANE</h1>
+</div>
+
+<embed src = "Eminem - Venom.mp3" autostart = true hidden = true>
+<noembed>
+<bgsound src ="Eminem - Venom.mp3.https://www.youtube.com/watch?v=8CdcCD5V-d8">
+</noembed>
+
+<nav>
+
+  <ul class="nav">
+    <li><a href="https://hasangulbaba.github.io/firstRepo/ileriProje/deneme.html" style="float:initial;">ANASAYFA</a></li>
+    <li><a href="https://hasangulbaba.github.io/firstRepo/ileriProje/admin.html">ADMİN</a></li>
+    <li><a href="https://hasangulbaba.github.io/firstRepo/ileriProje/hizliErisim.html">HIZLI ERİŞİM</a></li>
+	<li><a href="https://hasangulbaba.github.io/firstRepo/ileriProje/kitaplar.html">Kitapları Görüntüle</a></li>
+	<li><a href="https://hasangulbaba.github.io/firstRepo/ileriProje/iletisim.html">İletişim</a></li>
+	<li><a href="https://hasangulbaba.github.io/firstRepo/ileriProje/dikkat.html">Dikkat</a></li>
+  </ul>
+</nav><br>
+
+<center>
+<button class="button button3" onclick="makeRows()">Tüm Türler</button>
+<button class="button button3" onclick="maceraBul()">Macera</button>
+<button class="button button3" onclick="bilimBul()">Bilim</button>
+<button class="button button3" onclick="bilimKurguBul()">Bilim Kurgu</button>
+<button class="button button3" onclick="tarihBul()">Tarih</button>
+<button class="button button3" onclick="yazılımBul()">Yazılım</button>
+<center>
+
+
+<br>
+
+
+<button class="button button3" onclick="search()">Yazar Sorgu</button>
+
+  <tr style="text-align:left;">
+   <th><text style="font-weight:bold;text-align:left; color:white">Yazar giriniz:</text></th>
+   <th><input type=text id=yazarTur></th> 
+  </tr>
+
+</br>
+
+<h1>Kütüphane Kitap Tablosu</h1>
+<script>
+const database = new Database();
+const url = "https://hasangulbaba.github.io/firstRepo/ileriProje/text_files/";
+function readData(file) {
+    console.log("readData "+file);
+    if(file.includes("kitaplar.txt")) {
+      fetch(url+file)
+          .then(r => r.text())
+          .then(addKitap).then(makeRows);
+    } 
+	else if(file.includes("macera.txt")) {
+      fetch(url+file)
+          .then(r => r.text())
+          .then(addMacera).then(makeMaceraRows);
+    }
+    else {
+	console.log("File could not find.")
+    }
+}
+function parse(line) {
+    let b = line.split("\t");
+    return b;
+}
+function addKitap(txt) {
+    let a = txt.split("\n");
+    
+	for (let s of a) {
+		let std = parse(s);
+		database.kitap.set(std[0],[std[1],std[2],std[3]]); //kitap adı,yazar,tür
+		
+	}
+}
+readData("kitaplar.txt");
+var basliklar = [
+{KİTAP:"",YAZAR:"",TÜR:""},
+];
+function makeRows() {
+    let row = "<th></th>";
+    for (let q of Object.keys(basliklar[0]))
+        row += "<th>"+q+"</th>";	
+    let text = "<tr>"+row+"</tr>";
+	let i=1;
+    for (let b of database.kitap.keys()) {
+	   row = "<th>"+i+"</th>";
+	   
+       for (let i = 0; i < 3; i++) {
+      		row += "<td>"+database.kitap.get(b)[i]+"</td>";
+	   }
+       text += "<tr>"+row+"</tr>";
+	   i++;
+    }
+    const t = text.length+" chars";
+    
+    tablo.innerHTML = text; out.innerText = t; 
+	
+}
+//burası seçilen türlerin gelme yeri
+function maceraBul(){
+	let row = "<th></th>";
+	var strin="";
+		for (let q of Object.keys(basliklar[0]))
+        row += "<th>"+q+"</th>";	
+		let text = "<tr>"+row+"</tr>";
+		let i=1;	
+			
+	   
+	for (let b of database.kitap.keys()) {
+		 strin= database.kitap.get(b)[2].trim();
+		if(strin =="macera"){
+			
+	   row = "<th>"+i+"</th>";
+       for (let i = 0; i < 3; i++) {
+      		console.log(database.kitap.get(b)[i]);
+			row += "<td>"+database.kitap.get(b)[i]+"</td>";
+	   }
+       text += "<tr>"+row+"</tr>";
+	   i++;
+    
+    const t = text.length+" chars";
+    
+    tablo.innerHTML = text; out.innerText = t; 
+			
+			
+		}
+  }
+  
+}
+function bilimBul(){
+	let row = "<th></th>";
+	var strin="";
+		for (let q of Object.keys(basliklar[0]))
+        row += "<th>"+q+"</th>";	
+		let text = "<tr>"+row+"</tr>";
+		let i=1;	
+			
+	   
+	for (let b of database.kitap.keys()) {
+		 strin= database.kitap.get(b)[2].trim();
+		if(strin =="bilim"){
+			
+	   row = "<th>"+i+"</th>";
+       for (let i = 0; i < 3; i++) {
+      		console.log(database.kitap.get(b)[i]);
+			row += "<td>"+database.kitap.get(b)[i]+"</td>";
+	   }
+       text += "<tr>"+row+"</tr>";
+	   i++;
+    
+    const t = text.length+" chars";
+    
+    tablo.innerHTML = text; out.innerText = t; 
+					
+		}
+  }
+  
+}
+function bilimKurguBul(){
+		let row = "<th></th>";
+	var strin="";
+		for (let q of Object.keys(basliklar[0]))
+        row += "<th>"+q+"</th>";	
+		let text = "<tr>"+row+"</tr>";
+		let i=1;	
+			
+	   
+	for (let b of database.kitap.keys()) {
+		 strin= database.kitap.get(b)[2].trim();
+		if(strin =="bilim kurgu"){
+			
+	   row = "<th>"+i+"</th>";
+       for (let i = 0; i < 3; i++) {
+      		console.log(database.kitap.get(b)[i]);
+			row += "<td>"+database.kitap.get(b)[i]+"</td>";
+	   }
+       text += "<tr>"+row+"</tr>";
+	   i++;
+    
+    const t = text.length+" chars";
+    
+    tablo.innerHTML = text; out.innerText = t; 
+			
+		}
+  }
+  
+}
+function tarihBul(){
+	let row = "<th></th>";
+	var strin="";
+		for (let q of Object.keys(basliklar[0]))
+        row += "<th>"+q+"</th>";	
+		let text = "<tr>"+row+"</tr>";
+		let i=1;	
+			
+	   
+	for (let b of database.kitap.keys()) {
+		 strin= database.kitap.get(b)[2].trim();
+		if(strin =="tarih"){
+			
+	   row = "<th>"+i+"</th>";
+       for (let i = 0; i < 3; i++) {
+      		console.log(database.kitap.get(b)[i]);
+			row += "<td>"+database.kitap.get(b)[i]+"</td>";
+	   }
+       text += "<tr>"+row+"</tr>";
+	   i++;
+    
+    const t = text.length+" chars";
+    
+    tablo.innerHTML = text; out.innerText = t; 
+			
+		}
+  }
+}
+function yazılımBul(){
+	let row = "<th></th>";
+	var strin="";
+		for (let q of Object.keys(basliklar[0]))
+        row += "<th>"+q+"</th>";	
+		let text = "<tr>"+row+"</tr>";
+		let i=1;	
+			
+	   
+	for (let b of database.kitap.keys()) {
+		 strin= database.kitap.get(b)[2].trim();
+		if(strin =="yazılım"){
+			
+	   row = "<th>"+i+"</th>";
+       for (let i = 0; i < 3; i++) {
+      		console.log(database.kitap.get(b)[i]);
+			row += "<td>"+database.kitap.get(b)[i]+"</td>";
+	   }
+       text += "<tr>"+row+"</tr>";
+	   i++;
+    
+    const t = text.length+" chars";
+    
+    tablo.innerHTML = text; out.innerText = t; 
+			
+		}
+  }
+}
+function search() {
+	let row = "<th></th>";
+	var strin="";
+		for (let q of Object.keys(basliklar[0]))
+        row += "<th>"+q+"</th>";	
+		let text = "<tr>"+row+"</tr>";
+		let i=1;
+	
+	for (let b of database.kitap.keys()) {
+		strin= database.kitap.get(b)[1].trim();
+		if (strin.toUpperCase()== yazarTur.value.toUpperCase()) {
+			row = "<th>"+i+"</th>";
+       for (let i = 0; i < 3; i++) {
+      		console.log(database.kitap.get(b)[i]);
+			row += "<td>"+database.kitap.get(b)[i]+"</td>";
+	   }
+       text += "<tr>"+row+"</tr>";
+	   i++;
+    
+    const t = text.length+" chars";
+    
+    tablo.innerHTML = text; out.innerText = t; 
+		}
+		
+	}
+}
+</script>
+<center>
+<table id="tablo"><tbody>
+<tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr><tr><th>1</th><td>1,1<span class="tip">C1</span></td><td>1,2<span class="tip">C2</span></td><td>1,3<span class="tip">C3</span></td><td>1,4<span class="tip">C4</span></td><td>1,5<span class="tip">C5</span></td></tr><tr><th>2</th><td>2,1<span class="tip">C6</span></td><td>2,2<span class="tip">C7</span></td><td>2,3<span class="tip">C8</span></td><td>2,4<span class="tip">C9</span></td><td>2,5<span class="tip">C10</span></td></tr><tr><th>3</th><td>3,1<span class="tip">C11</span></td><td>3,2<span class="tip">C12</span></td><td>3,3<span class="tip">C13</span></td><td>3,4<span class="tip">C14</span></td><td>3,5<span class="tip">C15</span></td></tr>
+</tbody></table>
+
+<p id="out" style="font-size:small">999 chars</p>
+
+
+</center>
+
+<script>
+    makeRows();
+</script>
+ <h3>Refferance:</h3>
+  <a href="https://www.w3schools.com">W3schools</a>
+  <a href="http://www.mydesign.gen.tr">Mydesign</a>
+  <a href="http://www.radyolojinet.com">Radyoloji.net</a>
+</body>
+</html>
