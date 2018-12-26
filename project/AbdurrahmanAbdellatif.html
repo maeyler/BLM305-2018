@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html><head>
+        <title>The Store </title>
+        <link rel="stylesheet" href="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/styles.css">
+        <script src="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/store.js"  async=""></script>
+        <link rel="icon" href="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/icon.png">
+    </head>
+    <body>
+        <div>
+            <header class="main-header">
+                <h1 class="band-name band-name-large">Expresstr</h1>
+            </header>
+<h2>Search for item and read the  Detail</h2>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+<ul id="myUL"></ul>
+<script>
+    function myFunction() {
+        let ArrayOfItemShop = [];
+        let sizeofconainer = document.getElementsByClassName('container').length
+        for (let i = 0; i < sizeofconainer; i++) {
+            let SizeOfItem = document.getElementsByClassName('container')[i].getElementsByClassName('shop-item-title').length;
+            for (let j = 0; j < SizeOfItem; j++) {
+                ArrayOfItemShop.push(document.getElementsByClassName('container')[i].getElementsByClassName('shop-item-title')[j].innerText);
+            }
+        }
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        ul.innerHTML = " ";
+        var element;
+        var counterofelement = 0;
+        for (let i = 0; i < ArrayOfItemShop.length; i++) {
+            element = document.createElement("li");
+		    element.innerHTML = '<a href=https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/'+ document.getElementsByClassName('shop-item-title')[i].innerText.replace(" ","_")+".htm" +'>' + ArrayOfItemShop[i] + '</a>'
+            ul.appendChild(element);
+            li = ul.getElementsByTagName("li");
+            counterofelement++;
+        }
+        var uldisplay = 0;
+        for (i = 0; i < counterofelement; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+                uldisplay = i;
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+        li = " ";
+        element = " ";
+        ArrayOfItemShop = [];
+        if (uldisplay == 0) {
+            ul.innerHTML = " ";
+        }
+    }
+</script>
+<section class="container content-section">
+    <h2 class="section-header">MUSIC</h2>
+    <div class="shop-items">
+        <div class="shop-item">
+            <span class="shop-item-title">
+			 <a href="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/Album_1.htm" style="
+    font-size: x-large;
+    color: darkorchid;
+"> Album 1 </a>
+			</span>
+            <p>click on the image to play or pause the song </p>
+            <img id="img" class="shop-item-image" src="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/Images/Album 1.png">
+            <div class="shop-item-details">
+                <span class="shop-item-price">$12.99</span>
+                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+            </div>
+            <audio id="audio" src="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/Sound\Album1.mp3"></audio>
+            <script>
+                let size = 0;
+                document.getElementById("img").addEventListener("click", function() {
+                    if (size % 2 == 0) {
+                        alert(' Album 1 audio play ')
+                        document.getElementById("audio").play();
+                        document.getElementById("audio2").pause();
+                        document.getElementById("audio3").pause();
+                        document.getElementById("audio4").pause();
+
+                    } else {
+                        alert(' Album 1 audio pause ')
+                        document.getElementById("audio").pause();
+                    }
+                    size++;
+                    console.log(size);
+                });
+            </script>
+        </div>
+        <div class="shop-item">
+            <span class="shop-item-title">
+			 <a href="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/Album_2.htm" style="
+    font-size: x-large;
+    color: darkorchid;
+"> Album 2 </a>
+	</span>
+            <p>click on the image to play or pause the song </p>
+            <img id="img2" class="shop-item-image" src="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/Images/Album 2.png">
+            <div class="shop-item-details">
+                <span class="shop-item-price">$14.99</span>
+                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+            </div>
+            <audio id="audio2" src="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/Sound\Album2.mp3"></audio>
+            <script>
+                let size2 = 0;
+                document.getElementById("img2").addEventListener("click", function() {
+                    if (size2 % 2 == 0) {
+                        alert(' Album 2 audio play ')
+                        document.getElementById("audio2").play();
+                        document.getElementById("audio").pause();
+                        document.getElementById("audio3").pause();
+                        document.getElementById("audio4").pause();
+
+                    } else {
+                        alert(' Album 2 audio pause ')
+                        document.getElementById("audio2").pause();
+                    }
+                    size2++;
+                    console.log(size2);
+                });
+            </script>
+        </div>
+        <div class="shop-item">
+            <span class="shop-item-title">
+					 <a href="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/Album_3.htm" style="
+    font-size: x-large;
+    color: darkorchid;
+"> Album 3 </a>
+			</span>
+            <p>click on the image to play or pause the song </p>
+ <img id="img3" class="shop-item-image" src="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/Images/Album 3.png">
+            <div class="shop-item-details">
+                <span class="shop-item-price">$9.99</span>
+                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+            </div>
+            <audio id="audio3" src="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/Sound\Album3.mp3"></audio>
+            <script>
+                let size3 = 0;
+                document.getElementById("img3").addEventListener("click", function() {
+                    if (size3 % 2 == 0) {
+                        alert(' Album 3 audio play ')
+                        document.getElementById("audio3").play();
+                        document.getElementById("audio").pause();
+                        document.getElementById("audio2").pause();
+                        document.getElementById("audio4").pause();
+
+                    } else {
+                        alert(' Album 3 audio pause ')
+                        document.getElementById("audio3").pause();
+                    }
+                    size3++;
+                    console.log(size3);
+                });
+            </script>
+        </div>
+        <div class="shop-item">
+            <span class="shop-item-title">
+					 <a href="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/Album_4.htm" style="
+    font-size: x-large;
+    color: darkorchid;
+"> Album 4 </a>
+	
+			
+			
+			</span>
+            <p>click on the image to play or pause the song </p>
+            <img id="img4" class="shop-item-image" src="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/Images/Album 4.png">
+            <div class="shop-item-details">
+                <span class="shop-item-price">$19.99</span>
+                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+            </div>
+            <audio id="audio4" src="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/Sound\Album4.mp3"></audio>
+            <script>
+                let size4 = 0;
+                document.getElementById("img4").addEventListener("click", function() {
+                    if (size4 % 2 == 0) {
+                        alert(' Album 4 audio play ')
+                        document.getElementById("audio4").play();
+                        document.getElementById("audio").pause();
+                        document.getElementById("audio3").pause();
+                        document.getElementById("audio2").pause();
+
+                    } else {
+                        alert(' Album 4 audio pause ')
+                        document.getElementById("audio4").pause();
+                    }
+                    size4++;
+                    console.log(size4);
+                });
+            </script>
+        </div>
+    </div>
+</section>
+<section class="container content-section">
+    <h2 class="section-header">MERCH</h2>
+    <div class="shop-items">
+        <div class="shop-item">
+            <span class="shop-item-title">
+			
+					 <a href="https://abderrhmanabdellatif.github.io/advanced-programing-Homeworks/Porject/T-Shirt.htm" style="
+    font-size: x-large;
+    color: darkorchid;
+"> T-Shirt </a>
+	
+			
+			</span>
+            <div class="img-magnifier-container">
+                <div class="img-magnifier-glass" style="background-image: url(&quot;https://ae01.alicdn.com/kf/HTB1IInsaiDxK1Rjy1zcq6yGeXXaC/Men-s-Marvel-Spiderman-Cotton-Print-Black-T-shirts-Unisex-Comic-Superhero-Design-Brand-Tshirt-Women.jpg_640x640.jpg&quot;); background-repeat: no-repeat; background-size: 750px 750px; left: 161.492px; top: 110.859px; background-position: -588.477px -436.578px;"></div><img id="myimage" class="shop-item-image" src="https://ae01.alicdn.com/kf/HTB1IInsaiDxK1Rjy1zcq6yGeXXaC/Men-s-Marvel-Spiderman-Cotton-Print-Black-T-shirts-Unisex-Comic-Superhero-Design-Brand-Tshirt-Women.jpg_640x640.jpg">
+            </div>
+            <div class="shop-item-details">
+                <span class="shop-item-price">$19.99</span>
+                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+            </div>
+<script>
+/* Execute the magnify function: */
+try {
+magnify("myimage", 3);
+} catch (e) {
+  /*console.log(e instanceof ReferenceError); // true
+  //console.log(e.message);                   // "undefinedVariable is not defined"
+  console.log(e.name);                      // "ReferenceError"
+  console.log(e.fileName);                  // "Scratchpad/1"
+  console.log(e.lineNumber);                // 2
+  console.log(e.columnNumber);              // 6
+  console.log(e.stack);                     // "@Scratchpad/2:2:7\n"
+  */
+}
+
+/* Specify the id of the image, and the strength of the magnifier glass: */ 
+</script>			
+        </div>
+        <div class="shop-item">
+            <span class="shop-item-title">
+					 <a href="Coffee_Cup.htm" style="
+    font-size: x-large;
+    color: darkorchid;
+"> Coffee Cup</a>
+	</span>
+            <img class="shop-item-image" src="https://ae01.alicdn.com/kf/HTB1rM7YXXzsK1Rjy1Xbq6xOaFXaB/Pinkah-380-500ml-304-Stainless-Steel-Thermo-Cup-Travel-Coffee-Mug-with-Lid-Car-Water-Bottle.jpg_640x640.jpg">
+            <div class="shop-item-details">
+                <span class="shop-item-price">$6.99</span>
+                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container content-section">
+    <h2 class="section-header">CART</h2>
+    <div class="cart-row">
+        <span class="cart-item cart-header cart-column">ITEM</span>
+        <span class="cart-price cart-header cart-column">PRICE</span>
+        <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+    </div>
+    <div class="cart-items"></div>
+    <div class="cart-total">
+        <strong class="cart-total-title">Total</strong>
+        <span class="cart-total-price">$0</span>
+    </div>
+    <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+</section>
+<center>
+<div> 
+ <span style="font-size: 18.0px;"><span style="color: #767676;"><img alt="3" src="https://ae01.alicdn.com/kf/HTB1o8QVseySBuNjy1zdq6xPxFXaq.jpg"></span></span>
+<center>
+
+
+<p>Reference: 
+<br>
+<a href="https://www.w3schools.com/jsref/dom_obj_select.asp" target="ExternalDocument">HTML DOM Select Object</a> <br>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="ExternalDocument"> Introduction to the DOM </a>
+<br>
+<a href="https://www.w3schools.com/css/default.asp" target="ExternalDocument"> w3schools Css </a>
+   <br>
+<a href="https://store.hmv.com/" target="ExternalDocument"> store  Css </a>
+<br>
+<a href="https://www.aliexpress.com" target="ExternalDocument"> aliexpress Html </a>
+
+</p>
+
+</center></div></center></div>
+
+
+</body></html>
