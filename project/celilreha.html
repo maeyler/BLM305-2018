@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://celilreha.github.io/AdvancedProg/Project/style.css">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://celilreha.github.io/AdvancedProg/Project/images/hangman.png">
+    <script src="https://celilreha.github.io/AdvancedProg/Project/data.js" type="text/javascript"></script>
+    <title>Hangman </title>
+</head>
+<body id="body">
+
+<canvas class="a" id="boxCanvas" width="666" height="80" >.</canvas>
+<canvas class="b" id="manCanvas" width="255" height="600" style="border:3px dashed black;">.</canvas>
+
+
+<h1 id=title >HANGMAN</h1>
+
+<div id="main">
+
+    <div id="buttons">
+    </div>
+    <select name="category" id="category">
+    </select>
+    <button id="playButton">Play</button>
+    <p></p>
+    <p id="categoryName"></p>
+    <div id="end">
+        <img class=a src="https://celilreha.github.io/AdvancedProg/Project/images/up.png" id="up">
+        <img class=a src="https://celilreha.github.io/AdvancedProg/Project/images/down.png" id="down">
+        <p id="mylives" > </br> </p>
+        <p id="guessTxt"> </br> </p>
+        Try: <input onkeydown="return checkKey(event.key)" oninput="changeTxt(this.value)" type="text" name="tryText" id="tryText" ><br>
+            <button id="tryButton">Try</button><br>
+        <p style="font-size: 15px">Use '-' instead of space character</p>
+        <p id='score' >  </br></p>
+        <button id="reset" >Play again</button>
+    </div>
+
+</div>
+
+<script>
+    function changeTxt(value) {
+        document.getElementById("tryText").style.backgroundColor = "blue";
+        document.getElementById("tryText").style.color = "white";
+        if(value==="")
+            changeTxt2();
+    }
+    function changeTxt2() {
+        document.getElementById("tryText").style.backgroundColor = "white";
+        document.getElementById("tryText").style.color = "blue";
+    }
+    function checkKey(key) {
+        return (key >= 'a' && key <= 'z')||(key == 'Backspace')||(key === '-');
+    }
+
+</script>
+<footer>
+    <div id="created">
+        <img class=b src="https://celilreha.github.io/AdvancedProg/Project/images/CRE.png" id="CRE">
+        Created by &nbsp;<a href="https://celilreha.github.io/AdvancedProg">Celilreha</a>
+    </div>
+</footer>
+<audio id="gameOverS">
+    <source  src="https://celilreha.github.io/AdvancedProg/Project/sounds/gameOver.mp3" type="audio/mpeg">
+</audio>
+<audio id="goodJob">
+    <source  src="https://celilreha.github.io/AdvancedProg/Project/sounds/goodJob.mp3" type="audio/mpeg">
+</audio>
+<audio id="wrongLetter">
+    <source  src="https://celilreha.github.io/AdvancedProg/Project/sounds/wrongLetter.mp3" type="audio/mpeg">
+</audio>
+<audio id="usedLetter">
+    <source  src="https://celilreha.github.io/AdvancedProg/Project/sounds/usedLetter.mp3" type="audio/mpeg">
+</audio>
+<audio id="rightLetter">
+    <source  src="https://celilreha.github.io/AdvancedProg/Project/sounds/rightLetter.mp3" type="audio/mpeg">
+</audio>
+</body>
+
+</html>
