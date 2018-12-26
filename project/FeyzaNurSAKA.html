@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="application-name" content="Quiz Show" />
+<meta name="viewport" content="width=device-width, initial-scale=0.85">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+</head>	
+<style>	
+body{
+	font-family: 'Roboto Slab', serif;
+	background: #ff6666;
+}
+div#test{
+	height: 650px;
+	width: 400px;
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform: translateX(-50%) translateY(-50%);
+	background: rgba(255, 179, 179);
+	padding: 20px;
+	border: 1px solid #08038C;
+	box-shadow: 0 0 25px 9px #fff;
+}
+.title{
+	padding: 65px 0 5px 10px;
+	text-align: center;
+	font-size: 36px;
+	text-transform: uppercase;
+	color: #800000;
+}
+.title2{
+	padding: 80px 0 5px 10px;
+	text-align: center;
+	font-size: 36px;
+	text-transform: uppercase;
+	color: #800000;
+}
+.indicator{
+	margin-left: 15px;
+	margin-top: 30px;
+	padding: 10px 0 0 10px;
+	float: left;
+}
+.start{
+
+	font-size: 20px;
+	color: #000000;
+	width: 350px;
+	display: inline-block;
+	padding: 15px 0 0px 10px;
+	vertical-align: middle;
+	background: rgba(255, 230, 230);
+	margin: 5px 0 10px 25px;
+	border-radius: 20px;
+}
+.question{
+
+	padding: 20px;
+	font-size: 19px;
+	background: #800000;
+	border-radius: 20px;
+	margin: 10px 0 15px 0;
+	color: #f6f6f6;
+}
+.option{
+	font-size: 18px;
+	width: 364px;
+	display: inline-block;
+	padding: 10px 0 15px 10px;
+	vertical-align: middle;
+	background: rgba(255, 230, 230);
+	margin: 10px 0 10px 10px;
+	color: #000000;
+	border-radius: 20px;
+}
+.option:hover{
+	background: #800000;
+	color: #f6f6f6;
+}
+.next-btn{
+	border: none;
+	outline: none;
+	background: rgba(255, 102, 102);
+	width: 100px;
+	height: 35px;
+	border-radius: 15px;
+	cursor: pointer;
+	float: right;
+	margin: 10px 18px 5px 10px;
+}
+.score{
+	margin-top: 30px;
+	margin-right: 15px;
+	padding: 10px 0 0 10px;
+	border: none;
+	outline: none;
+	background: rgba(255, 230, 230);
+	width: 90px;
+	height: 30px;
+	border-radius: 15px;
+	cursor: pointer;
+	float: right;
+}
+
+.next-btn:hover{
+	background: #800000;
+	color: #f6f6f6;
+}
+.container{
+	padding-top: 0px;
+	text-align: center;
+	font-size: 26px;
+	text-transform: uppercase;
+	color: #800000;
+}
+.cr{
+        font-size: 16px;
+    	padding-top: 50px;
+	text-align: center;
+	width: 333px;
+	display: inline-block;
+	padding: 10px 10px 10px 10px;
+	vertical-align: middle;
+	background: rgba(255, 230, 230);
+	margin: 10px 0 10px 30px;
+	color: #000000;
+	border-radius: 20px;
+}
+</style>
+
+<script>
+"use strict";
+
+var pos = 0,start, test, test_status, question, choice, choices,isim, chA, chB, chC, chD, trueAnswer, correct=0, score = 0;
+var questions = [];//dosyadan okunan sorular diziye atılır
+var random;//soruyu random olarak getirmek için kullanılır 
+const url = "https://feyzanursaka.github.io/Odevler/project/questions.txt";
+function readData(){//dosyadan okuma
+    fetch(url)
+        .then(txt=>txt.text())
+        .then(txt =>{
+    let a = txt.split("\n");
+	for(let i=0;i<a.length-1;i++){
+    	let b = a[i].split("\t");// "\t" ye göre dosyadaki soruları ve cevapları böler
+    	question = b[0], chA = b[1], chB = b[2], chC=b[3], chD=b[4], trueAnswer=b[5];
+    	questions.push([question, chA, chB, chC, chD, trueAnswer]);
+	}
+	startPage();
+});
+}
+function _(x){
+	return document.getElementById(x);
+}
+function renderQuestion(){//result
+	test = _("test");
+	if(pos >= questions.length){
+        test.innerHTML ="<div class='title'>"+"Test Complated"+"</div><br>"
+		test.innerHTML += "<div class='cr'><h2>"+"You got "+correct+" of "+questions.length+" questions correct</h2></div>";
+		test.innerHTML += "<div class='cr'><h2>"+"Your score : "+score+"</h2></div>";
+	    if(score>=50){
+			test.innerHTML += "<div class='cr'><h2>"+"Congratulations Good Score :) "+"</h2></div>";
+		}
+		if(score<50){
+			test.innerHTML += "<div class='cr'><h2>"+"Try Again For Higher Score ! "+"</h2></div>";
+		}
+		pos = 0;
+		correct = 0;
+		score=0;
+        test.innerHTML += "<button id='nextButton' class='next-btn' onclick='startPage()'>Restart</button>";
+		return false;	
+	}
+	restart();
+}
+function startPage(){//başlangıç sayfası
+test = _("test");
+array=[];
+	     test.innerHTML ="<div class='title'>"+"welcome to quiz show"+"</div><br><br>";
+		 test.innerHTML +="<div class='start'><u1><li>Each correct answer is +10 points </li><br></div>"
+		 test.innerHTML +="<div class='start'><li>Each wrong answer is -5 points </li><br></div>"
+		 test.innerHTML +="<div class='start'><li>Good Luck :) </li><br></div>"
+		 test.innerHTML +="<div class='start'><li>Click Button to Start </li></ul><br></div>"
+		 test.innerHTML += "<button id='nextButton' class='next-btn' onclick='renderQuestion()' onclick='pad()'>Start</button>";
+}
+var array=[];
+var r;
+var sonuc;
+function randomm() {//0-9 arasında rastgele sayı üretir (AYNI OLMAYAN)
+		r=Math.floor(Math.random() * 10);
+		if(!array.includes(r)){
+			array.push(r);sonuc=r;
+		}else{randomm();}
+		return sonuc;
+}
+function restart(){//her çağrıldığında soru soran ekranı yükler
+	random=randomm();
+	test.innerHTML = "<div class='indicator'> Question " +(pos+1)+" of "+questions.length+"</div>";
+	test.innerHTML += "<div class='score'> Score =  " + score +"</div>";
+	question = questions[random][0];//random seçilen soru
+	chA = questions[random][1];//A şıkkı
+	chB = questions[random][2];//B şıkkı
+	chC = questions[random][3];//C şıkkı
+	chD = questions[random][4];//D şıkkı
+	
+	test.innerHTML +="<div id='quizContainer' class='container'>";
+	test.innerHTML +="<div class='title2'>"+"quiz show"+"</div>";
+	test.innerHTML += "<div id='question' class='question'>"+(pos+1)+") "+question+"</div>";
+	test.innerHTML += "<label id='A' class='option'><input type='radio' name='choices' onchange='green_red()' value='A'/> "+chA+"<span id='opt1'></span></label><br>";
+	test.innerHTML += "<label id='B' class='option'><input type='radio' name='choices' onchange='green_red()' value='B'/> "+chB+"<span id='opt2'></span></label><br>";
+	test.innerHTML += "<label id='C' class='option'><input type='radio' name='choices' onchange='green_red()' value='C'/> "+chC+"<span id='opt3'></span></label><br>";
+	test.innerHTML += "<label id='D' class='option'><input type='radio' name='choices' onchange='green_red()' value='D'/> "+chD+"<span id='opt3'></span></label><br>";
+	test.innerHTML += "<button id='nextButton' class='next-btn' onclick='checkAnswer()'>Submit Answer</button>";
+	test.innerHTML +="</div>";
+}
+function checkAnswer(){//cevapları kontrol eder
+	choices = document.getElementsByName("choices");
+	for(var i=0; i<choices.length; i++){
+		if(choices[i].checked){//eğer işaretlendiyse
+			choice = choices[i].value;
+			if(choice.startsWith(questions[random][5].charAt(0))){//doğru cevap seçtiğimiz şıkkın value değerine eşitse
+				correct++;//doğru sayısını arttır
+				score+=10;//10 puan ekle
+			}else if(!choice.startsWith(questions[random][5].charAt(0))){//değilse
+				if(score==0){//puan 0 lanmışssa puanı eksiltme
+					continue;
+				}else{//puan sıfırlanmamışsa yanlış cevap için 5 puan azalt
+				score-=5;
+				}
+			}
+		}else if(!choices[i].checked){//cevap işaretlenmemişse puana dokunma
+				score+=0;
+		}
+	}
+	pos++;//Kaçıncı soru olduğunu belirtir. Her checkAnswer çağrıldığında arttır.
+    renderQuestion();//restart için yada sonucu ekrana yazdırmak için çağır
+}
+var t;
+function green_red(){//seçenek doğruysa yeşil yanlışsa kırmızı gözükmesini sağlar
+	choices = document.getElementsByName("choices");
+	for(var i=0; i<choices.length; i++){
+	choice = choices[i].value;
+	if(choice.startsWith(questions[random][5].charAt(0))){//cevap doğruysa
+			t=choice;	
+			}
+	}
+	for(var i=0; i<choices.length; i++){
+		choice = choices[i].value;
+		if(choices[i].checked){
+			if(choice.startsWith(questions[random][5].charAt(0))){//cevap doğruysa
+				document.getElementById(choice).style.background='rgba(58, 219, 0, 1)';//yeşil
+			}
+			else if(!choice.startsWith(questions[random][5].charAt(0))){//yanlışsa
+				document.getElementById(choice).style.background='rgba(250, 0, 0, 1)';//kırmızı
+				document.getElementById(t).style.background='rgba(58, 219, 0, 1)';//doğru cevabı yeşil yap
+			}
+		}
+	}
+}
+window.addEventListener("load", readData, false);
+
+</script>
+
+<body>
+	<div id="test"></div>
+</body>
+</html>
