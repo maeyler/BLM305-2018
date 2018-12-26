@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Othello</title>
+    
+  <link rel="stylesheet" href="https://merveyavuz.github.io/JavaScriptHWs/othello.css">
+</head>
+
+
+    <body background="https://merveyavuz.github.io/JavaScriptHWs/b.jpeg" >
+    <div id="template">
+	   <div id="empty" class="cell"><div></div></div>
+	   <div id="black" class="cell"><div></div></div>
+	   <div id="white" class="cell"><div></div></div>
+    </div>
+
+    <div id="wrap">
+	   <h1>Othello</h1>
+	   <div id="board"></div>
+	   <p id="text"></p>
+	   <input  class="button"   type="button" id="reset" value="RESET" >
+        
+    </div>
+
+    <div class="dropdown">
+    <button onclick="myFunction()" class="dropbtn">References</button>
+    <div id="myDropdown" class="dropdown-content">
+        <a href="https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown" rel="nofollow">making menu</a>
+        <a href="https://very-chocho.ml/post-105/" rel="nofollow">check piece algorithm</a>
+        <a href="https://codepen.io/zitrusfrisch/pen/wvcxy" rel="nofollow">3d text effect</a>
+    </div>
+    </div>
+
+<script>
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+    <script  src="https://merveyavuz.github.io/JavaScriptHWs/othello.js"></script>
+</body>
+
+</html>
