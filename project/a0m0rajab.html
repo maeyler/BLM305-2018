@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ChatBot demo</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body {
+            background: #44ce000f;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .container {
+            border: 2px solid #dedede;
+            background-color: #f1f1f1;
+            border-radius: 15px;
+            padding: 10px;
+            margin: 10px 0;
+            margin-right:15%;
+
+        }
+
+        .darker {
+            margin-right:0%;
+            margin-left:15%;
+            border-color: #ccc;
+            background-color: #ddd;
+        }
+
+        .container::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+
+        .time-right {
+            float: right;
+            color: #aaa;
+        }
+
+        .time-left {
+            float: left;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w3-row">
+        <!-- <div class="w3-quarter w3-container">
+            <h2>w3-third</h2>
+            <p>heloo worlds</p>
+        </div> -->
+        <div class=" w3-container" style="padding-top: 5%">
+
+            <div class="w3-card w3-round-large" style="overflow-y: scroll;
+            height:60vh;padding-left:5%; padding-right: 5%;padding-top: 5%; padding-bottom: 5%;">
+
+                <div id="messages">
+
+                </div>
+
+                <div class="w3-show-inline-block">
+
+
+
+                </div>
+            </div>
+            <br>
+            <div class="w3-card w3-round-large" style="
+            padding-left: 5%; padding-right: 5%;padding-top: 5%;padding-bottom: 5% ">
+                <div class="w3-bar">
+                    <input type="text" value="" style="width: 80%;" id="stext">
+                    <!-- <textarea value="" style="width: 80%;" id="stext" placeholder="Type your message" rows="3"></textarea> -->
+                    <button class="w3-button w3-white w3-border w3-border-blue w3-round-large" id="btn">Send</button>
+
+                </div>
+            </div>
+        </div>
+        <!-- <div class="w3-quarter w3-container">
+            <h2>w3-third</h2>
+        </div> -->
+
+    </div>
+    <hr>
+    <pre>
+            ref :
+            <a href="https://wit.ai">Wit Ai</a>
+            <a href="https://www.w3schools.com/w3css/">W3 css</a>
+
+        </pre>
+    <script>
+        let msg;
+        let turn = 0;
+        let counter = 0;
+        function getMessage() {
+            if (stext.value == "")
+                return false;
+            blockCreator(stext.value, WitAiResponce(stext.value));
+            stext.value = ""
+
+
+        }
+        function spanCreate(inner) {
+            var span = document.createElement("span");
+            span.className = "time-left"
+            span.innerText = inner
+            return span;
+        }
+        function blockCreator(message, callback) {
+            counter++;
+            var newDiv = document.createElement("div");
+            var name;
+            let msg = message;
+            if (turn == 0) {
+                turn++;
+                name = "Bot"
+                newDiv.className = "container"  // darker
+
+
+            } else {
+                turn = 0;
+                name = "You"
+                newDiv.className = "container darker"
+                if (callback) {
+                    callback();
+                }
+
+
+
+            }
+            newDiv.innerHTML = "<span class=\"time-left\"> " + name + " </span> " + "<br> " + msg + " <br>"
+            newDiv.id = counter;
+            let getDate = new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+            newDiv.appendChild(spanCreate(getDate));
+
+
+            messages.appendChild(newDiv);
+            autoScroll();
+        }
+        function WitAiResponce(msg) {
+            fetch(
+                'https://api.wit.ai/message?v=20181209&q=' + msg + '&thread_id=3',
+                {
+                    method: 'GET',
+                    headers: { Authorization: `Bearer EDFDXG7BWHJDSUPTE54R3SINS5XCQWTW` }
+                }
+            )
+                .then(response => response.json())
+                .then(json => { worker(json); console.log(json + " type" + typeof json) });
+        };
+        function worker(json) {
+            //    let  test = 
+            let sureness = 0;
+            let text = JSON.stringify(json);
+            console.log(typeof JSON.parse(text))
+            if (json.entities.greetings || 0) {
+                json.entities.greetings.forEach(x => {
+                    if (x.confidence > 0.8) { greeting() } else {
+                        blockCreator("not sure if you are greetıng me but i am good :D ");
+                    }
+                })
+            } else if (json.entities.help || 0) {
+                blockCreator("the comamnds that avaialbe now is\n" +
+                    "hello , who made you , who are you" +
+                    "\nBtw, dont get upset my creator is still teaching me everyday :D ")
+            } else if (json.entities.maker || 0) {
+                blockCreator("built by abdurrahman RAJAB , github account : a0m0rajab  ");
+            } else if (json.entities.whoami || 0) {
+                blockCreator("I am an under developing bot made by abdurrahman rajab");
+            } else {
+                unknown()
+            }
+
+
+
+            console.log(json)
+            this.msg = json;
+
+
+        }
+        function unknown() {
+            blockCreator("sorry its unknown command please check them by using HELP \n we have defined only 3 basic information till now to check it please use \" help \" ")
+        }
+        function greeting() {
+            blockCreator("hey, welcome to chat bot application for help you can use \"help\" ");
+
+
+        }
+
+
+        // maker , philosophy , hope , how are you , help , whoami
+        function events() {
+            btn.addEventListener('click', getMessage);
+            stext.addEventListener('keyup', enter);
+
+        }
+        function enter(event) {
+            if (event.keyCode === 13) {
+                getMessage();
+            }
+        }
+        function init() {
+            events();
+            blockCreator("Hello i am a demo of WitAi what can i help you with?");
+
+        }
+        function clear() {
+            messages.innerHTML = ""
+        }
+        function autoScroll() {
+
+            document.getElementById(counter).scrollIntoView();
+
+        }
+        init();
+
+    </script>
+</body>
+
+</html>
