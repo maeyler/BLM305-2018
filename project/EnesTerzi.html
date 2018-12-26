@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+@font-face {
+  font-family: lotrFont;
+  src: url(https://enestrz.github.io/AdvancedProgrammingWorks/Project/anirb___.ttf);
+}
+*{
+  font-family: lotrFont;
+}
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+  body,html {
+    height: 100%;
+  margin: 0;
+  }
+  #ekran1{
+
+
+    background-image:url(https://enestrz.github.io/AdvancedProgrammingWorks/Project/ekran1.jpg);
+
+      height:100%;
+
+      background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+
+
+
+
+  #entrance{
+    position: absolute;
+    top: 50vh;
+    left: 32vw;
+
+
+  }
+  #e1buton{
+    position: absolute;
+    bottom:40vh;
+    left: 45vw;
+    right: 50vw;
+  }
+
+
+}
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  body,html {
+    height: 100%;
+  margin: 0;
+  }
+  #ekran1{
+
+    background-image:url(https://enestrz.github.io/AdvancedProgrammingWorks/Project/ekran1.jpg);
+
+      height:100%;
+
+      background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  }
+  #entrance{
+    position: absolute;
+    top: 40vh;
+    left: 22vw;
+
+
+  }
+  #e1buton{
+    position: absolute;
+    bottom:40vh;
+    left: 45vw;
+    right: 50vw;
+  }
+
+}
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  body,html {
+    height: 100%;
+  margin: 0;
+  }
+  #ekran1{
+
+    background-image:url(https://enestrz.github.io/AdvancedProgrammingWorks/Project/ekran1.jpg);
+
+      height:100%;
+
+      background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  }
+
+}
+#Referans{
+
+
+}
+#ekran3 {
+  background-color: black;
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+#resultImg{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#resultText1{
+   text-align: center;
+}
+#testImg{
+position: fixed;
+
+  display: block;
+  top: 5vh;
+
+  margin-left: auto;
+  margin-right: auto;
+  left: 12vw;
+
+}
+#soru {
+  position: absolute;
+   text-align: center;
+   left: 25%;
+   top: 50%;
+   font-size: 20px;
+}
+#refreshButon{
+  position: absolute;
+  left: 47%;
+
+}
+
+
+
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+
+
+}
+
+.left {
+    left: 0;
+    background-color: #111;
+
+    color: white;
+
+
+
+}
+
+.right {
+    right: 0;
+    background-color: red;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.centered {
+    width: 150px;
+    border-radius: 50%;
+}
+
+.mySlides {display:none;
+
+
+          }
+
+          .button {
+  background-color: #000000; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  position: absolute;
+  bottom: 30vh;
+  left: 43%;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+
+
+.button2:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  position: absolute;
+  bottom: 40vh;
+  left: 47.5vw;
+}
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;width:13px;padding:0;position:relative; left: 47.5%; top:500px;}
+</style>
+</head>
+
+<body>
+
+
+  <div id="ekran1" style="visibility:visible">
+
+    <h2 id="entrance"><font face="lotrFont"  color="black" size="5vw">Hangi Yüzüklerin Efendisi Karakterisin?</font></h2>
+    <input type="button" id="e1buton" onclick="gecisYap()" value="Maceraya Basla!">
+    <p id="Referans">  <a href="https://www.w3schools.com"><font color="white" size="2vw">Referans: w3schools</font></a></p>
+  </div>
+
+
+
+  <div class="w3-row" id="ekran2" style="visibility:hidden">
+<div  class="w3-half w3-container split left ">
+
+  <img id="testImg" src="" width="480" height="360">
+    <p id="soru"> </p>
+
+
+
+
+
+
+
+</div>
+
+<div id="sagEkran" class="w3-half w3-container split right ">
+
+  <div class="w3-content" >
+
+
+<h2 id=slidesContainer>
+
+
+
+</h2>
+
+
+<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+
+
+
+</div>
+
+<input type="button" class="button" id="buton1" onclick="degistir()" value="Select">
+</div>
+
+</div>
+
+
+<div id="ekran3" style="visibility:hidden">
+  <img id="resultImg" src="" alt="" width="640" height="480">
+  <p id="resultText1">   </p>
+  <input type="button" value="Tekrar Çöz" id="refreshButon" onClick="document.location.reload(true)">
+
+</div>
+</body>
+<script>
+var a=0;
+var b=0;
+var c=0;
+var testSonuc;
+//Başlangıç Ekranından Test Ekranına Geçme Tuşu
+function gecisYap(){
+document.getElementById("ekran1").style.visibility = "hidden" ;
+document.getElementById("ekran2").style.visibility = "visible" ;
+}
+
+//Default Startup Kodlar
+const questions = ["Kendini nasıl tanımlarsın?","Hangi silahı kulanmak isterdin?","Beşinci günün şafağında nereye bakardın?","En sevmediğin özelliğin?"];
+const answers = [["Cesur","İleri Görüşlü","Dirayetli"],["Kılıç","Ok","Balta"],["Doğuya","Batıya","Gökyüzüne"],["Yılmışlık","Kibir","İnatçı olmak"]];
+var sayi = 0;
+const giffs =["https://enestrz.github.io/AdvancedProgrammingWorks/Project/gif1.gif","https://enestrz.github.io/AdvancedProgrammingWorks/Project/gif2.gif","https://enestrz.github.io/AdvancedProgrammingWorks/Project/gif3.gif","https://enestrz.github.io/AdvancedProgrammingWorks/Project/gif4.gif"];
+const colors = ["#251d18","#402f21","#5a452e","#72593d"];
+document.getElementById("soru").innerHTML = questions[sayi];
+  document.getElementById("testImg").src = giffs[sayi];
+document.getElementById("sagEkran").style.backgroundColor = colors[sayi];
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function reset(){
+  slidesContainer.innerHTML="";
+  showDivs(1);
+}
+
+
+//Select Tuşu
+function degistir(){
+  sayi = sayi+1;
+  document.getElementById("testImg").src = giffs[sayi];
+  document.getElementById("soru").innerHTML = questions[sayi];
+  document.getElementById("sagEkran").style.backgroundColor = colors[sayi];
+  if (sayi==3) {
+    document.getElementById("buton1").value ="Sonucu Göster";
+}
+if (sayi>3) {
+    document.getElementById("ekran2").style.visibility = "hidden" ;
+    document.getElementById("ekran3").style.visibility = "visible" ;
+
+}
+
+
+
+
+//Test sonuçları hesaplama Bölümü
+
+
+
+  if (slideIndex==1) {
+    a = a + 1;
+  }else if (slideIndex==2) {
+    b = b + 1;
+  }else if (slideIndex==3) {
+    c = c + 1;
+  }
+  if (sayi==4) {
+  if (a>b) {
+    if (a>c) {
+      testSonuc = "Aragorn";
+    }else if (a<c) {
+      testSonuc = "Gimli";
+    } else if(a==c){
+      testSonuc = "Thorin";
+    }
+  }else if(b>a){
+    if (b>c) {
+      testSonuc ="Legolas";
+    }else if(b<c){
+      testSonuc ="Gimli";
+    }else if(b==c){
+      testSonuc = "Boromir";
+    }
+  }else if(a==b){
+    testSonuc = "Gandalf";
+  }
+  document.getElementById("resultImg").src = "https://enestrz.github.io/AdvancedProgrammingWorks/Project/"+testSonuc+".jpg";
+  document.getElementById("resultImg").alt = "https://enestrz.github.io/AdvancedProgrammingWorks/Project/"+testSonuc+".jpg";
+  document.getElementById("resultText1").innerText = testSonuc+" çıktın!!";
+  console.log("testSonuc ="+testSonuc);
+}
+  console.log("a :"+a);
+  console.log("b :"+b);
+  console.log("c :"+c);
+console.log(slideIndex);
+  reset();
+currentDiv(1);
+
+
+}
+
+
+
+//Slaytları Yazdırma Bölümü
+function yazdir(){
+answers[sayi].forEach(e => createSlides(e));
+
+}
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function createSlides(message){
+  var divUp = document.createElement("div");
+  divUp.className = "mySlides"
+  var divinner = document.createElement("div");
+  divinner.className = "w3-display-middle w3-large w3-container w3-padding-16 w3-black"
+  divinner.innerText=message
+  divUp.appendChild(divinner);
+slidesContainer.appendChild(divUp);
+}
+
+function showDivs(n) {
+  yazdir();
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+
+  var dots = document.getElementsByClassName("demo");
+  if (n > 3) {slideIndex = 1}
+  if (n < 1) {slideIndex = 3}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-white", "");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " w3-white";
+
+}
+</script>
+</html>
