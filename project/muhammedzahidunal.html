@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Memory Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        height: 100vh;
+        background: black;
+    }
+
+    .title {
+        color: red;
+        margin: 10px auto;
+        padding: 0px;
+        text-align: center;
+        font-size: 30px;
+    }
+
+    .timer {
+        font-size: 25px;
+        text-align: center;
+        margin: 0 auto;
+        color: red;
+    }
+
+    dd {
+        background: red;
+        font-size: 15px;
+        line-height: 15px;
+        height: 15px;
+        margin: 0px;
+        text-align: center;
+        width: 350px;
+    }
+
+    dd a {
+        color: white;
+    }
+
+    dd a:hover {
+        color: blue;
+    }
+
+    .memory-game {
+        width: 700px;
+        height: 560px;
+        margin: auto;
+        padding: 0px;
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+
+    .memory-card {
+        width: 130px;
+        height: 130px;
+        margin: 22px;
+        border-radius: 30px;
+        background: white;
+        border: red 10px solid;
+        transform: scale(1);
+        transform-style: preserve-3d;
+        transition: transform .5s;
+
+    }
+
+    .memory-card:active {
+        transform: scale(0.85);
+        transition: transform .2s;
+    }
+
+    .memory-card.flip {
+        transform: rotateY(180deg);
+    }
+
+    .front-face,
+    .back-face {
+        width: 100%;
+        height: 100%;
+        padding: 7px;
+        position: absolute;
+        border-radius: 5px;
+        backface-visibility: hidden;
+    }
+
+    .front-face {
+        transform: rotateY(180deg);
+    }
+
+    #button {
+        width: 46%;
+        text-align: center;
+        color: white;
+        padding: 10px;
+        background-color: red;
+        display: block;
+        position: relative;
+        margin: 0px auto;
+        font-size: 15px;
+    }
+</style>
+
+<body>
+    <p class="title">Memory Card Game</p>
+    <div class="timer" id="time">30</div>
+
+
+    <div id="butonBaslat">
+        <button id="button" onclick="oyna()">OYNA</button>
+    </div>
+
+
+    <div class="memory-game">
+
+        <div class="memory-card" data-framework="e1">
+            <img class="front-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/e1.png" />
+            <img class="back-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/JS.png" />
+        </div>
+        <div class="memory-card" data-framework="e1">
+            <img class="front-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/e1.png" />
+            <img class="back-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/JS.png" />
+        </div>
+        <div class="memory-card" data-framework="e2">
+            <img class="front-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/e2.png" />
+            <img class="back-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/JS.png" />
+        </div>
+        <div class="memory-card" data-framework="e2">
+            <img class="front-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/e2.png" />
+            <img class="back-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/JS.png" />
+        </div>
+        <div class="memory-card" data-framework="e3">
+            <img class="front-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/e3.png" />
+            <img class="back-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/JS.png" />
+        </div>
+        <div class="memory-card" data-framework="e3">
+            <img class="front-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/e3.png" />
+            <img class="back-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/JS.png" />
+        </div>
+        <div class="memory-card" data-framework="e4">
+            <img class="front-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/e4.png" />
+            <img class="back-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/JS.png" />
+        </div>
+        <div class="memory-card" data-framework="e4">
+            <img class="front-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/e4.png" />
+            <img class="back-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/JS.png" />
+        </div>
+        <div class="memory-card" data-framework="e5">
+            <img class="front-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/e5.png" />
+            <img class="back-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/JS.png" />
+        </div>
+        <div class="memory-card" data-framework="e5">
+            <img class="front-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/e5.png" />
+            <img class="back-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/JS.png" />
+        </div>
+        <div class="memory-card" data-framework="e6">
+            <img class="front-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/e6.png" />
+            <img class="back-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/JS.png" />
+        </div>
+        <div class="memory-card" data-framework="e6">
+            <img class="front-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/e6.png" />
+            <img class="back-face" src="https://muhammedzahidunal.github.io/ileriProgramming/Proje/JS.png" />
+        </div>
+
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.memory-card');
+        var kardAcıldımı = false;
+        var kartlarıKitle = false;
+        var ilkkard, ikincikard;
+        var count = 0;
+        var timer = 0;
+
+        function oyna() {
+            document.getElementById("butonBaslat").style.display = "none";
+
+            restart();
+            zaman();
+
+            cards.forEach(card => {
+                card.classList.add('flip');
+            });
+
+            setTimeout(function () {
+                kartlarıKapat();
+            }, 3000);
+        }
+
+        function kartlarıKapat() {
+            cards.forEach(card => {
+                card.classList.remove('flip');
+            });
+        }
+
+
+        function restart() {
+            kartlarıKapat();
+            timer = 30;
+            count = 0;
+            oyunuBaslat();
+        }
+
+        function zaman() {
+            timer = 30;
+            var t = document.getElementById("time");
+            var interval = setInterval(function () {
+                t.innerHTML = timer;
+                timer--;
+
+                if (t.innerHTML === "0") {
+                    alert("kaybettiniz. süre doldu");
+                    document.getElementById("butonBaslat").style.display = "block";
+                    kartlarıKapat();
+                    clearInterval(interval);
+
+                }
+                if (count == 6) {
+                    alert("KAZANDIN");
+                    document.getElementById("butonBaslat").style.display = "block";
+                    kartlarıKapat();
+                    clearInterval(interval);
+                }
+            }, 1000);
+
+
+        }
+
+        function oyunuBaslat() {
+
+            function kartlarıDondur() {
+                this.classList.add('flip');
+                if (!kardAcıldımı) {
+                    kardAcıldımı = true;
+                    ilkkard = this;
+                    return;
+                }
+
+                ikincikard = this;
+                karsılastır();
+            }
+
+            function karsılastır() {
+                if (ilkkard.dataset.framework === ikincikard.dataset.framework) {
+                    ikikartEsitse();
+                } else {
+                    kartlarEsitDegilse();
+                }
+            }
+
+            function ikikartEsitse() {
+                ilkkard.removeEventListener('click', kartlarıDondur);
+                ikincikard.removeEventListener('click', kartlarıDondur);
+                count = count + 1;
+                sıfırla();
+            }
+
+            function kartlarEsitDegilse() {
+                kartlarıKitle = true;
+                setTimeout(() => {
+                    ilkkard.classList.remove('flip');
+                    ikincikard.classList.remove('flip');
+                    sıfırla();
+                }, 350);
+            }
+
+            function sıfırla() {
+                [kardAcıldımı, kartlarıKitle] = [false, false];
+                [ilkkard, ikincikard] = [null, null];
+            }
+
+            (function kartlarıKar() {
+                cards.forEach(card => {
+                    let randomPos = Math.floor(Math.random() * 12);
+                    card.style.order = randomPos;
+                });
+            })();
+
+            cards.forEach(card => card.addEventListener('click', kartlarıDondur));
+
+        }
+
+    </script>
+    <center>
+        <div class=link>
+            <dd>References:</dd>
+            <dd><a href="https://medium.com/code-sketch/">medium.com</a></dd>
+            <dd><a href="https://developer.mozilla.org/tr/">developer.mozilla</a></dd>
+            <dd><a href="https://www.w3schools.com/">w3schools</a></dd>
+        </div>
+    </center>
+</body>
+
+
+</html>
