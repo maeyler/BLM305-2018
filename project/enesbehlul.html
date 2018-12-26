@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Money Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://enesbehlul.github.io/Advanced_Programming/Project/style.css">
+</head>
+<body>
+<div id="giris">
+    <form action="/action_page.php">
+      <div class="imgcontainer">
+        <img src="https://enesbehlul.github.io/Advanced_Programming/Project/img_avatar2.png" alt="Avatar" class="avatar">
+      </div>
+
+      <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" id = "userId">
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" id = "psw">
+
+        <button type="button" onclick="managementScreen(userId.value, psw.value)">Login</button>
+        <button type="button" onclick="managementScreen(1,'123')">TRY AS GUEST</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+      </div>
+
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" class="cancelbtn">Cancel</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+      </div>
+    </form>
+    <p><a href="https://www.w3schools.com/howto/howto_css_login_form.asp">References</a></p>\
+</div>
+    <script src="https://enesbehlul.github.io/Advanced_Programming/Project/classes.js"></script>
+    <script type="text/javascript">
+        var a = '<div class="top">\
+        	<div id= "userInfo", class="userInfo">\
+        	User: \
+        	</div>\
+            <div class="budget">\
+                <div class="budget__title"\
+                    Available Budget in <span class="budget__title--month">%Month%</span>:\
+                </div>\
+                \
+                <div class="budget__value">+ 2,345.64</div>\
+                \
+                <div class="budget__income clearfix">\
+                    <div class="budget__income--text">Income</div>\
+                    <div class="right">\
+                        <div class="budget__income--value">+ 4,300.00</div>\
+                        <div class="budget__income--percentage">&nbsp;</div>\
+                    </div>\
+                </div>\
+                \
+                <div class="budget__expenses clearfix">\
+                    <div class="budget__expenses--text">Expenses</div>\
+                    <div class="right clearfix">\
+                        <div class="budget__expenses--value">- 1,954.36</div>\
+                        <div class="budget__expenses--percentage">45%</div>\
+                    </div>\
+                </div>\
+            </div>\
+        </div>\
+        \
+        <div class="bottom">\
+            <div class="add">\
+                <div class="add__container">\
+                <label id="selectTypeLabel" for="selectCategory">Type:</label>\
+                    <select class="add__type">\
+                        <option value="income" selected>Income</option>\
+                        <option value="expence">Expense</option>\
+                    </select>\
+                    <br><br>\
+                    <label id="selectCategoryLabel" for="selectCategory">Category:</label>\
+                    <select id ="selectCategory" class="add__categorySelect" onchange="categorySelectClicked(value)">\
+                        <option value="select" selected>---select---</option>\
+                    </select>\
+                    <input type="text" class="add__description" placeholder="Add description">\
+                    <input type="text" class="add__category" placeholder="Add category">\
+                    <input type="number" class="add__value" placeholder="Value">\
+                    <button class="add__btn" onclick="addAction()">Add to list</button>\
+                    <p id="error"></p>\
+                </div>\
+            </div>\
+            \
+            <div class="container clearfix">\
+                <div class="income">\
+                    <h2 class="icome__title">Income</h2>\
+                    \
+                    <div class="income__list">\
+                        \
+                    </div>\
+                </div>\
+                                \
+                <div class="expenses">\
+                    <h2 class="expenses__title">Expenses</h2>\
+                    \
+                    <div class="expenses__list">\
+\
+                    </div>\
+                </div>\
+            </div>\
+        </div>\
+        <div id="canvasLabel">\
+        	<label for="myCanvas"><b>Percentage of expenses</b></label>\
+        </div>\
+        <canvas id="myCanvas"></canvas>\
+        <div id="myLegend"></div>\
+        <br><br><br>\
+        References:\
+        <p><a href="https://codepen.io/SmileySteven/full/KXmNZN">CSS</a></p>\
+        <p><a href="https://code.tutsplus.com/tutorials/how-to-draw-a-pie-chart-and-doughnut-chart-using-javascript-and-html5-canvas--cms-27197">Pie chart with canvas</a></p>\
+'
+    </script>
+
+</body>
+</html>
