@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="Arif Burak Dikmen, 2018" />
+    <meta name="description" content="BLM305 FSMV University" />
+</head>
+<style>
+    
+#firstDiv {
+     width: 200px; 
+     height:200px; 
+     background-color: navy;
+     float : left;
+}
+#secondDiv {
+     width: 200px; 
+     height:200px; 
+     background-color: green;
+     float : left;
+} 
+
+#sumDiv {
+     width: 200px; 
+     height:200px; 
+     background-color: red;
+     float : left;
+} 
+
+#sources{
+    width: 300px; 
+    height:50px; 
+    float:center;
+    top:50vh;
+}
+
+
+
+</style>
+<body>
+
+<h2 align=left>Matrix Operations</h2>
+
+<div class="entire-thing">
+
+    <div id="firstDiv">
+    <table class="matrix">
+        <tr>
+            <td><input id="00" type="text" value=10 style="width: 15px;"></td>
+            <td><input id="01" type="text" value=3 style="width: 15px;"></td>
+            <td><input id="02" type="text" value=5 style="width: 15px;"></td>
+
+        </tr>
+        <tr>
+           <td><input id="10" type="text" value=2 style="width: 15px;"></td>
+            <td><input id="11" type="text" value=7 style="width: 15px;"></td>
+            <td><input id="12" type="text" value=13 style="width: 15px;"></td>
+        </tr>
+        <tr>
+            <td><input id="20" type="text" value=3 style="width: 15px;"></td>
+            <td><input id="21" type="text" value=2 style="width: 15px;"></td>
+            <td><input id="22" type="text" value=6 style="width: 15px;"></td>
+        </tr>
+    </table>
+</div>
+
+<div id="secondDiv">
+<table class="matrix2">
+        <tr>
+            <td><input id="002" type="text" value=11 style="width: 15px;"></td>
+            <td><input id="012" type="text" value=19 style="width: 15px;"></td>
+            <td><input id="022" type="text" value=9 style="width: 15px;"></td>
+        </tr>
+        <tr>
+           <td><input id="102" type="text" value=7 style="width: 15px;"></td>
+            <td><input id="112" type="text" value=8 style="width: 15px;"></td>
+            <td><input id="122" type="text" value=5 style="width: 15px;"></td>
+        </tr>
+        <tr>
+            <td><input id="202" type="text" value=6 style="width: 15px;"></td>
+            <td><input id="212" type="text" value=1 style="width: 15px;"></td>
+            <td><input id="222" type="text" value=1 style="width: 15px;"></td>
+
+        </tr>
+    </table>
+    <button onclick="matrizenMultiplikation()">Multiply</button>
+    <button onclick="matrixAddiction()">Addition</button>
+</div>
+
+<div id="sumDiv">
+<table class="matrix3">
+        <tr>
+            <td><input id="00r" type="text" style="width: 30px;"></td>
+            <td><input id="01r" type="text" style="width: 30px;"></td>
+            <td><input id="02r" type="text" style="width: 30px;"></td>
+        </tr>
+        <tr>
+           <td><input id="10r" type="text" style="width: 30px;"></td>
+            <td><input id="11r" type="text" style="width: 30px;"></td>
+            <td><input id="12r" type="text" style="width: 30px;"></td>
+        </tr>
+        <tr>
+            <td><input id="20r" type="text" style="width: 30px;"></td>
+            <td><input id="21r" type="text" style="width: 30px;"></td>
+            <td><input id="22r" type="text" style="width: 30px;"></td>
+
+        </tr>
+    </table>
+        <button onclick="transponierte()">Transpose</button>
+        <button onclick="det()">Determinant</button>
+        <button onclick="matrix_invert()">Inverse</button>
+</div>
+<div id="sources">
+<h2>Sources: </h2>
+
+<p><a href="https://www.geeksforgeeks.org/javascript-string-prototype-concat-function/">String Concat</a></p>
+<p><a href="http://www.technomark.in/How-To-Place-Two-Divs-Next-To-Each-Other-Using-CSS.aspx">CSS</a></p>
+<p><a href="https://stackoverflow.com/questions/966225/how-can-i-create-a-two-dimensional-array-in-javascript">2D Array</a></p>
+<p><a href="https://stackoverflow.com/questions/7470268/html-input-name-vs-id">HTML Input</a></p>
+<p><a href="https://stackoverflow.com/a/27205510">Matrix Multiplication</a></p>
+<p><a href="https://stackoverflow.com/a/46805290">Matrix Transpose</a></p>
+<p><a href="http://collectivesolver.com/9891/how-to-calculate-the-determinant-of-a-3x3-matrix-in-javascript
+">Matrix Determinant</a></p>
+<p><a href="http://blog.acipo.com/matrix-inversion-in-javascript/">Matrix Inversion</a></p>
+<p><a href="https://stackoverflow.com/q/41278390">Displaying Table as Matrix</a></p>
+<p><a href="https://www.w3schools.com/jsref/jsref_parseint.asp">Parse Int</a></p>
+</div>
+  <table border="1">
+          <tr>
+            <th><input id="00rr" type="text" style="width: 130px;"></th>
+            <td><input id="01rr" type="text" style="width: 130px;"></td>
+            <td><input id="02rr" type="text" style="width: 130px;"></td>
+            </tr>
+          <tr>
+            <th><input id="10rr" type="text" style="width: 130px;"></th>
+            <td><input id="11rr" type="text" style="width: 130px;"></td>
+            <td><input id="12rr" type="text" style="width: 130px;"></td>
+            </tr>
+            <tr>
+            <th><input id="20rr" type="text" style="width: 130px;"></th>
+            <td><input id="21rr" type="text" style="width: 130px;"></td>
+            <td><input id="22rr" type="text" style="width: 130px;"></td>
+            </tr>
+          </table>
+</div>
+
+ 
+
+<script type="text/javascript">
+"use strict";
+
+function matrizenMultiplikation(){
+
+    var firstMat = [
+  [document.getElementById("00").value, document.getElementById("01").value, document.getElementById("02").value],
+  [document.getElementById("10").value, document.getElementById("11").value, document.getElementById("12").value],
+  [document.getElementById("20").value, document.getElementById("21").value, document.getElementById("22").value],
+];
+
+var secMat = [
+  [document.getElementById("002").value, document.getElementById("012").value, document.getElementById("022").value],
+  [document.getElementById("102").value, document.getElementById("112").value, document.getElementById("122").value],
+  [document.getElementById("202").value, document.getElementById("212").value, document.getElementById("222").value],
+];
+
+let sumMat = [];
+
+    for (var i = 0; i < firstMat.length; i++) {
+        sumMat[i] = [];
+        for (var j = 0; j < secMat[0].length; j++) {
+            var sum = 0;
+            for (var k = 0; k < firstMat[0].length; k++) {
+                sum += firstMat[i][k] * secMat[k][j];
+            }
+            sumMat[i][j] = sum;
+            var idx = "".concat(i,j,"r");
+            document.getElementById(idx).value = sum; 
+        }
+    }
+}
+
+
+
+function transponierte() {
+
+let lastMat = [
+  [document.getElementById("00r").value, document.getElementById("01r").value, document.getElementById("02r").value],
+  [document.getElementById("10r").value, document.getElementById("11r").value, document.getElementById("12r").value],
+  [document.getElementById("20r").value, document.getElementById("21r").value, document.getElementById("22r").value],
+];
+
+  const rows = lastMat.length, cols = lastMat[0].length;
+  const grid = [];
+  for (let j = 0; j < cols; j++) {
+    grid[j] = Array(rows);
+  }
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      grid[j][i] = lastMat[i][j];
+      var idy = "".concat(j,i,"r");
+      document.getElementById(idy).value = grid[j][i]; 
+    }
+  }
+  
+}
+
+function det() {
+
+    let arr = [
+  [document.getElementById("00r").value, document.getElementById("01r").value, document.getElementById("02r").value],
+  [document.getElementById("10r").value, document.getElementById("11r").value, document.getElementById("12r").value],
+  [document.getElementById("20r").value, document.getElementById("21r").value, document.getElementById("22r").value],
+];
+
+   var sum = arr[0][0] * (arr[1][1]*arr[2][2] - arr[1][2]*arr[2][1]) -
+                  arr[0][1] * (arr[1][0]*arr[2][2] - arr[1][2]*arr[2][0]) +
+                  arr[0][2] * (arr[1][0]*arr[2][1] - arr[1][1]*arr[2][0]);
+
+    alert("Determinant of this matrix is: " + sum);
+}
+
+// Returns the inverse of matrix `M`.
+function matrix_invert(){
+    // I use Guassian Elimination to calculate the inverse:
+    // (1) 'augment' the matrix (left) by the identity (on the right)
+    // (2) Turn the matrix on the left into the identity by elemetry row ops
+    // (3) The matrix on the right is the inverse (was the identity matrix)
+    // There are 3 elemtary row ops: (I combine b and c in my code)
+    // (a) Swap 2 rows
+    // (b) Multiply a row by a scalar
+    // (c) Add 2 rows
+
+
+    let M = [
+  [document.getElementById("00r").value, document.getElementById("01r").value, document.getElementById("02r").value],
+  [document.getElementById("10r").value, document.getElementById("11r").value, document.getElementById("12r").value],
+  [document.getElementById("20r").value, document.getElementById("21r").value, document.getElementById("22r").value],
+];
+
+    
+    //if the matrix isn't square: exit (error)
+    if(M.length !== M[0].length){return;}
+    
+    //create the identity matrix (I), and a copy (C) of the original
+    var i=0, ii=0, j=0, dim=M.length, e=0, t=0;
+    var I = [], C = [];
+    for(i=0; i<dim; i+=1){
+        // Create the row
+        I[I.length]=[];
+        C[C.length]=[];
+        for(j=0; j<dim; j+=1){
+            
+            //if we're on the diagonal, put a 1 (for identity)
+            if(i==j){ I[i][j] = 1; }
+            else{ I[i][j] = 0; }
+            
+            // Also, make the copy of the original
+            C[i][j] = M[i][j];
+        }
+    }
+    
+    // Perform elementary row operations
+    for(i=0; i<dim; i+=1){
+        // get the element e on the diagonal
+        e = C[i][i];
+        
+        // if we have a 0 on the diagonal (we'll need to swap with a lower row)
+        if(e==0){
+            //look through every row below the i'th row
+            for(ii=i+1; ii<dim; ii+=1){
+                //if the ii'th row has a non-0 in the i'th col
+                if(C[ii][i] != 0){
+                    //it would make the diagonal have a non-0 so swap it
+                    for(j=0; j<dim; j++){
+                        e = C[i][j];       //temp store i'th row
+                        C[i][j] = C[ii][j];//replace i'th row by ii'th
+                        C[ii][j] = e;      //repace ii'th by temp
+                        e = I[i][j];       //temp store i'th row
+                        I[i][j] = I[ii][j];//replace i'th row by ii'th
+                        I[ii][j] = e;      //repace ii'th by temp
+                    }
+                    //don't bother checking other rows since we've swapped
+                    break;
+                }
+            }
+            //get the new diagonal
+            e = C[i][i];
+            //if it's still 0, not invertable (error)
+            if(e==0){return}
+        }
+        
+        // Scale this row down by e (so we have a 1 on the diagonal)
+        for(j=0; j<dim; j++){
+            C[i][j] = C[i][j]/e; //apply to original matrix
+            I[i][j] = I[i][j]/e; //apply to identity
+        }
+        
+        // Subtract this row (scaled appropriately for each row) from ALL of
+        // the other rows so that there will be 0's in this column in the
+        // rows above and below this one
+        for(ii=0; ii<dim; ii++){
+            // Only apply to other rows (we want a 1 on the diagonal)
+            if(ii==i){continue;}
+            
+            // We want to change this element to 0
+            e = C[ii][i];
+            
+            // Subtract (the row above(or below) scaled by e) from (the
+            // current row) but start at the i'th column and assume all the
+            // stuff left of diagonal is 0 (which it should be if we made this
+            // algorithm correctly)
+            for(j=0; j<dim; j++){
+                C[ii][j] -= e*C[i][j]; //apply to original matrix
+                I[ii][j] -= e*I[i][j]; //apply to identity
+            }
+        }
+    }
+    
+    //we've done all operations, C should be the identity
+    //matrix I should be the inverse:
+
+    for (var i = 0; i < 3; i++) {
+        for(var j=0; j < 3; j++){
+            var idx = "".concat(i,j,"rr");
+            document.getElementById(idx).value = I[i][j]; 
+            console.log("matris" +  I[i][j])
+        }
+    }
+    
+}
+
+function matrixAddiction(){
+
+        var firstMat = [
+  [document.getElementById("00").value, document.getElementById("01").value, document.getElementById("02").value],
+  [document.getElementById("10").value, document.getElementById("11").value, document.getElementById("12").value],
+  [document.getElementById("20").value, document.getElementById("21").value, document.getElementById("22").value],
+];
+
+var secMat = [
+  [document.getElementById("002").value, document.getElementById("012").value, document.getElementById("022").value],
+  [document.getElementById("102").value, document.getElementById("112").value, document.getElementById("122").value],
+  [document.getElementById("202").value, document.getElementById("212").value, document.getElementById("222").value],
+];
+
+    let sum = 0 ;
+
+    for(let i=0; i < 3; i++){
+        for(let j=0; j < 3; j++){
+            sum = parseInt(firstMat[i][j]) + parseInt(secMat[i][j]);
+            var idx = "".concat(i,j,"r");
+            document.getElementById(idx).value = sum; 
+            sum = 0;
+        }
+    }
+
+
+}
+
+</script>
+
+</body>
+
+
+</html>
