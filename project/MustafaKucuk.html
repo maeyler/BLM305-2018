@@ -1,0 +1,254 @@
+<html>
+  <head>
+	<style>
+		body {background-color: Gold;}
+		td   {color: blue;}
+		th   {color: green;
+				padding: 2px;
+				width:70px;
+				height:70px;
+				/*border: 1px solid purple;*/
+			 }
+		table {/*border: 1px solid greenYellow;*/
+			   padding: 30px;
+			   /*background-color:orange;*/
+			   }
+	    button.hucre {color : white;
+					  background-color: purple;
+				      width : 69px;
+					  height: 69px;
+					  font-size : 30px;
+					  font-family: Arial;
+					  }
+		
+		#divBaslik {background-color: purple;
+					font-family: Arial;
+					font-size : 27px;
+					color : white;
+					margin: auto;
+					width: 30%;
+					height: 50px;
+					}
+</style>
+  </head>
+  
+  <body>
+	<div id = "divBaslik" align="middle" style = "height:auto;">
+		<h2 id = "baslik">Sayı Dizme Oyunu</h2>
+	</div>
+	
+	<div align = "middle" style = " margin-top:2%;">
+		<p>			
+			<label style = "font-family: Arial;
+					font-size : 27px;
+					color : red;">Time</label>
+		</p>
+		<p id = "sayac"></p>
+	</div>
+	
+	
+	<div>
+		<table align = "center" id = "table">
+		  <tr id = "row1">
+			<th><button id = "btn1" class = "hucre" value = "1">1</button></th>
+			<th><button id = "btn2" class = "hucre" value = "2">2</button></th>
+			<th><button id = "btn3" class = "hucre" value = "3">3</button></th>
+			<th><button id = "btn4" class = "hucre" value = "4">4</button></th>
+			<th><button id = "btn5" class = "hucre" value = "5">5</button></th>
+		  </tr>
+		  <tr>
+			<th><button id = "btn6" class = "hucre" value = "6">6</button></th>
+			<th><button id = "btn7" class = "hucre" value = "7">7</button></th>
+			<th><button id = "btn8" class = "hucre" value = "8">8</button></th>
+			<th><button id = "btn9" class = "hucre" value = "9">9</button></th>
+			<th><button id = "btn10" class = "hucre" value = "10">10</button></th>
+		  </tr>
+		  <tr>
+			<th><button id = "btn11" class = "hucre" value = "11">11</button></th>
+			<th><button id = "btn12" class = "hucre" value = "12">12</button></th>
+			<th><button id = "btn13" class = "hucre" value = "13">13</button></th>
+			<th><button id = "btn14" class = "hucre" value = "14">14</button></th>
+			<th><button id = "btn15" class = "hucre" value = "15">15</button></th>
+		  </tr>
+		  <tr>
+			<th><button id = "btn16" class = "hucre" value = "16">16</button></th>
+			<th><button id = "btn17" class = "hucre" value = "17">17</button></th>
+			<th><button id = "btn18" class = "hucre" value = "18">18</button></th>
+			<th><button id = "btn19" class = "hucre" value = "19">19</button></th>
+			<th><button id = "btn20" class = "hucre" value = "20">20</button></th>
+		  </tr>
+		  <tr>
+			<th><button id = "btn21" class = "hucre" value = "21">21</button></th>
+			<th><button id = "btn22" class = "hucre" value = "22">22</button></th>
+			<th><button id = "btn23" class = "hucre" value = "23">23</button></th>
+			<th><button id = "btn24" class = "hucre" value = "24">24</button></th>
+			<th><button id = "btn25" class = "hucre" value = "25">25</button></th>
+		  </tr>
+	</table>
+	</div>
+    
+	<div>
+		<p>
+			<button type="button" onclick = "basla()" style="background-color:purple; margin-left:auto; margin-right:auto;
+			display:block; height:60px; margin-top:2%; margin-bottom:2%"> Oyna Basla</button>			
+		</p>
+	</div>
+	<div align = "middle">
+		<p id = "pDeneme"></p>
+		<p id = "hata"></p>
+	</div>
+	
+	<p id = "referanslar"><h4>References</h4>
+	   <a href="https://stackoverflow.com/questions/3072233/getting-value-from-table-cell-in-javascript-not-jquery">stackoverflow table</a><br>
+	   <a href="https://www.w3schools.com/jsref/coll_table_cells.asp">w3schools table</a><br>
+	   <a href="https://www.w3schools.com/jsref/met_document_addeventlistener.asp">w3schools addEventListener</a><br>
+	   <a href="https://codepen.io/tayfunerbilen/pen/AXywjw">codepen time</a><br>
+	   <a href="http://www.zzzscore.com/1to50/en/?ts=1544469461251">Resource of the idea</a><br>
+	</p>
+	<script>
+		//pDeneme.innerHTML += "<br>" + document.getElementById("table").rows[0].cells[0].firstChild.value; //silme 
+		var numbers = [];
+		var count = 0;
+		function numbersDoldur(){
+			for(let i = 0; i < 50; i++){
+				numbers[i] = i+1;
+			}
+		}
+		
+		var first25numbers = [];
+		function doldur25(){
+			for(let i = 0; i < 25; i++){
+				first25numbers[i] = i+1;
+			}
+		}
+		
+		var last25numbers = [];
+		function doldurLast25(){
+			for(let i = 0; i < 25; i++){
+				last25numbers[i] = i+26;
+			}
+		}
+		
+		
+		var Kronometre = new Kronometre('sayac');
+		function Kronometre(Id, Saniye){
+
+		  this.gercekSaniye = Saniye || 0;
+		  this.saniye = Saniye || 0;
+		  this.interval;
+		  
+		  this.baslat = function(){
+			this.sayacElem = document.getElementById(Id);
+			if ( !this.interval ){
+			  this.sayac();
+			  this.interval = setInterval(this.sayac.bind(this), 1000);
+			}
+		  };
+		  
+		  this.sayac = function(){
+			
+			var toplamSaniye = this.saniye;
+			var saat = parseInt( toplamSaniye / 3600 ) % 24;
+			var dakika = parseInt( toplamSaniye / 60 ) % 60;
+			var saniye = toplamSaniye % 60;
+			
+			this.sayacElem.innerHTML = (saat < 10 ? "0" + saat : saat) + ":" + (dakika < 10 ? "0" + dakika : dakika) + ":" + (saniye  < 10 ? "0" + saniye : saniye);
+			
+			this.saniye += 1;
+			
+		  };
+		  
+		  this.duraklat = function(){
+			clearInterval(this.interval);
+			this.interval = null;
+		  };
+		  
+		  this.bitir = function(){
+			this.duraklat();
+			this.sayacElem.innerHTML = '';
+			this.saniye = this.gercekSaniye;
+		  };
+		  
+		}
+		function basla(){
+			Kronometre.baslat();
+			Kronometre.bitir();
+			Kronometre.baslat();
+			init();
+		}
+		
+		
+		function init(){
+			var rand;
+			count = 0;
+			hata.innerHTML = "Hatalı Basımlar :" + count;
+			pDeneme.innerHTML = "";
+			numbersDoldur();
+			doldur25();
+			doldurLast25();
+			
+			var table = document.getElementById('table');
+			for (var r = 0, n = table.rows.length; r < n; r++) {
+				for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
+					rand = (Math.floor(Math.random() * 50) + 1) % 26;
+					while(!first25numbers.includes(rand % 26) && first25numbers.length != 0){
+						rand = (Math.floor(Math.random() * 50) + 1) % 26;
+					}
+					
+					if(first25numbers.includes(rand % 26)){
+						table.rows[r].cells[c].firstChild.value = rand % 26;
+						table.rows[r].cells[c].firstChild.innerHTML = table.rows[r].cells[c].firstChild.value;
+						first25numbers.splice(first25numbers.indexOf(rand), 1);
+					}
+				}
+			}
+		}
+		 
+	   
+		
+		  
+		function secondStep(){
+			var rand;
+			var basilanButon;
+			var buttonCurrentValue;
+			buttons = document.getElementsByClassName('hucre');
+			for (var i = 0; i < buttons.length; i++) {
+				buttons[i].addEventListener('click',redirect,false);
+			}
+			function redirect(e){
+				basilanButon = document.getElementById(e.target.id);
+				buttonCurrentValue = e.target.value;
+				
+				if(buttonCurrentValue == numbers[0]){
+					
+					numbers.splice(0, 1);
+					rand = (Math.floor(Math.random() * 50) + 1) % 25;
+					
+					if(basilanButon.innerHTML <= 25){
+						while(last25numbers[rand] == 0){
+							rand = (Math.floor(Math.random() * 50) + 1) % 25;
+						}
+						basilanButon.value = last25numbers[rand];
+						basilanButon.innerHTML = basilanButon.value;
+						last25numbers[rand] = 0;
+					}else {
+						basilanButon.innerHTML = "";
+					}
+					
+				}else if(pDeneme.innerHTML != "KAZANDINIZ"){
+					count++;
+					hata.innerHTML = "Hatalı Basımlar :" + count;
+				}
+				
+				if(numbers.length == 0){
+					Kronometre.duraklat();
+					pDeneme.innerHTML = "KAZANDINIZ";
+				}
+			}
+		}
+		
+		basla();
+		secondStep();
+	</script>
+  </body>
+</html>
