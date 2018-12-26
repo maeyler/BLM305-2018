@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://mervetanrikulu.github.io/Odevler/Proje/Css.css">
+    <script src="https://mervetanrikulu.github.io/Odevler/Proje/ProjeScript.js"></script>
+    <title></title>
+</head>
+<body onload="Hangman.initialize()">
+    <br/>
+    <br/>
+    <br/>
+    <h1 class="h1">Hang Man</h1>
+    <p id="score" class="elements">Score : 0</p>
+    <img id="img6" class="img6" alt="image" src="https://mervetanrikulu.github.io/Odevler/Proje/dementor.png">
+    <img id="img20" class="img20" src="https://mervetanrikulu.github.io/Odevler/Proje/ayaklar.gif">
+    <img id="img11" class="img11" alt="image" src="https://mervetanrikulu.github.io/Odevler/Proje/moon.png">
+    <img id="img13" class="img13" src="https://mervetanrikulu.github.io/Odevler/Proje/broom1.png">
+    <img id="img17" class="img17" alt="image" src="https://mervetanrikulu.github.io/Odevler/Proje/snitch.gif">
+    <p id="text22" class="text22">Two sword</p>
+    <p id="text21" class="text21">Animagus</p>
+    <p id="text20" class="text20">Time Turner</p>
+    <p id="text19" class="text19">Goblet of Fire</p>
+    <p id="text18" class="text18">Sorting Hat</p>
+    <p id="text17" class="text17">Lost Diadem</p>
+    <p id="text16" class="text16">Stone</p>
+    <p id="text15" class="text15">Snake</p>
+    <p id="text14" class="text14">Chess Board</p>
+    <p id="text13" class="text13">Remembrall</p>
+    <p id="text12" class="text12">Transportdator</p>
+    <p id="text" class="text">I show not your face but your hearts desire</p>
+    <p id="text2" class="text2">Prison</p>
+    <p id="text3" class="text3">Protector of the Philosopher's Stone</p>
+    <p id="text4" class="text4">Deathly Hallows</p>
+    <p id="text5" class="text5">Magic</p>
+    <p id="text6" class="text6">Special furniture for Weasley's</p>
+    <p id="text7" class="text7">Lucy</p>
+    <p id="text8" class="text8">"Always..."</p>
+    <p id="text9" class="text9">"Such a beautiful place it is, to be with friends."</p>
+    <p id="text10" class="text10">"It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends."</p>
+    <p id="text11" class="text11">"The wand chooses the wizard, remember."</p>
+
+
+    <div id="container">
+
+        <img id="imghangma" alt="image" src="https://mervetanrikulu.github.io/Odevler/Proje/hangman_0.jpg" style="margin-left:-20%">
+
+    </div>
+
+    <div id="ui">
+        <div id="letters" class="elements"></div>
+        <div id="availableLetters"></div>
+        <input id="input" class="elements" onkeyup="Hangman.onEnter(event)" type="text" placeholder="Enter the Phrase" />
+        <div id="clue" type="button" class="elements" onclick="Hangman.PharesesClue()">Clue</div>
+        <div id="button" class="elements" type="button" onclick="Hangman.onSubmit('input')">Submit Guess</div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <a href="https://codepen.io/SkiZer0/pen/VbQKPx" style="color:rgb(140,120,121)">Appearance</a> &emsp;
+</body>
+</html>
