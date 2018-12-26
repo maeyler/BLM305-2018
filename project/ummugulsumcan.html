@@ -1,0 +1,255 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ümmü</title>
+
+    <style>
+    body{
+     background-image : url("https://media.giphy.com/media/WoD6JZnwap6s8/giphy.gif");
+    }
+input{
+    padding: 20px;
+    text-align: center;
+    margin:0 auto;
+    display: block;
+    font-style: bold italic;
+    font-size:15px;
+    border-radius: 20px;
+
+    }
+img{
+    opacity: 1;
+    text-align: left ;
+    margin-left: auto;
+    }
+button {
+    padding: 15px;
+    margin:10 auto;
+    display: block;
+    font-size: 12px; 
+    text-align: center;
+    outline: none;
+  
+    border: none;
+    background-color: #33ff66;
+    font-style: bold italic;
+    font-size: 15px;
+    color: black;
+    border-radius: 12px;
+   
+    }
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    font-style: oblique;
+    text-shadow: 3px 2px green;
+    word-spacing: -5px;
+    margin:20 auto;
+    }
+a
+    {
+   color: white;
+    }
+h2 {
+    color: white;
+    text-align: center;
+    font-style: oblique;
+    text-shadow: 3px 2px green;
+    word-spacing: -5px;
+    margin:0 auto;
+    }
+ .imageu{
+    width: 200px;
+    height:100px;
+    background: green;
+    position: relative;
+    -webkit-animation-name: imageu;  /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1000ms;  /* Safari 4.0 - 8.0 */  
+    -webkit-animation-fill-mode: forwards; /* Safari 4.0 - 8.0 */
+    animation-name: imageu;
+    animation-duration:1000ms;  
+    animation-fill-mode: backwards;
+    margin:20px auto;
+   animation-timing-function: linear;
+       transition-duration: 10s;
+}
+.imaged{
+    width: 200px;
+    height: 100px;
+    background: green;
+    position: relative;
+    -webkit-animation-name: imagede;  /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1000ms;  /* Safari 4.0 - 8.0 */  
+    -webkit-animation-fill-mode: forwards; /* Safari 4.0 - 8.0 */
+    animation-name: imagede;
+    animation-duration: 1000ms;  
+    animation-fill-mode: backwards;
+    margin:20px auto;
+    animation-timing-function: linear;
+   transition-duration: 10s;
+}
+.gift
+    {
+    width: 200px;
+    height:200px;
+    margin:0 auto;
+    }
+
+    @-webkit-keyframes imagede {
+  from {top: 300px;}
+  to {top: 0px; background-color: green;}
+}
+    @keyframes imagede{
+  from {top:300px;}
+  to {top: 0px; background-color: green;}
+}
+    @-webkit-keyframes imageu {
+  from {top: 0px;}
+  to {top: 300px; background-color: green;}
+}
+    @keyframes imageu {
+  from {top: 0px;}
+  to {top: 300px;
+      background-color: green ;}
+}
+    </style>
+</head>
+<body>
+    
+
+  <h1>Number Prediction Game</h1>
+
+    <button id="yeniOyun" onclick =" yeni()" "class=" button2"> New Game </button>
+   <h2>Enter Number</h2>
+    <input type="text" id="sayi" />
+
+    <button id="tahminEt"  onclick =" tahmin()" > Guess number 0 to 8 </button>
+    <h2>Guess Result</h2>
+    <input type="text" id="sonuc"/>
+
+   <img src="https://img.icons8.com/ios/2x/down.png " id="imagedown" class="imageu" >
+
+    <img src=  "https://img.icons8.com/ios/2x/up.png" id="imageup" class="imaged" >
+
+    <img src=  " https://media3.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif?cid=3640f6095c19093d584b696845d06519" class="gift"  id="gift">
+
+  <li><a href=" http://www.yusufsezer.com.tr/kategori/javascript/ ">REF:For Game</a></li>
+<li><a href=" https://developer.mozilla.org/en-US/docs/Web/CSS/animation">REF2:For Animation </a></li>
+<li><a href=" https://www.w3schools.com/css/css3_animations.asp">REF3:For Animation </a></li>
+
+<script>
+    var hak;
+    var rastgeleSayi = 0;
+    var _tahminEt = tahminEt.value;
+    var _yeniOyun = yeniOyun.value;
+  
+    var _sayi = sayi.value;
+ 
+     
+      sayi.value = "";
+      sonuc.value="";
+  
+    document.getElementById("imageup").style.display = "none";
+  document.getElementById("imagedown").style.display = "none";
+   document.getElementById("gift").style.display = "none";
+    function yeni() {
+     hak=3;
+    rastgeleSayi = Math.floor((Math.random() * 8) + 0);
+     document.getElementById("imageup").style.display = "none";
+     document.getElementById("imagedown").style.display = "none";
+    document.getElementById("gift").style.display = "none";
+   document.getElementById("yeniOyun").disabled = true;
+    _sayi.value = "";
+    sonuc.value="";
+    sayi.value="";
+  document.getElementById("tahminEt").disabled = false;
+  document.getElementById("yeniOyun").disabled = true;
+     alert("You need to a number to play! You have 3 right to play ");
+  
+       }
+    function tahmin() {
+     var girilenSayi = parseInt(sayi.value);
+    console.log("tutulan sayı="+rastgeleSayi);
+      document.getElementById("imageup").style.display = "none";
+     document.getElementById("gift").style.display = "none";
+    var veri = document.getElementById("sayi").value;
+      if(veri>='a' && veri<='z'){
+       hak=4;
+       sonuc.value= "You writed letters.Write Number.";
+  console.log("hakkı="+hak);
+}
+ 
+ else if(veri>='A' && veri<='Z'){
+    hak=4;
+  
+   sonuc.value= "You writed letters.Write Number.";
+   console.log("hakkı="+hak);
+}
+    else if (rastgeleSayi > girilenSayi) {
+        sonuc.value ="Entered a value higger than= " +girilenSayi;
+        document.getElementById("imageup").style.display = "block";
+          document.getElementById("imagedown").style.display = "none";
+      } 
+      else if (girilenSayi > rastgeleSayi) {
+      sonuc.value = "Entered a value less than= " +girilenSayi;
+      document.getElementById("imagedown").style.display = "block";
+        
+      } 
+ else if(girilenSayi == rastgeleSayi) {
+       sonuc.value = "Congratulations!!!";
+      document.getElementById("gift").style.display = "block";
+    document.getElementById("imageup").style.display = "none";
+    document.getElementById("imagedown").style.display = "none";
+ document.getElementById("tahminEt").disabled = true;
+ document.getElementById("yeniOyun").disabled = false;
+    }
+   
+else{
+ hak=4;
+ console.log(hak);
+    sonuc.value= "Please,For guess write number. ";
+}
+   
+  
+ console.log("haksayısı ="+hak);
+  if ( hak == 0 ) {
+     document.getElementById("imageup").style.display = "none";
+     document.getElementById("imagedown").style.display = "none";
+     document.getElementById("gift").style.display = "none";
+       sonuc.value = " Lost!..You finished right. ";
+ document.getElementById("tahminEt").disabled = true;
+ document.getElementById("yeniOyun").disabled = false;
+       alert("Lost! Guess Number = "+rastgeleSayi+"!");
+    
+    }
+hak--;
+  }
+ 
+</script>
+
+</body>
+
+</html>
