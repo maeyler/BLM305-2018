@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="https://maya-karahbala.github.io/advancedpro/Project/style.css">
+	<style>
+.ghost-button-thick-border {
+  display: inline-block;
+  width:250px;
+  height:30px; 
+  font-weight: bold;
+  padding: 8px;
+  color: #fff;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+  transition: background-color 0.5s ease-out,
+  color 0.2s ease-out;
+  cursor: pointer;
+}
+    </style>
+</head>
+<body class=back  >
+	  
+	 <div>
+	     <div id=ball1 class=ball style="margin-left: 80px; visibility: hidden;" ></div>
+	    </div>   
+	<div  >
+		<div id=box0 class=box onClick="control(0)"
+		style="margin-left: 0px"></div>
+		<div id=box1 class=box  onClick="control(1)"style="margin-left:300px"></div>
+		<div id=box2 class=box  onClick="control(2)"style="margin-left:600px"></div>
+	    <div id=box3 class=box onClick="control(3)" style="margin-left:900px"></div>
+	</div>
+
+	<div style="margin-left: 60px; margin-top: 40px;  "> 
+	   <a id=level1 class=" ghost-button-thick-border level1" onClick="easyGame()" >EASY</a> <p></p> 
+	   <a id=level2 class=" ghost-button-thick-border level2" onClick="medGame() ">MEDIUM</a><p></p> 
+	   <a id=level3 class=" ghost-button-thick-border level3" onClick="hardGame()">HARD</a><p></p> 
+	   </div> 
+	
+		<img  id=gameOvaer src="https://maya-karahbala.github.io/advancedpro/Project/Pictures/gameOver.png" class=gameOvaer  >
+		<img  id=youWin src="https://maya-karahbala.github.io/advancedpro/Project/Pictures/youWin.png" class=youWin  >
+		
+<script src ="https://maya-karahbala.github.io/advancedpro/Project/script.js"></script>	
+</body>
+</html>
