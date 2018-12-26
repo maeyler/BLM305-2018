@@ -1,0 +1,599 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Website Homework</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCIFpRngDl7RkwbTz_qY-N8qtNq5JeGDL8",
+            authDomain: "daily-b47b4.firebaseapp.com",
+            databaseURL: "https://daily-b47b4.firebaseio.com",
+            projectId: "daily-b47b4",
+            storageBucket: "daily-b47b4.appspot.com",
+            messagingSenderId: "208212779745"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        // Get the modal
+        var giris_yapildi = 0;
+        var uId;
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function kullanici_giris_ekrani() {
+            if (document.getElementById("log").innerText == "Log In") {
+                document.getElementById('id01').style.display = 'block';
+                document.getElementById("log2").style.display = 'none';
+
+            }
+            else {
+                document.getElementById('id01').style.display = 'none';
+                inUser.value = "";
+                inPass.value = "";
+                dailyText.value = "";
+                dateInput.value = "gg.aa.yyyy";
+                document.getElementById("menuList").innerHTML = "";
+                document.getElementById("con").style.opacity = 0.6;
+                document.getElementById("log").innerText = "Log In";
+                document.getElementById("con").style.pointerEvents = 'none';
+                document.getElementById("log2").style.display = 'block';
+
+            }
+        }
+
+        function singup() {
+            document.getElementById('singup').style.display = 'block';
+        }
+
+        function writeUserData(userId, date, daily) {
+
+            var rootRef = firebase.database().ref();
+            var dailyRef = rootRef.child('daily');
+            var newDailyRow = dailyRef.push();
+            newDailyRow.set({
+                username: userId,
+                daily: daily,
+                date: date
+            });
+
+            alert('Succes \n Your Daily was Saved :)')
+
+        }
+
+        function saveDaily() {
+            if (dailyText.value.length > 14) {
+                writeUserData(uId, dateInput.value, dailyText.value);
+                getDaily();
+            }
+            else
+                alert('Please input some text.(Min: 15 Charters)');
+        }
+
+        function getDaily() {
+            /*var rootRef = firebase.database().ref();
+            var dailyRef = rootRef.child('daily');
+            dailyRef.on('value', function(snapshot){
+                console.log(snapshot.val().value)
+
+            });*/
+            document.getElementById("menuList").innerHTML = "";
+            var rootRef = firebase.database().ref();
+            var urlRef = rootRef.child("daily");
+            urlRef.once("value", function (snapshot) {
+                snapshot.forEach(
+                    function (child) {
+                        let a = child.val();
+                        if (uId == a["username"]) {
+                            for (var i in a) {
+                                var textDaily;
+                                if (i == "date") {
+                                    var link = document.createElement("a");
+                                    var ulist = document.getElementById("menuList");
+                                    var newItem = document.createElement("li");
+
+                                    link.textContent = a[i];
+                                    link.setAttribute('href', "#");
+                                }
+                                else if (i == "daily")
+                                    textDaily = a[i];
+                            }
+                            link.onclick = function () {
+                                read(textDaily, link.textContent)
+                            }
+                            newItem.appendChild(link);
+                            ulist.appendChild(newItem);
+                        }
+                    }
+                )
+            })
+        }
+
+        function read(text, date) {
+            dateInput.value = date;
+            dailyText.value = text;
+        }
+
+        function giris_gerceklestir() {
+            if (giris_yapildi == 1) {
+
+                getDaily();
+                giris_yapildi = 1;
+                document.getElementById("log").innerText = "Log out";
+                document.getElementById("con").style.opacity = 1;
+                document.getElementById("con").style.pointerEvents = 'auto';
+                document.getElementById("log2").style.display = 'none';
+                //var delayInMilliseconds = 2000;
+
+                //setTimeout(function () {
+                //    linkLoad();
+                //}, delayInMilliseconds);
+
+
+
+            }
+            else {
+                giris_yapildi = 0;
+                if (inUser.value != "" && inPass.value != "")
+                    alert('Username or Password wrong !!! \n Please try again.. ');
+                document.getElementById("menuList").innerHTML = "";
+                document.getElementById("con").style.opacity = 0.6;
+                document.getElementById("log").innerText = "Log In";
+                document.getElementById("con").style.pointerEvents = 'none';
+                document.getElementById("log2").style.display = 'block';
+
+            }
+            document.getElementById('id01').style.display = 'none';
+        }
+        function giris_yap() {
+            
+            var rootRef = firebase.database().ref();
+            var urlRef = rootRef.child("users");
+            urlRef.on("value", function (snapshot) {
+                
+                snapshot.forEach(
+                    function (child) {
+                        let a = child.val();
+                        if (a["username"] == inUser.value && a["password"] == inPass.value) {
+                            giris_yapildi = 1;
+                            uId = a["userid"];
+                            giris_gerceklestir();
+                        }
+                        
+                        
+                    })
+                if (giris_yapildi != 1) {
+                    giris_yapildi = 0;
+                    giris_gerceklestir();
+
+                }
+
+                
+            }
+            )
+           
+
+        }
+        var uye_olabilir = 1;
+        function uye_islemini_gerceklestir(userid) {
+
+            if (uye_olabilir == 0)
+                alert("There is such a user name, please try again !!");
+            else if (sinPass.value != sinPass2.value) {
+                alert("Passwords do not match, please try again !!");
+            }
+            else {
+                var rootRef = firebase.database().ref();
+                var usersRef = rootRef.child('users');
+                var newUserRow = usersRef.push();
+                newUserRow.set({
+                    password: sinPass.value,
+                    userid: userid,
+                    username: sinUser.value
+                });
+
+                alert('Succes \n Registration Successful :)')
+                document.getElementById('singup').style.display = 'none';
+            }
+        }
+
+        function uye_ol() {
+
+            uye_olabilir = 1;
+            var uyeid=0;
+            var rootRef = firebase.database().ref();
+            var urlRef = rootRef.child("users");
+            urlRef.on("value", function (snapshot) {
+
+                snapshot.forEach(
+                    function (child) {
+                        let a = child.val();
+                        if (a["username"] == sinUser.value)
+                            uye_olabilir = 0;
+                        if (parseInt(uyeid) < parseInt(a["userid"]))
+                            uyeid = a["userid"];
+
+                    })
+                    
+                uyeid = parseInt(uyeid) + 1;
+                uye_islemini_gerceklestir(uyeid); 
+                
+            })
+            
+        }
+
+    </script>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            width: 100%;
+            margin: 0 auto;
+            font-family: Arial, Helvetica, sans-serif;
+            height: auto;
+        }
+
+        #con {
+        }
+
+        /* Style the top navigation bar */
+        .topnav {
+            overflow: hidden;
+            background-color: #723405;
+        }
+
+            /* Style the topnav links */
+            .topnav a {
+                float: right;
+                display: block;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                /* Change color on hover */
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+        /* Style the content */
+        .content {
+            background-color: #ddd;
+            padding: 10px;
+            height: 400px; /* Should be removed. Only for demonstration */
+        }
+
+        /* Style the footer */
+        .footer {
+            /*background-color: #f1a7ca;*/
+            background-color: #723405;
+            padding: 1px;
+            padding-right: 15px;
+            color: #DDDDDD;
+            font-size: 10px;
+        }
+
+        .menu {
+            width: 5%;
+            height: 100%;
+            float: left;
+        }
+
+        .con {
+            background-image: url("https://colakhuseyin.github.io/HuseyinCalisma/Daily/img_tree.png");
+            background-repeat: no-repeat;
+            background-position: right top;
+            margin-right: 20px;
+            height: 100%;
+            width: 100%;
+        }
+
+        #row {
+            width: 55%;
+            height: 35px;
+            margin: 0 auto;
+        }
+
+        #row2 {
+            width: 55%;
+            height: auto;
+            min-height: 50%;
+            border: 5px black double;
+            box-shadow: 5px 10px #888888;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        #newDaily {
+            float: right;
+            display: block;
+            /*color: #0074D9;*/
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        #cap {
+            color: black;
+            float: left;
+            padding-left: 15px;
+            font-size: 11pt;
+            font-weight: bold;
+        }
+
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            /*font: 200 20px/1.5 Helvetica, Verdana, sans-serif;*/
+            border-bottom: 1px solid #ccc;
+        }
+
+            li:last-child {
+                border: none;
+            }
+
+            li a {
+                text-decoration: none;
+                color: #000;
+                display: block;
+                width: 150px;
+                -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+                -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+                -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+                transition: font-size 0.3s ease, background-color 0.3s ease;
+            }
+
+                li a:hover {
+                    font-size: 25px;
+                    background: #f6f6f6;
+                }
+
+        h2 {
+            font-size: 20px;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 20px;
+            color: #001f3f;
+        }
+
+        textarea {
+            width: 100%;
+            height: auto;
+        }
+
+        /*Login Css*/
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Set a style for all buttons */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+
+        /* Center the image and position the close button */
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+            position: relative;
+        }
+
+        img.avatar {
+            width: 15%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button (x) */
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: #000;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: red;
+                cursor: pointer;
+            }
+
+        /* Add Zoom Animation */
+        .animate {
+            -webkit-animation: animatezoom 0.6s;
+            animation: animatezoom 0.6s
+        }
+
+        @-webkit-keyframes animatezoom {
+            from {
+                -webkit-transform: scale(0)
+            }
+
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
+
+        @keyframes animatezoom {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+
+            .cancelbtn {
+                width: 100%;
+            }
+        }
+
+        .ref {
+            font-size: 9pt;
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="topnav">
+        <p style="color:white; float:left; padding-left:15px;">Daily</p>
+        <a id="log" href="#" onclick="kullanici_giris_ekrani()">Log In</a>
+        <a id="log2" href="#" onclick="singup()">Sing Up</a>
+
+        <div id="id01" class="modal">
+            <div class="modal-content animate">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id01').style.display = 'none'; document.getElementById('log2').style.display = 'block';" class="close" title="Close Modal">&times;</span>
+                    <img src="https://colakhuseyin.github.io/HuseyinCalisma/Daily/img_avatar2.png" alt="Avatar" class="avatar">
+                </div>
+                <div class="container">
+                    <label for="uname"><b>Username</b></label>
+                    <input id="inUser" type="text" placeholder="Enter Username" name="uname" required>
+                    <label for="psw"><b>Password</b></label>
+                    <input id="inPass" type="password" placeholder="Enter Password" name="psw" required>
+                    <button type="submit" onclick="giris_yap()">Login</button>
+                </div>
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id01').style.display = 'none'; document.getElementById('log2').style.display = 'block';" class="cancelbtn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="singup" class="modal">
+            <div class="modal-content animate">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('singup').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                <div class="container">
+                    <label for="uname"><b>Username</b></label>
+                    <input id="sinUser" type="text" placeholder="Enter Username" name="uname" required>
+                    <label for="psw"><b>Password</b></label>
+                    <input id="sinPass" type="password" placeholder="Enter Password" name="psw" required>
+                    <label for="psw"><b>Password (Again)</b></label>
+                    <input id="sinPass2" type="password" placeholder="Enter Password (Again)" name="psw" required>
+                    <button type="submit" onclick="uye_ol()">Sing Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="menu">
+            <h2>Days</h2>
+            <ul id="menuList"></ul>
+        </div>
+        <div id="con" class="con" style="pointer-events:none; opacity:0.5">
+            <div id="row">
+                Date: <input id="dateInput" type="date" name="dateInput">
+                <a id="newDaily" href="#" onclick="dailyText.value = ''; Kaydet.style.pointerEvents = 'auto'; Kaydet.style.opacity = 1; document.getElementById('dateInput').valueAsDate = new Date();">Create New Daily (*)</a>
+            </div>
+            <div id="row2">
+                <textarea id="dailyText" rows="15" cols="50" name="comment" form="usrform"></textarea>
+                <button id="Kaydet" type="button" onclick="saveDaily()" style="pointer-events:none; opacity:0.5">Kaydet</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p style="text-align:right">design By Hüseyin Çolak</p>
+        <div style="font-size:9pt; padding-left:15px; text-decoration: none; color: white;">
+            <p>
+                References
+            </p>
+            <p>
+                1. <a class="ref" href="https://designshack.net/articles/css/5-simple-and-practical-css-list-styles-you-can-copy-and-paste/">designshack.net</a>
+            </p>
+            <p>
+                2. <a class="ref" href="https://www.w3schools.com/howto/howto_css_login_form.asp">www.w3schools.com</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+
