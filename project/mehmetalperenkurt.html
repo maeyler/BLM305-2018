@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Flight Booking</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+	<link href="https://mehmetalperenkurt.github.io/ileriprogramlama/termproject/css/style.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div id="booking" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="booking-form" >
+						<div class="form-header">
+                            
+                            <div style="width: 100%; display: table;">
+                                <div style="display: table-cell;"><button class="shw-btn" onclick="document.getElementById('booking-form').style.display='block'; document.getElementById('showTicketTable').style.display='none'; "  value="Flight Booking">Flight Booking</button></div><button style="display: table-cell;" class="shw-btn" onclick="ac.showTickets();" value="Show Tickets">Show Tickets</button>
+                            </div>
+                            
+                            <div >
+                                 
+                            </div>
+                        </div>
+						<form action="javascript:getFlightHours();" id="booking-form">
+							<div class="form-group">
+								<div class="form-checkbox input-not-empty">
+									<label for="one-way">
+										<input type="radio" id="one-way" checked>
+										<span></span>One way
+									</label>
+									<label for="roundtrip">
+										<input type="radio" id="roundtrip" disabled>
+										<span></span><s>Roundtrip</s>
+									</label>
+									
+								</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+							        <div class="form-group input-not-empty">
+                                        <input class="form-control" type="text" id="departLocation" autocom list="departLocationList" placeholder="City or Airport code" autocomplete="off" autocapitalize="off" autocorrect="off" role="combobox" required>
+									        <datalist id="departLocationList">
+                					        </datalist>
+								            <span class="form-label">Flying from</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                        <div class="form-btn" >
+                                            <input type="button" class="icon2" title="Switch" onclick="tooglesw()" >
+                                        </div>
+                                </div>
+                                <div class="col-md-5">
+                                        <div class="form-group input-not-empty">
+                                            <input class="form-control" id="destinationLocationId" list="destinationLocationList" placeholder="City or Airport code" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" role="combobox" required>
+                                            <datalist id="destinationLocationList">
+                                                </datalist>
+                                                
+                                            <span class="form-label">Flying to</span>
+                                        </div>
+                                    </div>
+                            </div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group input-not-empty">
+										<input class="form-control" type="date" id="depart" max="2019-01-25" required>
+										<span class="form-label">Check In</span>
+										
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group input-not-empty">
+										<select class="form-control" disabled>
+											<option>Economy class</option>
+										</select>
+										<span class="select-arrow"></span>
+										<span class="form-label"><s>Travel class</s></span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+						
+								<div class="col-md-5">
+									<div class="form-group input-not-empty">
+										<input id="txtAdultCount" class="form-control" type="number" step="1" value="1" min="1" max="5">
+										<span class="select-arrow"></span>
+										<span class="form-label">Adults</span>
+									</div>
+								</div>
+								<div class="col-md-5">
+									<div class="form-group  input-not-empty">
+										<input id="txtChildCount" class="form-control" type="number" step="1" value="0" min="0" max="2" placeholder="0">
+										<span class="select-arrow"></span>
+										<span class="form-label">Children</span>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-btn" >
+										<span class="form-label-tgl"></span>
+										<input type="button" class="tgl-btn-icon" title="Clear all fields" onclick="clearForm();">
+										
+									</div>
+								</div>
+							</div>
+							<div class="form-btn" >
+							<input type="submit" class="submit-btn" value="Show Flights" ></form>
+							</div>
+									<input id="hiddenHour" type="hidden" value> 
+        							<input id="txtDepartDate" type="hidden" value="">
+									<input id="hiddenDepartLoc" type="hidden" value="">
+        							<input id="hiddenDestLoc" type="hidden" value="">
+									<input id="hiddenAdultCount" type="hidden" value="">
+        							<input id="hiddenChildCount" type="hidden" value="">
+                                       <input id="hiddenFlightCode" type="hidden" value="">
+                                       <input id="companyNameData" type="hidden" value="">
+
+									<input id="txtSeatNumber" type="hidden" value="">
+						
+                    </div>
+                    <div class="ticket-form" >
+                            <table id="showTicketTable" >
+                            </table>
+                        </div>
+				</div>
+            </div>
+            
+			<div class="result-form" id="result-form" style="display:none;">
+				<div class="form-header" id="result-form-header">
+                    <h1 id="h1-result"></h1> 
+                    
+                            
+				</div>
+               
+	<div id="result-flight" class="result-form">
+		
+    </div>
+
+	
+				
+				<div id="div-customer" style="display:none;" class="booking-form">
+					<div class='col-md-8'>
+						<div class='form-group input-not-empty'>
+							<input class='form-control' type='text' autocomplete='off' autocapitalize='off' autocorrect='off' required> 
+							<span class='form-label'>FAlan</span>
+                        </div>
+                    </div>
+        		</div>
+                
+				
+
+        		</div>
+			</div>
+            
+                
+            
+
+		</div>
+		
+	    <div id="myModal" class="modal">
+                <div class="modal-content">
+                  <div class="canvas-container">
+                          <span class="close">&times;</span>
+                          <canvas id="canvas" width="820" height="350"></canvas>
+                  </div>
+                </div>
+              </div>
+	<button onclick="topFunction()" id="myBtn" title="Go to top"></button>
+	
+
+	<script>
+	var today = new Date();
+	var dd = today.getDate();
+    const currentTime=today.getHours();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+ 		if(dd<10){
+       		 dd='0'+dd
+    	} 
+    	if(mm<10){
+        	mm='0'+mm
+    	} 
+	today = yyyy+'-'+mm+'-'+dd;
+	document.getElementById("depart").setAttribute("min", today);
+	//document.getElementById("depart2").setAttribute("min", today);
+	document.getElementById('depart').value = today;
+	function tooglesw(){
+    
+    var c=document.getElementById('departLocation').value;
+    var d=document.getElementById('destinationLocationId').value;
+    document.getElementById('departLocation').value=d;
+    document.getElementById('destinationLocationId').value=c;
+    
+}
+	class Flights{
+		constructor(companyName,flightCode,aircraftModel,departLocation,departLocationCode,destinationLocation,destinationLocationCode,flightDates){
+        	this.companyName=companyName
+        	this.flightCode=flightCode
+        	this.aircraftModel=aircraftModel
+        	this.departLocation=departLocationCode
+        	this.departLocationCode=departLocation
+        	this.destinationLocation=destinationLocation 
+        	this.destinationLocationCode=destinationLocationCode
+        	this.flightDates=flightDates
+    }
+}
+	class ticket{
+    	constructor(guid,resCode,seats,date,boardingTime, passenger,departLocation,destinationLocation,currentCompany){
+        	this.guid=guid;
+        	this.resCode=resCode;
+        	this.seats=seats;
+        	this.date=date;
+        	this.boardingTime=boardingTime;
+			this.passenger = passenger;
+			this.departLocation=departLocation;
+			this.destinationLocation=destinationLocation;
+            this.currentCompany=currentCompany;
+    }
+}
+class database{
+    constructor(){
+        this.urlS="https://raw.githubusercontent.com/mehmetalperenkurt/ileriprogramlama/master/work/calisma/flights3.txt";
+        this.flights= new Map();
+        this.tickets=new Map();
+        this.airports=new Set();
+        this.readFlights();
+    }
+    readFlights(){
+        console.log("readFlights "+this.urlS);
+        fetch(this.urlS)
+        .then(r => r.text())
+        .then(r => this.addFlights(r))
+    }
+    addFlights(txt){
+        let a = txt.split("\n");
+        for (let s of a) {
+        let flights = this.parseFlights(s);
+        this.flights.set(flights.flightCode,flights);
+        }
+    }
+    parseFlights(line){
+        let s = line.split("\t");
+        let dates = [];
+        let e=[];
+        for (let i=7; i<s.length; i++) 
+        dates.push(s[i]);
+        const flight = new Flights(s[0],s[1],s[2],s[3],s[4],s[5],s[6],dates);
+        let c=s[4]+" "+s[3]
+        this.airports.add(c)
+        return flight
+    }
+     datalist(){
+        let arr=Array.from(ac.airports);
+        var list='';
+        for(var i = 0; i < arr.length; i++)
+        list += '<option value="'+arr[i]+'"/>';
+        document.getElementById('departLocationList').innerHTML = list;
+        document.getElementById('destinationLocationList').innerHTML=list;
+    }
+    showTickets(){
+        document.getElementById('booking-form').style.display="none";
+        document.getElementById('div-customer').style.display="none";
+        document.getElementById('result-form-header').style.display='none'
+        document.getElementById('result-form').style.display='none'; 
+        document.getElementById('showTicketTable').style.display='';
+        var count=0;
+    var $html="<tr><th>Flight</th><th>Date</th><th>Time</th><th>From >> To</th><th>Passenger</th><th></th></tr>";
+    for(let x of ac.tickets){
+        var item=x[1].date+" - "+x[1].boardingTime+" - "+x[1].departLocation+" - "+x[1].destinationLocation+" - "+x[1].passenger;
+        console.log(item);
+        var printData=x[0].toString();
+		var $inputHtml = "<tr><td>"+x[1].resCode+"</td><td>"+x[1].date+"</td><td>"+x[1].boardingTime+"</td><td>"+x[1].departLocation+" >> "+x[1].destinationLocation+"</td><td>"+x[1].passenger+"</td><th><input type='button' class='btnPrint' id='btnPrint' onclick='printTicket(\""+printData+ "\")'></th></tr>";
+        $html += $inputHtml;
+    }   
+        if($html.length>101){
+        document.getElementById('showTicketTable').innerHTML=$html;
+        }
+        else{
+            document.getElementById('showTicketTable').innerHTML="nothing found"
+        }
+    }
+    
+    sellTicket(){
+	var adultCnt=parseInt(document.getElementById('hiddenAdultCount').value);
+    var childCnt=parseInt(document.getElementById('hiddenChildCount').value);
+    var companyName= document.getElementById('companyNameData').value;
+	var customerNameCnt=[];
+	var countCnt=adultCnt+childCnt;
+	for(let i=0;i<countCnt;i++){
+	var j=document.getElementsByName('customerName')[i].value;
+	if(j!="") customerNameCnt.push(j);
+	}
+	//if(customerNameCnt==""||customerNameCnt==null) alert("Please fill all required fields")
+	if(customerNameCnt.length!=countCnt||customerNameCnt==null) alert("Please fill all required fields")
+	else{
+    var seatTextList = document.getElementById('txtSeatNumber').value.split(',');
+    var currentHour = document.getElementById('hiddenHour').value;
+    var currentDate = document.getElementById('txtDepartDate').value;
+	var flightCode = document.getElementById('hiddenFlightCode').value;
+	var currentDepart = document.getElementById('departLocation').value.toUpperCase();
+	var currentDestination = document.getElementById('destinationLocationId').value.toUpperCase();
+    for(var i=0; i< seatTextList.length; i++){
+        var currentSeat = seatTextList[i];
+        var currentCustomer = document.getElementById('customer'+(i+1)).value;
+        var ticketCode= currentDate+" "+currentHour+" "+flightCode + " " + currentSeat;
+        var ticketGuid = guid();
+        const ticket11 =new ticket(ticketGuid,flightCode,currentSeat,currentDate,currentHour, currentCustomer,currentDepart,currentDestination,companyName);
+        ac.tickets.set(ticketCode, ticket11);
+    }
+    alert("Successfully Booked");
+    clearForm();   
+    document.getElementById("div-customer").style.display = "none";
+    document.getElementById("result-form").style.display = "none";
+    topFunction();
+    }
+}
+}
+ac=new database();
+var getFlightHours = function(){
+    //var hours=today.getHours();
+    document.getElementById('showTicketTable').style.display="none";
+    document.getElementById('result-form-header').style.display='block'
+    document.getElementById('div-customer').setAttribute("style","display:none;");
+	var departure =  document.getElementById('departLocation').value.split(' ')[0];
+    var destination = document.getElementById('destinationLocationId').value.split(' ')[0];
+	document.getElementById('hiddenDepartLoc').value=departure;
+	document.getElementById('hiddenDestLoc').value=destination;
+	var departDate = document.getElementById('depart').value;
+    var adultCount = document.getElementById('txtAdultCount').value;
+    var childCount = document.getElementById('txtChildCount').value;
+    document.getElementById('txtDepartDate').value = departDate;
+    document.getElementById('hiddenAdultCount').value = adultCount;
+    document.getElementById('hiddenChildCount').value = childCount;
+    var flightDates = [];
+    if(departure==destination){
+        return alert("Departure and arrival points cannot be the same. Please change one.")
+    }
+    for(let x of ac.flights){
+        var item = x[1];
+        if(item.departLocation == departure && item.destinationLocationCode == destination){
+            
+            document.getElementById('companyNameData').value = item.companyName;
+
+            flightDates = item.flightDates;
+            appendToLi(flightDates, item.flightCode);
+			document.getElementById("result-form").setAttribute("style","display:visible;");
+			setTimeout(scrollToBottom(),500);
+		    document.getElementById('h1-result').innerHTML=departDate+" >> "+departure+" >> "+ destination;
+        }
+    }
+    if(flightDates.length<1){
+		clearForm();
+        return alert("No Flights Found");
+    }
+}
+var appendToLi = function(flightDates, flightCode){
+    // var realDate=new Date();
+    // var currentTime= realDate.getHours().toString();
+    var realDate= document.getElementById('txtDepartDate').value;
+	var departLoc= document.getElementById('hiddenDepartLoc').value;
+	var destLoc= document.getElementById('hiddenDestLoc').value;
+
+    var $html = "";
+    $html += "";
+    flightDates.forEach(element => {
+        var elementControl=parseInt(element.slice(0,2));
+        if(today==realDate){
+        if(elementControl>currentTime){
+        $html += "<div id='result-flight2' class='row pResult result-flight2 result-form'><div class='col-md-3'>"+element+"</div><div  class='col-md-3'>"+departLoc+"</div><div  class='col-md-3'>"+destLoc+"</div><div  class='col-md-3'><input type='button' class='tgl-btn-book' value='BOOK' flightCode='"+flightCode+"' resultHiddenHour='"+element+"' onclick='setTicket(this)'></div></div>";
+        //$html += "<li><a class='set-ticket' onclick='setTicket(this)' flightCode='"+flightCode+"'>"+element+"</a></li>";
+        }}
+        else{
+        $html += "<div id='result-flight2' class='row pResult result-flight2 result-form'><div class='col-md-3'>"+element+"</div><div  class='col-md-3'>"+departLoc+"</div><div  class='col-md-3'>"+destLoc+"</div><div  class='col-md-3'><input type='button' class='tgl-btn-book' value='BOOK' flightCode='"+flightCode+"' resultHiddenHour='"+element+"' onclick='setTicket(this)'></div></div>";
+        //$html += "<li><a class='set-ticket' onclick='setTicket(this)' flightCode='"+flightCode+"'>"+element+"</a></li>";
+        }
+        
+    });
+    $html+= "";
+    document.getElementById("result-flight").style.display = "block";
+    document.getElementById("result-flight").innerHTML = "";
+    document.getElementById("result-flight").innerHTML = $html;
+}
+/*var arrayRemove = function(arr,value){
+   return arr.filter(function(ele){
+       return ele != value;
+   });
+}*/
+var setTicket = function(e){
+    
+    var availableList = [];
+	//var hour = e.innerText;
+	var hour = e.getAttribute('resultHiddenHour');
+    document.getElementById('hiddenHour').value = hour;
+
+    var flightCode = e.getAttribute('flightCode');
+    document.getElementById('hiddenFlightCode').value = flightCode;
+    var departDate = document.getElementById('txtDepartDate').value;
+    var adultCount = document.getElementById('hiddenAdultCount').value;
+    var childCount = document.getElementById('hiddenChildCount').value;
+    
+    var seatCount = parseInt(adultCount) + parseInt(childCount);
+    var ticketCode=departDate+" "+hour+" "+flightCode;
+    var allSeatList = getPlaneSeat(); // Her türlü !!!!!!
+    var busySeat = hasKey(ticketCode);
+    if(busySeat.length > 0)
+        availableList = getAvailableSeat(busySeat,allSeatList);
+    else
+        availableList = allSeatList;
+    if(availableList.length < 1){
+        
+        //document.getElementById('txtSeatNumber').value = seatTextList;
+        return console.log("Capacity is full");
+        }
+    else
+    {
+        var seatTextList = getSeatByCount(availableList, seatCount);
+        document.getElementById('txtSeatNumber').value = seatTextList;
+        generateCustomerForm(seatCount);
+    }
+// for(let x of ac.flights){
+//     var item =x[1];
+//     item.flightCode
+//     document.getElementById('depart').value;
+// }
+}
+var hasKey = function(ticketCode){
+    var busySeat = [];
+    for(let x of ac.tickets){
+        var currentTicketList = x[0].split(" ");
+        var currentTicketText = currentTicketList[0] + " " + currentTicketList[1] + " " + currentTicketList[2];
+        if(currentTicketText == ticketCode){
+            busySeat.push(x[1].seats);
+        }
+    }
+    return busySeat;
+}
+var generateCustomerForm = function(seatCount){
+    var $html = "";
+    for(var i=0; i< seatCount; i++){
+		var count = i+1;
+		var $inputHtml = "<div class='col-md-10'><div class='form-group input-not-empty'><input id='customer"+count+"' class='form-control' name='customerName' type='text' autocomplete='off' autocapitalize='off' autocorrect='off' required> <span class='form-label'>Passenger"+count+"</span></div></div>";
+        //var $inputHtml = 'Passenger '+count+': <input id="customer'+count+'" type="text" name="fname" class="fname" required><br>';
+        $html += $inputHtml;
+    }
+    var $btn = "<button class='tgl-btn' onclick='ac.sellTicket();'>Buy Ticket</button><br><button class='tgl-btn' onclick='ac.showTickets()'>Show Tickets</button>";
+    $html += $btn;
+    document.getElementById("div-customer").style.display = "block";
+    document.getElementById("div-customer").innerHTML = "";
+    document.getElementById("div-customer").innerHTML = $html;
+    document.getElementById("result-flight").style.display = "none";
+    
+}
+/*var showTickets = function(){
+    for(let x of ac.tickets){
+        var item=x[1].date+" - "+x[1].boardingTime+" - "+x[1].departLocation+" - "+x[1].destinationLocation+" - "+x[1].passenger;
+        console.log(item);
+    }
+}*/
+var getSeatByCount = function(availableList, seatCount){
+    var seatTextList = "";
+    for(var i=0; i<seatCount; i++){
+        if(i == 0)
+            seatTextList += availableList[i];
+        else
+            seatTextList += "," + availableList[i];
+    }
+    return seatTextList;
+}
+var getAvailableSeat = function(busySeat,allSeatList){
+    //var availableList = [];
+    for(let x of busySeat){
+        for(let y of allSeatList){
+            if(x == y)
+            {
+                //arrayRemove(allSeatList,x);
+                //allSeatList.remove(x);
+                var item1 = allSeatList.indexOf(x);
+                allSeatList.splice(item1,1);
+            }
+        }
+    }
+    return allSeatList;
+}
+// Koltuk seçtirmek için sonra eklenecek
+var getPlaneSeat = function(){
+    var list = [];
+    var $html = "";
+    for(var i=0; i<12; i++){
+        var seatNumber = i+1;
+        //$html += "<div>";
+        for(var j=0; j<6; j++){
+            var seatLetter = generateLetter(j+1);
+            list.push(seatLetter + seatNumber);
+            //$html += "<button letter="+seatLetter+">"+ seatNumber +"</button>";
+        }
+        //$html +="</div><br />";
+    }
+    return list;
+}
+var generateLetter = function(value){
+    var letter = "";
+    switch(value) {
+        case 1:
+        letter = "A";
+        break;
+        case 2:
+        letter = "B";
+        break;
+        case 3:
+        letter = "C";
+        break;
+        case 4:
+        letter = "D";
+        break;
+        case 5:
+        letter = "E";
+        break;
+        case 6:
+        letter = "F";
+        break;
+    }
+    return letter;
+}
+var showSeat=function(){
+var item=[];
+var control1=document.getElementById('hiddenHour').value;
+var control2=document.getElementById('txtDepartDate').value;
+var control3=document.getElementById('hiddenFlightCode').value;
+for(let x of ac.tickets){
+    
+    var item1=x[0].split(" ");
+        if(control2==item1[0]&&control1==item1[1]&&control3==item1[2]){
+console.log(item1[3]);}
+}
+}
+var guid = function() {
+  var s4 = function() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+//  setTimeout(ac.datalist(),2500);
+/*function datalist(){
+for (let a of ac.airports){
+var str='';
+str += '<option value="'+a+'" />'; // Storing options in variable
+}
+var my_list=document.getElementById("departLocationList");
+my_list.innerHTML =+str;
+departLocationList.innerHTML=str;
+}*/
+setTimeout(function(){ const out=ac.flights.size;  ac.datalist(); }, 700);
+
+window.onscroll = function() {scrollFunction()};
+/****************************************************/
+var printTicket = function(x){
+    var data = this.ac.tickets.get(x);
+    var ctx = document.getElementById('canvas').getContext('2d');
+        var img = new Image();
+        var imgTALogo= new Image();
+        var imgIBLogo= new Image();
+        var imgLULogo= new Image();
+        var imgAFLogo= new Image();
+        var imgBALogo= new Image();
+        img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        ctx.font = "19px Tahoma";
+        ctx.fillText(data.destinationLocation,104, 221);
+        ctx.fillText(data.departLocation,104, 164);
+        ctx.fillText(data.passenger,104, 108);
+        ctx.fillText(data.seats,104, 275);
+        ctx.fillText(data.resCode,317, 164);
+        ctx.fillText(data.date,471, 164);
+        ctx.fillText(data.boardingTime,471, 221);
+        ctx.font = "13px Tahoma";
+        ctx.fillText(data.passenger,605,100);
+        ctx.font = "15px Tahoma";
+        ctx.fillText(data.departLocation,605, 144);
+        ctx.fillText(data.destinationLocation, 605,188);
+        ctx.fillText(data.seats,605, 277);
+        ctx.fillText(data.resCode,605, 232);
+        ctx.fillText(data.date,714, 232);
+        ctx.fillText(data.boardingTime,714, 277);
+        if(data.currentCompany=="Turkish Airlines") ctx.drawImage(imgTALogo,326,245)
+        else if(data.currentCompany=="Iberia")  ctx.drawImage(imgIBLogo,326,245)
+        else if(data.currentCompany=="Lufthansa") ctx.drawImage(imgLULogo,326,245)
+        else if(data.currentCompany=="Air France") ctx.drawImage(imgAFLogo,326,245)
+        else if(data.currentCompany=="British Airlines") ctx.drawImage(imgBALogo,326,245)
+
+
+
+        //ctx.drawImage(imgLogo,451,266);
+  };
+        img.src = 'https://mehmetalperenkurt.github.io/ileriprogramlama/termproject/pass2.png';
+        imgTALogo.src = 'https://mehmetalperenkurt.github.io/ileriprogramlama/termproject/ta-logo.png';
+        imgIBLogo.src= 'https://mehmetalperenkurt.github.io/ileriprogramlama/termproject/ib-logo.png';
+        imgLULogo.src='https://mehmetalperenkurt.github.io/ileriprogramlama/termproject/lu-logo.png';
+        imgAFLogo.src= 'https://mehmetalperenkurt.github.io/ileriprogramlama/termproject/af-logo.png';
+        imgBALogo.src= 'https://mehmetalperenkurt.github.io/ileriprogramlama/termproject/ba-logo.png';
+        document.getElementById('myModal').style.display='block';
+        ctx.clearRect(0,0,820,350);
+}
+var dataURL = canvas.toDataURL('image/png',0.92);
+console.log(dataURL);
+var modal = document.getElementById('myModal');
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+  modal.style.display = "none";
+}
+/*var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("btnPrint");
+
+// Get the <span> element that closes the modal
+
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+/*********************/
+var scrollFunction= function() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+var topFunction = function() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+var scrollToBottom = function() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+var clearForm = function(){
+	document.getElementById("departLocation").value="";
+	document.getElementById("destinationLocationId").value="";
+	document.getElementById("txtAdultCount").value="1";
+	document.getElementById("depart").value= today;
+	document.getElementById("div-customer").style.display = "none";
+	document.getElementById("result-flight").style.display = "none";
+	document.getElementById("txtChildCount").value="0";
+    document.getElementById("result-form").style.display = "none";
+    document.getElementById('showTicketTable').innerHTML="";
+}
+	</script>
+    <div style="margin-bottom: -50px; ">
+    <a href="https://mehmetalperenkurt.github.io/ileriprogramlama/">GitHub Repo</a><br>
+    <a href="https://getbootstrap.com/docs/4.1/layout/grid/">bootstrap col-md</a><br>
+    <a href="http://guid.us/GUID/JavaScript">GUID Generator</a><br>
+    <a href="https://www.w3schools.com/howto/howto_js_scroll_to_top.asp">Scroll Function </a><br>
+    <a href="https://stackoverflow.com/questions/2738920/how-to-add-background-image-for-input-type-button">Button Icon</a><br>
+    <a href="https://www.w3schools.com/css/default.asp">CSS Tutorial</a>
+     
+
+    
+    </div>
+
+</body>
+</html>
+
