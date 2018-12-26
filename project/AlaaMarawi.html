@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Minesweeper Game</title>
+	<link rel="icon" sizes="250x250" href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/mine1.png">
+	<style>
+	h1 {
+		text-align: center;
+		letter-spacing: 2px;
+		word-spacing: 10px;
+		text-shadow: 0px 0px 10px pink;
+		line-height: 1.8;
+		//font-stretch:extra-condensed;
+		font: 30px  arial,sans-serif;
+		font-weight:bold;
+	}
+	body{
+		background: url("https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/bg.jpg") no-repeat center center fixed;
+		//background-repeat: no-repeat;
+		background-size: 100% ;
+		// background-position: center;
+		background-size: cover;
+		min-width:500px;
+		width: auto;
+	}
+	svg{
+		background: purple;
+		font: 15px arial, sans-serif;
+		border: 5px solid black;
+	}
+	.unoppened {
+		// border-radius: 10%;
+		filter: url(#unopenedSquare);
+		// background-size: contain;
+		// background-position: center;
+		background-repeat: no-repeat;
+		background-size: 100% ;
+		//position:  absolute;
+		//  margin: 5%;
+	}
+	.easy{
+		background: #e6f0a3;
+		background: -moz-linear-gradient(top, #e6f0a3 6%, #d2e638 50%, #c3d825 51%, #dbf043 100%);
+		background: -webkit-linear-gradient(top, #e6f0a3 6%,#d2e638 50%,#c3d825 51%,#dbf043 100%);
+		background: linear-gradient(to bottom, #e6f0a3 6%,#d2e638 50%,#c3d825 51%,#dbf043 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6f0a3', endColorstr='#dbf043',GradientType=0 );
+	}
+	.easy:hover {
+		background-image: none;
+		background-color: #DDA0DD; 
+		color: black;
+		box-shadow: 0 30px 39px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+	}
+	.medium{
+		background: #fede9a;
+		background: -moz-linear-gradient(top, #fede9a 6%, #feb728 50%, #fead0a 51%, #febe3e 100%);
+		background: -webkit-linear-gradient(top, #fede9a 6%,#feb728 50%,#fead0a 51%,#febe3e 100%);
+		background: linear-gradient(to bottom, #fede9a 6%,#feb728 50%,#fead0a 51%,#febe3e 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fede9a', endColorstr='#febe3e',GradientType=0 );
+	}
+	.medium:hover {
+		background: none;
+		background-color: #DDA0DD; 
+		color: black;
+		box-shadow: 0 30px 39px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	}
+	.hard{
+		background: #f4b4a4;
+		background: -moz-linear-gradient(top, #f4b4a4 6%, #ec5b3a 50%, #e24826 51%, #f46848 100%);
+		background: -webkit-linear-gradient(top, #f4b4a4 6%,#ec5b3a 50%,#e24826 51%,#f46848 100%);
+		background: linear-gradient(to bottom, #f4b4a4 6%,#ec5b3a 50%,#e24826 51%,#f46848 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4b4a4', endColorstr='#f46848',GradientType=0 );
+	}
+	.hard:hover {
+		background-image: none;
+		background-color: #DDA0DD; 
+		color: black;
+		box-shadow: 0 30px 39px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	}
+
+	.newG{
+		margin-left:  2%;
+		//margin-top: 2%;
+		border: 3px solid black;
+		border-radius: 8px;
+		width: 130px;
+		height: 115px;
+		font: 22px  arial,sans-serif;
+		//color: white;
+		font-weight:bold;
+		text-align: center;
+		background: #fea7ff;
+		background: -moz-linear-gradient(-45deg, #fea7ff 0%, #d800dc 50%, #b900bc 51%, #fc3bff 100%);
+		background: -webkit-linear-gradient(-45deg, #fea7ff 0%,#d800dc 50%,#b900bc 51%,#fc3bff 100%);
+		background: linear-gradient(135deg, #fea7ff 0%,#d800dc 50%,#b900bc 51%,#fc3bff 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fea7ff', endColorstr='#fc3bff',GradientType=1 );
+		box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	}
+	.newG:hover{
+		box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.30), 0px 10px 10px 20px rgba(0,0,0,0.19);
+		transition-duration: 0.5s;
+	}
+	.easy,.hard,.medium{
+		//padding: 2%;
+		border: 3px solid black;
+		border-radius: 8px;
+		height: 70px;
+		width: 130px;
+		font: 22px  arial,sans-serif;
+		font-weight:bold;
+		text-align: center;
+		box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+		transition-duration: 0.5s;
+	}
+	.smily{
+		display: inline-block;
+		border: 3px solid black;
+		border-radius: 8px;
+		width:65px;
+		height: 60px;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-image: url(https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/smile.png); 
+		background-size: 80%; 
+		margin-left: 2%;
+		margin-top: 3px;
+	}
+	#textLine{
+		//border: 5px solid black;
+		display: inline-block;
+		//padding-bottom: 4%;
+		float: left;
+		margin-top: 20px;
+		margin-right:0%;
+		margin-left: 15%;
+	}
+
+
+</style>
+</head>
+
+<body style=" text-align: center;">
+	<h1>Minesweeper Game</h1>
+<div>
+	<button class="easy" onclick="easyLevel()"> Easy </button>
+	<button class="medium" onclick="mediumLevel()"> Medium  </button>
+	<button class="hard" onclick="hardLevel()"> Hard  </button>
+	<button class="newG" onclick="newGame()"> NEW GAME  </button>
+</div>
+	<div style="font: 25px  arial,sans-serif;
+	font-weight:bold;
+	clear: left;
+	margin-top: 3px;
+	//padding-left: 40px;
+	//padding-right: 8%;
+	text-align: center;
+	border: 3px solid black;
+	width: auto;">
+		<div id="textLine">
+			Custom :  x   <input id="xTilestxt" type="text" name="xTiles" style="width:30px" value="9">
+			y <input id="yTilestxt" type="text" name="yTiles" style="width:30px " value="9">
+			mines <input id="minestxt" type="text" name="mines" style="width:30px " value="10">
+		</div>
+		<div id="status" class="smily"></div>
+	</div>
+
+</br>
+<svg id="mySVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" oncontextmenu="return false">
+
+
+	<filter id="unopenedSquare" x="0%" y="0%" width="100%" height="100%">
+		<feImage xlink:href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/unopenedSquare.png"/>
+	</filter>
+	<filter id="openedSquare" x="0%" y="0%" width="100%" height="100%">
+		<feImage xlink:href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/openedSquare.png"/>
+	</filter>
+	<filter id="mine" x="0%" y="0%" width="100%" height="100%">
+		<feImage xlink:href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/mine.png"/>
+	</filter>
+	<filter id="flage" x="0%" y="0%" width="100%" height="100%">
+		<feImage xlink:href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/flag.png"/>
+	</filter>
+	<filter id="1" x="0%" y="0%" width="100%" height="100%">
+		<feImage xlink:href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/1.png"/>
+	</filter>
+	<filter id="2" x="0%" y="0%" width="100%" height="100%">
+		<feImage xlink:href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/2.png"/>
+	</filter>
+	<filter id="3" x="0%" y="0%" width="100%" height="100%">
+		<feImage xlink:href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/3.png"/>
+	</filter>
+	<filter id="4" x="0%" y="0%" width="100%" height="100%">
+		<feImage xlink:href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/4.png"/>
+	</filter>
+	<filter id="5" x="0%" y="0%" width="100%" height="100%">
+		<feImage xlink:href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/5.png"/>
+	</filter>
+	<filter id="6" x="0%" y="0%" width="100%" height="100%">
+		<feImage xlink:href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/6.png"/>
+	</filter>
+	<filter id="7" x="0%" y="0%" width="100%" height="100%">
+		<feImage xlink:href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/7.png"/>
+	</filter>
+	<filter id="8" x="0%" y="0%" width="100%" height="100%">
+		<feImage xlink:href="https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/8.png"/>
+	</filter>        
+</svg>
+
+<br>
+
+<p style="color:white ">My GitHub Repo: <i>Alaa Ma </i> :
+	<a style="color:pink " href="https://alaamarawi.github.io/AdvancedProgramming_javascript/CW7/myApp.html" target="ExternalDocument"> main page / app</a>,
+	<a style="color:pink " href="https://github.com/AlaaMarawi/AdvancedProgramming_javascript"1
+	 target="ExternalDocument"> github</a>
+	</br>
+	References
+	<i>References: </i> </br>
+		<a style="color:pink " href="https://www.w3schools.com/default.asp" target="ExternalDocument"> w3schools</a></br>
+	<a style="color:pink " href="https://stackoverflow.com/questions/1034712/creating-svg-graphics-using-javascript"
+	 target="ExternalDocument"> Stackoverflow</a>
+
+</p>
+
+
+
+<script>
+
+	"use strict";
+
+	var myTile;
+	function createTile(x,y,w,h)
+	{
+		myTile= document.createElementNS(svgNS,"rect");
+    	//myTile.setAttribute("id",i+""+j); // tile id = ij (its location in the array)
+   		myTile.setAttribute("x",x);
+   		myTile.setAttribute("y",y);
+    	myTile.setAttribute("width",w);
+    	myTile.setAttribute("height",h);
+    	myTile.setAttribute('class','unoppened');
+    	//myTile.setAttribute('filter','url(#unopenedSquare)');
+    	myTile.setAttribute('onmousedown', 'click(this,evt)'); // set click event
+    	document.getElementById("mySVG").appendChild(myTile); //add child to svg
+	} 
+	function drawMyGrid(){ // draw the grid and fill the a2D array
+ 		for(let i=0; i<iTiles;i++ ){  
+ 			tileMap[i]=[];
+ 			xTile=0; // start a new line
+ 			console.log(jTiles);
+ 			for ( let j = 0; j < jTiles; j++) {
+ 				createTile(xTile,yTile,widthTile,heightTile);
+ 				myTile.isMine=false;
+ 				myTile.isRevealed=false;
+ 				myTile.hasFlag=false;
+     	 		myTile.xLoc=i; // x location
+     	 		myTile.yLoc=j; // y location
+     	 		tileMap[i][j]=myTile; //add tile to array
+     	 		xTile+=(widthTile +2); // go to the right as tile width
+  			}
+		yTile+=(heightTile +2); // go down as tile height
+		
+		}
+	}
+	var clickedTile={}; 
+	function click(element,evt){
+		if(gameEnded)return;
+  		//clickedTile=tileMap[element.id[0]][element.id[1]];
+  		clickedTile=tileMap[element.xLoc][element.yLoc];
+  		if(clickedTile.isRevealed)return;
+  		console.log(element.xLoc+","+element.yLoc+" clicked"); //tile location x,y
+  		if (evt.which==1){ //if mouse left button clicked
+  			reveal(clickedTile);
+  			if(gameEnded)gameOver();
+  		}else if (evt.which==3){ //if mouse right button clicked
+
+    		if (clickedTile.hasFlag){ //if clicked tile is flaged.. 
+    			unFlage(element);
+    			clickedTile.hasFlag=false;
+    			flagCount--;
+
+    		}else{
+    			putFlage(element);
+	    		clickedTile.hasFlag=true;
+	    		flagCount++;
+    		}
+		}
+		 // not suitable for mobile (no  right click to put flag!)
+		/*
+		if(flagCount==mines){ // controle game status
+			if(revealedTileCount==(iTiles*jTiles)-flagCount){ // if all tiles except mines are revealed:
+     			console.log("you Won");
+     			youWin();
+     		}
+ 		}
+ 		*/
+			if(revealedTileCount==(iTiles*jTiles)-mines){ // if all tiles except mines are revealed:
+     			console.log("you Won");
+     			youWin();
+     		}
+	}
+	function reveal(tile){
+		tile.isRevealed=true;
+		mineCount=0;
+		if (tile.isMine){
+			explode(tile);
+			//gameOver();
+			gameEnded=true;
+	    }else{
+	      seeNeighbors(tile.xLoc,tile.yLoc); // see n.s of this x,y tile
+		revealedTileCount++;
+	  	
+	  	}  
+	}
+	function putFlage(element){
+		element.style.filter= 'url(#flage)';
+	}
+	function unFlage(element){
+		element.style.filter= 'url(#unopenedSquare)';
+	}
+	function explode(element){
+		element.style.filter= 'url(#mine)';
+			//gameOver();
+
+	}
+	function randomMines(){
+		var ri;
+		var rj;
+		for (let i = 0; i < mines; i++) {
+			ri =Math.floor(Math.random() * iTiles); 
+			rj =Math.floor(Math.random() * jTiles); 
+			console.log(ri+" "+rj);
+			if(tileMap[ri][rj].isMine){ 
+				i--;
+				continue ;
+			}
+			tileMap[ri][rj].isMine=true;
+		}
+	}
+	let mineCount;
+	function seeNeighbors(x,y){
+ 		// console.log(tileMap[x][y]);
+ 		mineCount=0;
+		for (let i = x - 1; i <= x + 1; i++) {
+		 	for (let j = y - 1; j < y + 2; j++) { 
+		 		if (i == x && j == y) {
+		 			continue;
+		 		}
+		 		try {
+		 			if (tileMap[i][j].isMine) {
+						//console.log("it is a mine! : i,j "+i+","+j);
+		                mineCount++;
+					}
+				} catch (err) {
+					continue;
+				}
+			}
+		}
+		console.log("neighbor mine count: "+mineCount);
+		labelCounter(tileMap[x][y],mineCount);
+		if(mineCount==0){
+			for (let i = x - 1; i < x + 2; i++) {
+      			for (let j = y - 1; j < y + 2; j++) {
+      				if (i < 0 || j < 0) {
+      					continue;
+      				}
+      				try {
+      					if (!tileMap[i][j].isRevealed && !tileMap[i][j].hasFlag) {
+      						reveal(tileMap[i][j]);
+      					}
+      				} catch (err) {
+      					continue;
+      				}
+      			}
+      		} 
+		}
+ 	}
+	function labelCounter(tile,mineCount){
+	  	console.log("revealed: "+tile.xLoc+","+tile.yLoc);
+	  	if(mineCount==0){
+	  		tile.style.filter= 'url(#openedSquare)';
+	  	}else if(mineCount<9){
+	  		tile.style.filter= 'url(#'+mineCount+')';
+	  	}else{
+	  		console.log("Error! neighbors' mineCount cannot be more than 8");
+	  	}
+	}
+  	function youWin(){
+  		document.getElementById("status").style.backgroundImage='url("https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/victory.png")';
+  		document.getElementById("status").style.backgroundSize="135%";
+  		gameEnded=true;
+  	}
+  	function gameOver(){
+  		//gameEnded=true;
+  		document.getElementById("status").style.backgroundImage='url("https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/dead.png")';
+  		document.getElementById("status").style.backgroundSize="90%";
+  		for(let i =0; i<tileMap.length;i++){
+  			for (var j = 0; j < tileMap[i].length; j++) {
+  				if(tileMap[i][j].isMine){
+  					explode(tileMap[i][j]);
+  				}
+  			}
+  		}
+
+  	}
+	function resetSmiley(){
+  		document.getElementById("status").style.backgroundImage='url("https://alaamarawi.github.io/AdvancedProgramming_javascript/Project_minesweeper/smile.png")';
+  		document.getElementById("status").style.backgroundSize="80%";
+
+  	}
+	function easyLevel(){
+ 	 	iTiles=9;
+  		jTiles=9;
+ 	 	mines=10;
+ 	 	document.getElementById("xTilestxt").value=iTiles;
+ 	 	document.getElementById("yTilestxt").value=jTiles;
+ 	 	document.getElementById("minestxt").value=mines;
+ 	 	startGame();
+  	}
+	function mediumLevel(){
+	  	iTiles=16;
+	  	jTiles=16;
+	  	mines=40;
+	  	document.getElementById("xTilestxt").value=iTiles;
+	  	document.getElementById("yTilestxt").value=jTiles;
+	  	document.getElementById("minestxt").value=mines;
+	  	startGame();
+  	}
+	function hardLevel(){
+	  	iTiles=20;
+	  	jTiles=25;
+	  	mines=99;
+	  	document.getElementById("xTilestxt").value=iTiles;
+	  	document.getElementById("yTilestxt").value=jTiles;
+	  	document.getElementById("minestxt").value=mines;
+	  	startGame();
+	}
+	function newGame(){ //custom level
+		jTiles=document.getElementById("xTilestxt").value;
+		iTiles=document.getElementById("yTilestxt").value;
+		mines=document.getElementById("minestxt").value;
+		if(mines>=iTiles*jTiles){
+			mines=(iTiles*jTiles) -1;
+			document.getElementById("minestxt").value=mines;
+		}
+		startGame();
+	}
+	function startGame(){
+		svgNS = "http://www.w3.org/2000/svg";
+		mysvg = document.getElementById("mySVG");
+		yTile=0;
+		xTile=0;
+		tileMap=[];
+		 //mysvg.setAttribute('width', iTiles*widthTile+(xTile*3));
+		 mysvg.setAttribute('height', iTiles*widthTile+2*iTiles+"px");
+		 mysvg.setAttribute('width', ((jTiles*heightTile)+(2*jTiles))+"px");
+		document.body.style.width="100%";
+		//document.body.style.minWidth =(mysvg.width.baseVal.value) + 100+"px"; // reset body width w respect tp svg width
+		drawMyGrid(); // draw the grid and fill 2D array
+		randomMines(); // put mines randomly
+		flagCount=0;
+		revealedTileCount=0;
+		resetSmiley();
+		gameEnded=false;
+	}
+	function automaticReveal(){
+		for (var i = 0; i <tileMap.length; i++) {
+  			for (var j = 0; j <tileMap[0].length; j++) {
+   				reveal(tileMap[i][j]);
+  			}
+		}
+	}
+
+	var svgNS ; 
+	let mysvg ;
+	let xTile=0; //starting x location of the tile
+	let yTile=0; // starting y location of the tile
+	let widthTile=50; // width of tile
+	let heightTile=50; // height of tile
+	let iTiles =9; // # of tiles in line
+	let jTiles =9; // # of tiles in row
+	let tileMap=[]; // 2d array of tiles
+	var flagCount=0;
+	var revealedTileCount=0;
+	var mines=10;
+	var gameEnded=false;
+	startGame();
+	//reveal(tileMap[0][0]);
+	//explode(tileMap[1][1]); // explode one tile
+	//automaticReveal(); // reveal all tiles
+	//console.log(document.body.offsetWidth)
+	//console.log(mysvg.width.baseVal.value)
+	//document.body.style.Width=(mysvg.width.baseVal.value) + 400;
+	//console.log(document.body.offsetWidth)
+
+</script>
+
+</body>
+</html>
