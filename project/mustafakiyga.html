@@ -1,0 +1,468 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+	  <title>Maze Game</title>
+		<style>
+	    body {
+		  background:lightblue;
+	    }
+		.button {
+		  background-color: #555555; /* Green */
+		  border: none;
+		  color: white;
+		  padding: 15px 32px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;
+		  margin: 4px 2px;
+		  cursor: pointer;
+		}
+		</style>
+
+		
+		<body>
+		<div style="position: absolute; left:33%;">
+		  <!-- <button onclick="start();this.disabled = true;">Start</button> -->
+		  <button id="Button1" class="button" onclick="easy()">Easy</button>
+		  <button id="Button2" class="button" onclick="medium()">Medium</button>
+		  <button id="Button3" class="button" onclick="hard()">Hard</button>
+
+		  <label id="moves" style = "color:white;">Moves: 0</label>
+		 
+
+		<div style="position: absolute; left:-47%;">
+			<canvas id="canvas" width="480" height="480" style="margin-left:30%;border:2px solid black;"></canvas>
+		</div>
+		 <br><br><br><br><br><br><br><br><br><br>
+		 <br><br><br><br><br><br><br><br><br><br>
+		 <br><br><br><br><br><br><br><br><br>
+			<div style="text-align:center; width:380px;  ">
+			  <button onclick="moveUp()">UP</button><br><br>
+			  <button onclick="moveLeft()">LEFT</button>
+			  <button onclick="moveRight()">RIGHT</button><br><br>
+			  <button onclick="moveDown()">DOWN</button>
+				</div>
+
+		<hr>
+
+		<p>Ref: <a href="https://www.w3schools.com/jsref/event_key_keycode.asp" 
+		   target="ExternalDocument">Using of Event Key </a>
+		</p>
+		<p><a href="https://keycode.info/" 
+		   target="ExternalDocument">Key Codes</a>
+		</p>
+		<p><a href="http://jsfiddle.net/n8j1s/4y22135r/" 
+		   target="ExternalDocument">Similar Project</a>
+		</p>
+		<p><a href="https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Collision_detection" 
+		   target="ExternalDocument">Collision Detection</a>
+		</p>
+		<p><a href="http://eloquentjavascript.net/17_canvas.html" 
+		   target="ExternalDocument">Drawing on Canvas </a>
+		</p>
+		<p><a href="https://stackoverflow.com/questions/8916620/disable-arrow-key-scrolling-in-users-browser" 
+		   target="ExternalDocument">Prevent Scrolling of Arrows </a>
+		</p>
+		  
+		  <script>
+		  
+
+
+
+var canvas = document.getElementById("canvas")
+var ctx = canvas.getContext("2d");
+
+var dog = new Image();
+dog.src = "https://mustafakiyga.github.io/AdvancedProgramming/PROJECT/dog.png";
+
+var bone = new Image();
+bone.src = "https://mustafakiyga.github.io/AdvancedProgramming/PROJECT/bone.png";
+
+var pattern = new Image();
+pattern.src = "https://mustafakiyga.github.io/AdvancedProgramming/PROJECT/pattern.png";
+
+var maze = [];
+
+var player = new Object({
+	x:0,y:0,loc: 0, moves: 0}
+);
+
+function moveUp(){
+	if (player.y != 0){
+		player.loc -= 15;
+		if (maze[player.loc].state != 1){
+			ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+			player.y --;
+			player.moves ++;
+		}
+		else {
+			player.loc += 15;
+		}
+	}
+		ctx.drawImage(dog,player.x * 32,player.y * 32,32,32);
+	if (maze[player.loc].state == 2){
+		alert("You win!");
+		location.reload();// refresh page
+
+	}
+	
+	document.getElementById("moves").innerHTML = "Moves: " + player.moves;
+}
+function moveDown(){
+
+	if (player.y != 14){
+		player.loc += 15;
+		if (maze[player.loc].state != 1){
+			ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+			player.y ++;
+			player.moves ++;
+		}
+		else {
+			player.loc -= 15;
+		}
+	}
+		ctx.drawImage(dog,player.x * 32,player.y * 32,32,32);
+	if (maze[player.loc].state == 2){
+		alert("You win!");
+		location.reload();// refresh page
+
+	}
+	
+	document.getElementById("moves").innerHTML = "Moves: " + player.moves;
+	
+}
+function moveRight(){
+	if (player.x != 14){
+		player.loc ++;
+		if (maze[player.loc].state != 1){
+			ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+			player.x++;
+			player.moves ++;
+		}
+		else {
+			player.loc --;
+		}
+	}
+		ctx.drawImage(dog,player.x * 32,player.y * 32,32,32);
+	if (maze[player.loc].state == 2){
+		alert("You win!");
+		location.reload();// refresh page
+
+	}
+	
+	document.getElementById("moves").innerHTML = "Moves: " + player.moves;
+}
+function moveLeft(){
+	if (player.x != 0){
+		player.loc --;
+		if (maze[player.loc].state != 1){
+			ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+			player.x --;
+			player.moves ++;
+		}
+		else {
+			player.loc ++;
+		}
+	}
+		ctx.drawImage(dog,player.x * 32,player.y * 32,32,32);
+	if (maze[player.loc].state == 2){
+		alert("You win!");
+		location.reload();// refresh page
+
+	}
+	
+	document.getElementById("moves").innerHTML = "Moves: " + player.moves;
+}
+
+function keyPress(e){
+	switch(e.keyCode){
+		case 39:  //Right arrow pressed
+		e.preventDefault();	//Prevent scrolling the page via arrow
+		if (player.x != 14){
+			player.loc ++;
+			if (maze[player.loc].state != 1){
+				ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+				player.x++;
+				player.moves ++;
+			}
+			else {
+				player.loc --;
+			}
+		}
+		break;
+		case 68: //D pressed
+		
+			if (player.x != 14){
+				player.loc ++;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.x++;
+					player.moves ++;
+				}
+				else {
+					player.loc --;
+				}
+			}
+			break;
+		case 37:  /* Left arrow pressed */
+		e.preventDefault();	
+			if (player.x != 0){
+				player.loc --;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.x --;
+					player.moves ++;
+				}
+				else {
+					player.loc ++;
+				}
+			}
+			break;
+		case 65: //A pressed
+		
+			if (player.x != 0){
+				player.loc --;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.x --;
+					player.moves ++;
+				}
+				else {
+					player.loc ++;
+				}
+			}
+			break;
+		case 40 :  /* Down arrow pressed */
+		
+		e.preventDefault();	
+		if (player.y != 14){
+			player.loc += 15;
+			if (maze[player.loc].state != 1){
+				ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+				player.y ++;
+				player.moves ++;
+			}
+			else {
+				player.loc -= 15;
+			}
+		}
+			break;
+		case 83: //S pressed
+		
+			if (player.y != 14){
+				player.loc += 15;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.y ++;
+					player.moves ++;
+				}
+				else {
+					player.loc -= 15;
+				}
+			}
+			handled = true
+			break;
+			
+			case 38:  /* Up arrow pressed */
+			e.preventDefault();	
+			handled = true
+			if (player.y != 0){
+				player.loc -= 15;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.y --;
+					player.moves ++;
+				}
+				else {
+					player.loc += 15;
+				}
+			}
+                        break;
+		case 87: //W pressed
+		handled = true
+			if (player.y != 0){
+				player.loc -= 15;
+				if (maze[player.loc].state != 1){
+					ctx.clearRect(player.x * 32,player.y * 32, 32, 32);
+					player.y --;
+					player.moves ++;
+				}
+				else {
+					player.loc += 15;
+				}
+			}
+			break;
+
+	}
+	
+	ctx.drawImage(dog,player.x * 32,player.y * 32,32,32);
+	if (maze[player.loc].state == 2){
+		alert("You win!");
+		location.reload();// refresh page
+
+	}
+	
+	document.getElementById("moves").innerHTML = "Moves: " + player.moves;
+}
+
+function easy(){
+document.getElementById("Button1").disabled = true;
+document.getElementById("Button2").disabled = true;
+document.getElementById("Button3").disabled = true;
+
+var array = [
+    [0,1,0,1,0,0,1,0,0,0,1,0,0,1,0],
+    [0,0,0,0,0,1,1,1,1,0,1,1,0,0,0],
+    [0,1,1,1,0,0,1,1,1,0,1,0,0,1,0],
+    [0,0,0,1,1,0,1,0,0,0,0,0,1,1,0],
+    [1,1,0,0,1,0,1,0,1,1,1,0,1,1,0],
+    [0,0,0,0,0,0,0,0,1,0,0,0,0,1,0],
+    [1,0,1,1,1,1,1,1,1,0,1,1,1,1,0],
+    [0,0,0,0,1,0,0,1,1,0,1,1,0,1,0],
+    [1,1,1,0,0,0,0,0,0,0,1,0,0,0,0],
+    [1,0,0,0,1,1,1,1,1,1,1,0,1,1,1],
+    [1,0,1,0,1,0,0,0,0,0,1,0,0,0,1],
+    [1,1,1,0,1,1,1,1,1,0,1,0,1,0,1],
+    [1,0,0,0,1,0,0,0,0,0,1,1,1,0,1],
+    [1,0,1,1,1,1,1,0,1,0,0,2,0,0,1],
+    [1,0,0,0,0,0,1,0,0,0,1,1,1,1,1]];
+	
+player = ({
+	x:7,y:0,loc: 7, moves: 0}//loc 15
+);
+
+	var y = 0;
+
+
+	for (var i = 0;i < 15;i++){
+		var x = 0;
+		for (var j = 0;j < 15;j++){
+			maze.push({
+				"x":x,"y":y,"state":array[i][j]}
+			);
+			x++;
+		}
+		y++;
+	}
+
+	for (var i = 0;i < 15 * 15;i++){
+		if (maze[i].state == 1)
+			ctx.drawImage(pattern,maze[i].x * 32, maze[i].y * 32, 30, 30);
+		if (maze[i].state == 2)
+			ctx.drawImage(bone,maze[i].x * 32, maze[i].y * 32, 30, 30);
+	}
+	ctx.drawImage(dog,player.x * 32,player.y * 32,32,32);
+	
+	window.addEventListener("keydown", keyPress, true);
+	
+}
+
+function medium(){
+document.getElementById("Button1").disabled = true;
+document.getElementById("Button2").disabled = true;
+document.getElementById("Button3").disabled = true;
+
+	var array = [
+    [1,0,0,0,0,0,1,1,1,1,1,1,1,1,1],
+    [1,0,1,0,1,1,1,0,0,0,0,0,0,0,0],
+    [2,0,1,0,0,0,1,0,1,0,1,1,1,1,0],
+    [0,0,1,1,1,0,0,0,1,0,1,0,0,0,0],
+    [0,1,1,0,1,1,1,1,1,0,1,0,1,1,1],
+    [0,1,1,0,1,0,1,0,0,0,0,0,0,0,0],
+    [0,0,1,0,1,0,1,0,1,1,1,1,1,1,0],
+    [1,1,1,0,0,0,1,0,0,1,0,0,0,0,0],
+    [0,0,1,1,1,0,1,1,1,1,0,1,1,1,1],
+    [1,0,1,0,0,0,1,0,0,0,0,0,0,0,1],
+    [1,0,1,0,1,1,1,0,1,1,1,1,1,0,1],
+    [1,0,1,0,1,0,0,0,1,0,0,0,1,0,1],
+    [1,0,1,0,1,0,1,1,1,0,1,0,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,1,0,1,0,1],
+    [1,1,1,1,1,1,1,0,1,1,1,0,0,0,1]];
+	
+player = ({
+	x:7,y:14,loc: 217, moves: 0}
+);
+
+var y = 0;
+
+
+for (var i = 0;i < 15;i++){
+	var x = 0;
+	for (var j = 0;j < 15;j++){
+		maze.push({
+			"x":x,"y":y,"state":array[i][j]}
+		);
+		x++;
+	}
+	y++;
+}
+
+	for (var i = 0;i < 15 * 15;i++){
+		if (maze[i].state == 1)
+			ctx.drawImage(pattern,maze[i].x * 32, maze[i].y * 32, 30, 30);
+		if (maze[i].state == 2)
+			ctx.drawImage(bone,maze[i].x * 32, maze[i].y * 32, 30, 30);
+	}
+	ctx.drawImage(dog,player.x * 32,player.y * 32,32,32);
+	
+	window.addEventListener("keydown", keyPress, true);
+	
+}
+
+function hard(){
+document.getElementById("Button1").disabled = true;
+document.getElementById("Button2").disabled = true;
+document.getElementById("Button3").disabled = true;
+
+		  var array = [
+    [1,0,1,1,0,1,0,0,0,1,0,0,0,1,0],
+    [1,0,0,0,0,1,0,1,0,1,0,1,0,1,0],
+    [1,1,1,1,0,1,0,1,0,0,0,1,0,0,0],
+    [0,0,0,1,0,0,0,1,0,1,1,1,1,1,0],
+    [0,1,0,1,1,1,0,1,0,0,0,0,1,0,0],
+    [0,1,0,0,0,1,0,1,1,1,1,0,1,0,1],
+    [0,1,1,1,0,0,0,0,1,0,1,0,1,0,1],
+    [0,0,0,0,0,1,1,0,0,0,1,0,1,0,1],
+    [0,1,0,1,1,1,1,0,1,0,0,0,0,0,0],
+    [0,1,0,1,0,0,0,0,1,0,1,1,1,0,1],
+    [0,1,0,1,0,1,0,1,1,0,0,1,0,0,0],
+    [0,1,0,0,0,0,0,0,0,0,1,0,1,1,1],
+    [0,1,1,1,1,1,1,1,1,1,0,0,2,0,0],
+    [0,1,0,0,0,0,0,1,0,1,0,1,0,1,1],
+    [0,0,0,1,0,1,0,0,0,0,0,1,0,0,0]];
+	
+player = ({
+	x:1,y:0,loc: 1, moves: 0}
+);
+
+var y = 0;
+for (var i = 0;i < 15;i++){
+	var x = 0;
+	for (var j = 0;j < 15;j++){
+		maze.push({
+			"x":x,"y":y,"state":array[i][j]}
+		);
+		x++;
+	}
+	y++;
+}
+
+	for (var i = 0;i < 15 * 15;i++){
+		if (maze[i].state == 1)
+			ctx.drawImage(pattern,maze[i].x * 32, maze[i].y * 32, 30, 30);
+		if (maze[i].state == 2)
+			ctx.drawImage(bone,maze[i].x * 32, maze[i].y * 32, 30, 30);
+	}
+	ctx.drawImage(dog,player.x * 32,player.y * 32,32,32);
+	
+	window.addEventListener("keydown", keyPress, true);
+	
+}
+
+
+
+</script>
+		</body>
+</html>
