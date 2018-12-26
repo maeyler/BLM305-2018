@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Student Automation</title>
+    <link rel="stylesheet" href="https://sfrcnayds.github.io/JSHomeworks/Project/main.css">
+    <script src="https://sfrcnayds.github.io/JSHomeworks/Project/studentAutomation.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <div class="table">
+          <div class="leftinfo">
+            <h1>Student Automation <span>by Sefercan Aydaş</span></h1>
+          </div>
+          <div class="rightinfo">
+
+          </div>
+        </div>
+      </div>
+    </header>
+    <section id="headmenu">
+      <div class="container">
+        <ul>
+          <li><a href="#" id = "anasayfa">Anasayfa</a></li>
+          <li><a href="#" id = "dersEkle">Ders Ekle</a></li>
+          <li><a href="#" id = "notGir">Not Gir</a></li>
+          <li><a href="#" id = "ogrenciEkle">Öğrenci Ekle</a></li>
+          <li><a href="#" id = "hocaEkle">Hoca Ekle</a></li>
+          <li><a href="#" id = "derseOgrenciEkle">Derse Öğrenci Ekle</a></li>
+        </ul>
+      </div>
+    </section>
+    <section id="homepage">
+      <div class="container">
+        <div class="homepage" id = "divHomePage">
+          <h2>Ders Listesi</h2>
+          <ul class="les-list" id="coursesList">
+            <li class="title">
+              <div class="dersid">
+                #
+              </div>
+              <div class="dersadi">
+                Ders Adı
+              </div>
+              <div class="dershocasi">
+                Ders Hocası
+              </div>
+              <div class="dersakts">
+                Ders AKTS/Kredi
+              </div>
+              <div class="dersproccess">
+                &nbsp;
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="dersekle" id = "divDersEkle" style="display: none">
+          <h2>Ders Ekle</h2>
+          <div id="dersEkleSuccessfulMessage" class="alert alert-success" style="display: none">
+            Ders Eklendi!
+          </div>
+          <div id="dersEkleFail" class="alert alert-danger" style="display: none">
+            Ders ekleme başarısız!
+          </div>
+          <form>
+            <div class="form-group">
+              <label>Ders Kodu:</label>
+              <input id="dersKoduInput" type="text"  placeholder="Ders kodunu girin">
+            </div>
+            <div class="form-group">
+              <label for="">Ders Adı:</label>
+              <input type="text" id="dersAdiInput" placeholder="Ders adını girin">
+            </div>
+            <div class="form-group">
+              <label for="">Ders Hocası:</label>
+              <select id= "dersEkleHocalar" class="" name="">
+                <option id="firstChild">-- Ders hocası seçin.</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="">Ders AKTS / Kredi Kodu:</label>
+              <input type="number" id="dersAktsInput" placeholder="Akts girin">
+            </div>
+            <div class="form-group">
+              <label>Sınıf:</label>
+              <select id ="dersEkleSınıf">
+                  <optgroup label="A blok">
+                      <option value="A102">A102</option>
+                      <option value="A103">A103</option>
+                      <option value="A104">A104</option>
+                      <option value="A105">A105</option>
+                    </optgroup>
+                    <optgroup label="B blok">
+                        <option value="B112">B112</option>
+                        <option value="B113">B113</option>
+                        <option value="B114">B114</option>
+                        <option value="B115">B115</option>
+                        <option value="B116">B116</option>
+                      </optgroup>
+                <optgroup label="Laboratuvar">
+                  <option value="Lab 1">Lab 1</option>
+                  <option value="Lab 2">Lab 2</option>
+                  <option value="Lab 3">Lab 3</option>
+                  <option value="Lab 4">Lab 4</option>
+                  <option value="Lab 5">Lab 5</option>
+                </optgroup>
+
+              </select>
+            </div>
+            <div class="form-group text-right">
+              <button type="reset">Temizle</button>
+              <button type="reset" class="primary" onclick="addCourse()">Gönder</button>
+            </div>
+          </form>
+        </div>
+        <div class="notgir" id = "divNotGir" style="display: none">
+          <h2>Not Gir</h2>
+          <div id="notGirSuccessfulMessage" class="alert alert-success" style="display: none">
+            Not Eklendi!
+          </div>
+          <div id="notEkleFail" class="alert alert-danger" style="display: none">
+            Hoca ekleme başarısız!
+          </div>
+          <form>
+            <div class="form-group">
+              <label>Ders Adı:</label>
+              <select onchange="notEkleCourseSelectChange()" id = "notGirDersSelect">
+                <option value="">-- Ders seçin.</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="">Ders Hocası:</label>
+              <input type="text" id="notGirDersHoca" placeholder="Ders Hocası" disabled="disabled">
+            </div>
+
+            <div class="form-group">
+              <label for="">Öğrenci Seçin:</label>
+              <select id = "notGirOgrenciSelect">
+                <option value="-1">--- Öğrenci seçin.</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Ders Notu Girin:</label>
+                <input id="courseNoteInput" type="number" min = "0" max = "100" step="1" placeholder="Not girin">
+            </div>
+            <div class="form-group text-right">
+              <button type="reset">Temizle</button>
+              <button type="reset" class="primary" onclick="addExamNote()">Gönder</button>
+            </div>
+          </form>
+        </div>
+        <div class="hocaekle" id = "divHocaEkle" style="display: none">
+          <h2>Hoca Ekle</h2>
+          <div id="teacherSuccesfullAddedMessage" class="alert alert-success" style="display: none;">
+            Hoca Eklendi!
+          </div>
+          <div id="teacherEkleFail" class="alert alert-danger" style="display: none">
+            Hoca ekleme başarısız!
+          </div>
+          <form>
+            <div class="form-group">
+              <label for="">Hocanın Adı:</label>
+              <input type="text" id="inputTeacherName" name="teacherName" placeholder="Hocanın adını girin">
+            </div>
+            <div class="form-group">
+              <label for="">Hocanın Soyadı:</label>
+              <input type="text" id="inputTeacherSurname" name="teacherSurname" placeholder="Hocanın soyadını girin">
+            </div>
+            <div class="form-group text-right">
+              <button type="reset">Temizle</button>
+              <button type="reset" class="primary" onclick="addTeacher()">Gönder</button>
+            </div>
+          </form>
+        </div>
+        <div class="ogrenciekle" id = "divOgrenciEkle" style="display: none">
+          <h2>Öğrenci Ekle</h2>
+          <div id="ogrenciEkleSuccessfulMessage" class="alert alert-success" style="display: none">
+            Öğrenci Eklendi!
+          </div>
+          <div id="ogrenciEkleFail" class="alert alert-danger" style="display: none">
+            Öğrenci ekleme başarısız!
+          </div>
+          <form>
+            <div class="form-group">
+              <label for="">Öğrencinin Adı:</label>
+              <input type="text" id = "studentNameInput" placeholder="Öğrencinin adını girin">
+            </div>
+            <div class="form-group">
+              <label for="">Öğrencinin Soyadı:</label>
+              <input type="text" id="studentSurnameInput" placeholder="Öğrencinin soyadını girin">
+            </div>
+            <div class="form-group">
+              <label>Öğrencinin Bölümü:</label>
+              <select id="studentDepartment">
+                <optgroup label="Mühendislik Fakültesi">
+                  <option value="Bilgisayar Mühendisliği">Bilgisayar Mühendisliği</option>
+                  <option value="Biyomedikal Mühendisliği">Biyomedikal Mühendisliği</option>
+                </optgroup>
+                <optgroup label="Görsel Sanatlar Fakültesi">
+                  <option value="Grafik Tasarım">Grafik Tasarım</option>
+                  <option value="Mimari Restorasyon">Mimari Restorasyon</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Öğrencinin Numarası:</label>
+              <input type="number" id="studentNo" placeholder="Öğrencinin numarasını girin">
+            </div>
+            <div class="form-group text-right">
+              <button type="reset">Temizle</button>
+              <button type="reset" class="primary" onclick="addStudent()">Gönder</button>
+            </div>
+          </form>
+        </div>
+        <div class="derseogrenciekle" id = "divDerseOgrenciEkle" style="display: none">
+          <h2>Derse Öğrenci Ekle</h2>
+          <div id="derseOgrenciEkleSuccessfulMessage" class="alert alert-success" style="display: none">
+            Derse Öğrenci Eklendi!
+          </div>
+          <div id="derseOgrenciEkleFail" class="alert alert-danger" style="display: none">
+            Derse Öğrenci ekleme başarısız!
+          </div>
+          <form>
+            <div class="form-group">
+              <label for="">Ders:</label>
+              <select onchange="courseSelectChange()" id="courseSelect">
+                <option value="-1">Ders Seçiniz--></option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Hoca Adı:</label>
+              <input type="text" id="courseTeacherName" placeholder="Hoca Adı" disabled>
+            </div>
+            <div class="form-group">
+              <label>Öğrenci:</label>
+              <select id="studentSelect">
+                <option value="-1">Öğrenci Seçiniz--></option>
+              </select>
+            </div>
+            <div class="form-group text-right">
+              <button type="reset">Temizle</button>
+              <button type="reset" class="primary" onclick="addStudentToCourse()">Gönder</button>
+            </div>
+          </form>
+        </div>
+    </section>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>
+          <h2>Ders Düzenle</h2>
+          <form>
+            <input type="hidden" id="courseId">
+            <div class="form-group">
+              <label>Ders Adı:</label>
+              <input id="modalDersAdi" type="text" placeholder="Not girin">
+            </div>
+            <div class="form-group">
+              <label for="">Ders Hocası:</label>
+              <select id = "modalHocalar">
+                <option value="">-- Hoca seçin.</option>
+              </select>
+            </div>
+            <div class="form-group text-right">
+              <button type="reset" class="primary" onclick="changeCourseInfo()">Düzenle</button>
+            </div>
+          </form>
+        </p>
+      </div>
+
+    </div>
+    <footer>
+      <div class="container">
+        <div class="copyright">
+          &copy; Powered by Sefercan Aydaş - 2018 Sefercan Aydaş All Rights Reserved
+        </div>
+      </div>
+    </footer>
+
+    <div class="container">
+      <div class="reference">
+        <h2 style="margin-top: 0">Referans:</h2>
+        <span>* Modal: <a href="https://www.w3schools.com/howto/howto_css_modals.asp" target="_blank">https://www.w3schools.com/howto/howto_css_modals.asp</a> </span>
+      </div>
+    </div>
+  </body>
+</html>
