@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>AliAlperenASLAN</title>
+</head>
+<style>
+* { margin:0;
+	padding:0; }
+
+html, body { width:100%; height:100%; }
+canvas { display:block; }
+
+	#container {
+			width		: 100%;
+			height		: 100%;
+			overflow	: hidden;
+			padding		: 0;
+			margin		: 0;
+			-webkit-user-select	: none;
+			-moz-user-select	: none; 	
+		}
+</style>
+<body>
+<audio id="myAudio3">
+
+  <source src="https://alperen317.github.io/AdvancedProgramming/D%C3%B6nem%C3%96devi/boom.mp3" type="audio/mpeg">
+ 
+</audio>
+
+<audio id="myAudio2">
+
+  <source src="https://alperen317.github.io/AdvancedProgramming/D%C3%B6nem%C3%96devi/laser.mp3" type="audio/mpeg">
+ 
+</audio>
+
+<audio id="myAudio">
+
+  <source src="https://alperen317.github.io/AdvancedProgramming/D%C3%B6nem%C3%96devi/mainSound.mp3" type="audio/mpeg">
+ 
+</audio>
+</body>
+<script>
+
+
+
+
+
+var mainSound = document.getElementById("myAudio"); 
+var laserSound = document.getElementById("myAudio2");
+var boomSound = document.getElementById("myAudio3");  
+
+
+
+
+
+
+var timeLeft = 30;
+	var timerId ;
+
+
+
+
+
+//canvas oluşturma 
+canvas = document.createElement('canvas');
+canvas.id = 'screen';
+//body canvası ekleme
+document.body.appendChild(canvas);
+//canvas boyutları
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+// canvas getContext(2d)
+var canvas = document.getElementById('screen');
+var screenWidth = canvas.width;
+var screenHeight = canvas.height;
+
+var ctx = canvas.getContext("2d");
+
+
+ ctx.fillStyle = "#000000";
+ ctx.fillRect(0, 0, screenWidth, screenHeight);
+
+//tanımlamalar 
+var score = 0;
+var starArray = [];
+var enemyArray = [];
+var keyboardArray = [];
+var shotArray = [];
+var player = new Player();
+	
+//classlar 
+function Star(){
+    //star x, y 
+    this.x = randomNumber(1, screenWidth);
+    this.y = 0;
+    //boyut 
+    this.radius = 1;
+    //bir sonra ki hareket için ikinci y
+    this.yd = randomNumber(1, 8);
+    this.color = "white";
+} 
+function Player() {
+    this.size = 50;
+    this.x = (screenWidth-50) / 2;
+    this.y = (screenHeight-75);
+    this.speed = 10;
+    this.key = false;
+    this.shots = 0;
+	
+   this.moveLeft = function () {
+        this.x -= this.speed;
+    };
+    this.moveRight = function () {
+        this.x += this.speed;
+    };
+    this.moveUp = function () {
+        this.y -= this.speed;
+    };
+    this.moveDown = function () {
+        this.y += this.speed;
+    };
+    this.shot = function () {
+		laserSound.play();
+        if (shotArray.length === 0) {
+            shotArray.push(new Shot());
+        }
+		
+    };
+}
+
+function Enemy() {
+    this.x = randomNumber(50, screenWidth-50);
+    this.y = 0;
+    this.color = 'green';
+    this.radius = 20;
+    this.yd = 3;
+}
+
+
+function Shot() {
+    this.size = 10;
+    this.color = 'cyan';
+    this.radius = 5;
+    this.x = player.x+50;
+    this.y = player.y;
+    this.yd = 10;
+}
+
+
+ 
+ // canvas mouse event
+ function getMousePos(canvas, event) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
+    };
+}
+//mouse kontrol 
+function isInside(pos, rect){
+    return pos.x > rect.x && pos.x < rect.x+rect.width && pos.y < rect.y+rect.height && pos.y > rect.y
+}
+
+function distance(a, b) {
+    return Math.sqrt(Math.pow((b.x - a.x), 2) + Math.pow((b.y - a.y), 2));
+};
+
+//buton classı 
+function buttonCanvas(x,y){
+	this.x = x;
+	this.y = y;
+	this.width = 150;
+	this.height= 50;
+
+};
+
+//button array
+buttonPlay = new buttonCanvas(((screenWidth-150)/2) , ((screenHeight-150)/2) );
+buttonGit = new buttonCanvas(((screenWidth-150)/2),((screenHeight-10)/2));
+buttonAgain = new buttonCanvas((screenWidth-150)/2,(screenHeight-150));
+
+buttonArray = [];
+buttonArray.push(buttonPlay);
+buttonArray.push(buttonGit);
+buttonArray.push(buttonAgain);
+//button event 
+canvas.addEventListener('click', function(evt) {
+    var mousePos = getMousePos(canvas, evt);
+	
+
+		
+
+	for(item in buttonArray){
+		if(isInside(mousePos, buttonArray[item])){
+		
+			if(item == 0){
+			    mainSound.play();
+				gameLoop();
+				timerId = setInterval(countdown, 1000);
+			}
+			if(item == 1){
+				window.location.href = 'https://alperen317.github.io/AdvancedProgramming/';
+			}
+			if(item == 2){
+				setTimeout("location.reload(true);");
+			}
+			if(item == 3){
+				window.location.href = 'https://alperen317.github.io/AdvancedProgramming/DönemÖdevi/usefull.html';
+			}
+			if(item == 4){
+				player.shot();
+			}
+			if(item == 5 ){
+				
+			}
+
+			
+		}
+	
+	}
+
+	});
+
+	
+	
+	
+	canvas.addEventListener('touchstart', function(evt) {
+	x = evt.touches[0].clientX;
+	y = evt.touches[0].clientY;
+	var mousePos = getMousePos(canvas, evt);
+	mousePos.x  = x;
+	mousePos.y = y;
+
+	if(isInside(mousePos, buttonArray[5])){
+		keyboardArray[37] = true;
+	}
+	if(isInside(mousePos, buttonArray[6])){
+		keyboardArray[39] = true;
+	}
+	
+	
+	
+	
+	});
+
+	canvas.addEventListener('touchend', function(evt) {
+		keyboardArray[37] = false;
+		keyboardArray[39] = false;
+	});
+	
+
+	
+	
+	
+	
+	
+function drawMenu(){
+
+
+	
+	ctx.font = "50px Verdana bold";
+	ctx.fillStyle = "cyan";
+	ctx.fillText("Space Shooter",(screenWidth)/2 - 150 , 150);
+	
+	
+	
+    
+	ctx.fillStyle = "cyan";
+    ctx.fillRect((screenWidth-150)/2,(screenHeight-150)/2,150,50);
+	ctx.font = "25px Verdana bold";
+	ctx.fillStyle = "white";
+	ctx.fillText("Play",(screenWidth-50)/2 , (screenHeight-70)/2);
+	
+	
+	
+	
+	ctx.fillStyle = "cyan";
+    ctx.fillRect((screenWidth-150)/2,(screenHeight-10)/2 ,150,50);
+	ctx.font = "25px Verdana bold";
+	ctx.fillStyle = "white";
+	ctx.fillText("Github",(screenWidth-70)/2, (screenHeight+50)/2);
+	
+	
+	
+		
+}
+
+drawMenu();
+
+// random number 
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+function myFunction() {
+  alert('Hello');
+}
+
+ function countdown() {
+      if (timeLeft == 0) {
+        clearTimeout(timerId);
+        endLoop();
+      } else {
+
+        timeLeft--;
+      }
+    }
+	
+
+
+function gameLoop() {
+
+		
+	
+		//alt planda bulunan butonları kapatmak için
+	buttonArray[0] = 5
+	buttonArray[1] = 10; 
+	
+	
+	
+	
+		  //animasyonun sürekli calışması için
+		 game =  window.requestAnimationFrame(gameLoop);
+		  
+		  
+		  
+		  
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(0, 0, screenWidth, screenHeight);
+    buttonShot = new buttonCanvas( 0,(screenHeight-165),60 ,50 );
+	buttonLeft = new buttonCanvas( 0,(screenHeight-80),100 ,50 );
+	buttonRight = new buttonCanvas( (screenWidth-100),(screenHeight-80),100 ,50 );
+	
+	
+	
+	buttonArray[4] = buttonShot;
+	buttonArray[5] = buttonLeft;
+	buttonArray[6] = buttonRight;
+    //SHOT BUTTON 
+	ctx.fillStyle = "red";
+    ctx.fillRect((0),(screenHeight-165),60,50);
+	//ctx.strokeStyle = "white";
+	//ctx.strokeRect(0, (screenHeight-165), 60, 50);
+	
+	
+	
+	//sağ button
+
+	ctx.fillStyle = "black";
+    ctx.fillRect((screenWidth-100),(screenHeight-80),100,50);
+	ctx.strokeStyle = "white";
+	ctx.strokeRect((screenWidth-100),(screenHeight-80), 100, 50);
+	
+	
+	
+	
+	
+	//sol button
+	ctx.fillStyle = "black";
+    ctx.fillRect((0),(screenHeight-80),100,50);
+	ctx.strokeStyle = "white";
+	ctx.strokeRect(0,(screenHeight-80), 100, 50);
+	
+	
+	//sağ buton >
+	ctx.font = "30px Verdana bold";
+	ctx.fillStyle = "white";
+	ctx.fillText(">", (screenWidth-40) , (screenHeight-48));
+	
+	
+	//sol buton <
+	ctx.font = "30px Verdana bold";
+	ctx.fillStyle = "white";
+	ctx.fillText("<", 48 , (screenHeight-48));
+	
+	
+		//belirli sayıda arka plan için yıldız 
+          if (randomNumber(1, 100) < 50) {
+           starArray.push(new Star());
+          } 
+		  if (randomNumber(1, 100) < 2) {
+            enemyArray.push(new Enemy());
+        }  
+	
+	  
+        draw();
+		
+		
+}
+
+
+//canvas game draw function 
+function draw() {
+	
+	drawTime();
+    drawEnemy();
+    drawStars();
+	drawPlayer();
+	drawShot();
+	drawScore();
+  
+}
+
+function drawStars() {
+    //yıldız arrayinde dolaşarak yıldızları oluşturuyor
+    for (var i = 0; i < starArray.length; i++) {
+        ctx.fillStyle = starArray[i].color;
+        ctx.beginPath();
+        ctx.arc(starArray[i].x, starArray[i].y, starArray[i].radius, 0, Math.PI *2);
+        ctx.fill();
+        ctx.closePath();
+        starArray[i].y += starArray[i].yd;
+        
+    }
+   
+}
+
+
+function drawEnemy() {
+    for (var i = 0; i < enemyArray.length; i++) {
+        ctx.fillStyle = enemyArray[i].color;
+        ctx.beginPath();
+        ctx.arc(enemyArray[i].x, enemyArray[i].y, enemyArray[i].radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.closePath();
+        enemyArray[i].y += enemyArray[i].yd;
+        if (enemyArray[i].y > screenHeight) {
+			
+            enemyArray.splice(i, 1);
+        }
+		
+    }
+}
+
+
+function drawPlayer(){
+
+	
+	
+	  if ((keyboardArray[37]   )&& (player.x + player.size)+50 > player.size * 2) {
+		
+        player.moveLeft();    
+    }
+     
+    if ((keyboardArray[39] )&& (player.x + player.size) < screenWidth-50) {
+        player.moveRight();
+    }
+    
+    if ((keyboardArray[38]   )&& (player.y + player.size) > player.size) {
+        player.moveUp();    
+    }
+    
+    if ((keyboardArray[40]  ) && (player.y + player.size) < screenHeight) {
+        player.moveDown();
+    }
+    
+    if (keyboardArray[32]) {
+        player.shot();
+          
+    }
+    player_img = new Image();
+	player_img.src = 'https://alperen317.github.io/AdvancedProgramming/D%C3%B6nem%C3%96devi/images/player.png'
+
+    ctx.beginPath();
+    ctx.drawImage(player_img, player.x, player.y, 100,105 );
+    ctx.closePath();
+    ctx.fillStyle = "cyan";
+    ctx.fill();
+	
+
+	
+}
+
+var sayac = 0;
+
+
+
+function drawShot() {
+    for (var i = 0; i < shotArray.length; i++) {
+        ctx.fillStyle = shotArray[i].color;
+        ctx.beginPath();
+        ctx.arc(shotArray[i].x, shotArray[i].y, shotArray[i].radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.closePath();
+        shotArray[i].y -= shotArray[i].yd;
+        
+        if (shotArray[i].y < 1) {
+			//Shot array de ki y ekseninde  ekrandan çıkınca silinmesi için
+            shotArray.splice(i, 1);
+            continue;            
+        }
+        for (var j = 0; j < enemyArray.length; j++) {
+			console.log(enemyArray[j].radius)
+            if (distance(shotArray[i], enemyArray[j]) < enemyArray[j].radius) {
+                enemyArray.splice(j, 1);
+                score += 1;
+				boomSound.play();
+                drawEnemy();
+                shotArray.splice(i, 1);
+				
+            } 
+		
+        }
+		
+        
+      
+    }
+}
+
+
+function drawScore() {
+		
+      ctx.font = "50px Verdana bold" ;
+      ctx.fillStyle = "white";
+      ctx.textAlign = "right";
+      ctx.fillText(score, screenWidth - 50, 60);
+    };
+
+function drawTime(){
+
+	  ctx.font = "50px Verdana bold" ;
+      ctx.fillStyle = "white";
+      ctx.fillText(timeLeft, 50, 50);
+
+
+}
+
+
+
+function endLoop(){
+	 
+	cancelAnimationFrame(game);
+	mainSound.pause();
+	 ctx.fillStyle = "#000000";
+     ctx.fillRect(0, 0, screenWidth, screenHeight);
+	 
+	  
+	 
+	 ctx.font = "50px Verdana bold" ;
+     ctx.fillStyle = "white";
+	 ctx.textAlign = "center";
+	 ctx.fillText ("Score = "+score, (screenWidth-50)/2,(screenHeight-50)/2);
+	 
+	ctx.fillStyle = "cyan";
+    ctx.fillRect((screenWidth-150)/2,(screenHeight-150),150,50);
+	ctx.font = "25px Verdana bold";
+	ctx.fillStyle = "white";
+	ctx.fillText("Menu",(screenWidth-20)/2, (screenHeight-120) );
+	
+	
+	buttonRef =  new buttonCanvas((screenWidth-175),(screenHeight-70)  );
+	buttonArray[3] = buttonRef;
+	ctx.fillStyle = "cyan";
+    ctx.fillRect((screenWidth-175),(screenHeight-70) ,150,50);
+	ctx.font = "25px Verdana bold";
+	ctx.fillStyle = "white";
+	ctx.fillText("Usefull Link",(screenWidth-100), (screenHeight-40));
+	
+
+
+}
+
+ 
+
+//keybord listener
+document.addEventListener('keydown', function (e) {
+    keyboardArray[e.keyCode] = true;
+	
+});
+
+document.addEventListener('keyup', function (e) {
+    keyboardArray[e.keyCode] = false;
+});
+
+
+
+</script>
+
+
+
+
+
+</html>
