@@ -1,0 +1,113 @@
+<html>
+	
+<head>
+	
+<link rel = "icon" href = "https://zeynasip.github.io/AdvancedProgramming/TermProject/idea.png"> 
+<link rel="manifest" href="https://zeynasip.github.io/AdvancedProgramming/TermProject/manifest.json"> 
+
+<script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('https://zeynasip.github.io/AdvancedProgramming/sw.js')
+        .then((reg) => { console.log('SW starts', reg.active) })
+        .catch(console.log)
+    }
+</script>
+
+<style>
+	
+.baslik{
+	background-color: white;
+	padding: 15px;
+    color: #C0C3AF;
+    font-family: "ITC Serif Gothicv", Lato;
+    font-size: 10em;
+    letter-spacing: 0.2em;
+    position: absolute;
+    top: 35%;
+	margin-left: 180px;
+}
+@mixin vertical-align($position){
+	position:$position;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+@mixin all-transition($time){
+	transition: all $time;
+	-webkit-transition: all $time;
+}
+body{
+	background-color: #C0C3AF;
+	margin: 0;
+	font-family: 'Muli', sans-serif;
+}
+.menu{
+	font-weight: 100;
+	background: #efefef;
+	width: 150px;
+	height: 100%;
+	padding-left: 50px;
+	position: fixed;
+	z-index: 100;
+	-webkit-box-shadow: -3px 0px 5px 0px rgba(0,0,0,0.2);
+	box-shadow: -3px 0px 5px 0px rgba(0,0,0,0.2);
+	right: -130px;
+	@include all-transition(0.3s);
+	color: #222;
+}
+.menu:hover{
+	transform: translate3d(-130px, 0, 0);
+	animation-timing-function: 1s ease-in;
+}
+.menu:focus{
+	transform: translate3d(-130px, 0, 0);
+	animation-timing-function: 1s ease-in;
+}
+.title{
+	top:50%;
+	@include horizantal-align(absolute);
+	transform: rotate(270deg);
+	left: 10px;
+	font-weight: 800;
+	font-size: 15px;
+}
+.nav{
+	@include vertical-align(absolute);
+    font-weight: 100;
+}
+.nav li{
+    padding-bottom: 30px;
+	list-style-type: none;
+}
+.nav a{
+	display: block;
+	text-decoration: none;
+	color: inherit;
+	include all-transition(0.3s);
+}
+.nav a:hover{
+	color: #aaa;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class = "menu"><br><br><br><br><br><br><br><br><br><br><br>
+		<ul class = "nav">
+			<li><a href = "https://zeynasip.github.io/AdvancedProgramming/TermProject/hakkimizda.html">Hakkımızda</a></li>
+			<li><a href = "https://zeynasip.github.io/AdvancedProgramming/TermProject/fikirler.html">Fikirlere Bak</a></li>
+			<li><a href = "https://zeynasip.github.io/AdvancedProgramming/TermProject/fikirolustur.html">Fikir Dene</a></li>
+			<li><a href = "https://zeynasip.github.io/AdvancedProgramming/TermProject/kaynaklar.html">Kaynaklar</a></li>
+		</ul>
+</div>
+
+<div class = "baslik">DÜKKAN</div>
+	
+</body>
+
+</html>
