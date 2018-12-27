@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Hangman</title>
+    <link rel="icon" href<link rel="icon" sizes="512x512" href="https://aysesenafeyiz.github.io/ileriProgramlama/Project/images/hangman.png" type="image/png" sizes="16x16">
+
+
+  <style>
+
+    .button {
+    color: #831f1f;
+	background: #f0e9d8;
+    font-weight: bold; 
+    width: auto;
+        }
+    .box{
+        width: 75px;
+        height: 75px;
+    }
+    #hangman {
+    background-image: url('https://aysesenafeyiz.github.io/ileriProgramlama/Project/images/hangman.png');
+    background-repeat: no-repeat;
+    width: 404px;
+    height: 512px;
+    border-color: black;
+        border-style: solid;
+        border-width: thin;
+    } 
+    #head {
+        margin-left: 200px;
+        margin-top: 135px;
+    }
+    #leftArm {
+        margin-left: 125px;
+        float: left;
+    }
+    #body {
+        float: left;
+    }
+    #rightArm {
+        float: left;
+    }
+    #leftLeg {
+        margin-left: 170px;
+        clear: left;
+        float: left;
+    }
+    #rightLeg {
+        float: left;
+    }
+    #main {
+	margin-top: -20px;
+	}.hidden {
+	visibility:hidden;
+	}
+	.show {
+	visibility:visible;
+	
+	}
+	.letter {
+	font-size: 2em;
+	width:40px;
+	height:45px;
+	display:inline-block;
+	border-bottom: 2px solid black;
+	text-align:center;
+	margin-right:15px;
+    }
+    .prg {
+	 color: #831f1f;
+	 font-weight: bold
+    }
+	.text{
+	color: black;
+	font-size: 18px;
+	}
+	#reference{
+	margin-top: 20px 
+	}
+
+
+
+      </style>
+
+  
+
+ <script>
+ function restart() {
+ location.reload();
+} 
+ 
+function tryChange(v) {
+    
+	
+	//adam asma
+	//counter++;
+    //document.getElementById(divNames[counter]).appendChild(images[counter]);
+    if(v!="" && v!=" "){
+
+			var alert = document.getElementById("alert");
+            
+
+	
+	let key = v.toLowerCase();
+    let asci=key.charCodeAt(0);
+			//gecersiz karakter girimi onleme
+			if ((asci < 97 && c.hangman.lives !== 0 && c.hangman.correct !== c.hangman.word.length) || (asci > 122 && c.hangman.lives !== 0 && c.hangman.correct !== c.hangman.word.length ) ) {
+					alert.textContent = 'Not a valid key!';
+					setTimeout( function(){
+						alert.textContent = '';
+					}, 2000);
+			} else{
+			//geçerli karakter
+			if(c.hangman.guesses.has(key)==false){
+				c.hangman.guesses.set(key, "g")
+			
+				//tahmin edilenlere ekle
+				var ag = document.getElementById("ag");
+				ag.innerText+=" "+v;
+			
+				//girilen yanlis
+				if ( c.hangman.word.indexOf(key) == -1 ) {
+				//adam asma
+				counter++;
+				document.getElementById(divNames[counter]).appendChild(images[counter]);
+				//cani azalt
+			   c.hangman.lives=c.hangman.lives-1;
+			
+			   }else{
+				//girilen dogru
+			    for( let i = 0; i < c.hangman.word.length; i++ ) {
+				   
+							//iterate throught the correct word after each keyPress
+							if ( key == c.hangman.word[i] ){
+								//if keyPress is in the randomWord
+								document.getElementById(i).className = 'show';
+								c.hangman.correct = document.getElementsByClassName('show').length;//correct counter === number of show classes in the DOM
+								
+								
+							}
+			    }
+			}
+			
+			
+			}else{
+			alert.textContent = 'You already guess!';
+					setTimeout( function(){
+						alert.textContent = '';
+					}, 2000);
+			
+			
+			}
+		
+		}
+		
+		
+		
+		if ( c.hangman.correct == c.hangman.word.length) {
+		//if correct === number of show classes
+		alert.textContent = "You WIN!!!";
+																
+		}
+		
+		if ( c.hangman.lives == 0) {
+		//if correct === number of show classes
+		alert.innerText = "Game Over :(  The word must be '"+c.hangman.word+ "'.";
+																
+		}
+		
+		document.getElementById("letter").value="";
+		}
+	
+	
+return (5-counter);
+}
+ </script>
+
+
+
+
+
+</head>
+
+<body>
+<body style="background-color:#b18e5b8a;">
+
+<h2 id="title" style="
+    color: #831f1f;
+">Hangman</h2>
+
+
+
+<p class="prg " >Category :  
+<output type=text id=wt class="text">
+</p>
+
+<p class="prg ">Lives :    
+<output type=text id=l class="text">
+</p>
+
+<p class="prg ">Already Guessed :
+<output type=text id=ag class="text">
+</p>
+
+<h4 id="alert"></h4>
+
+<p>
+<input type=text id=letter maxlength="1" >
+<button class="button" , onclick="l.innerText=tryChange(letter.value)" >Try</button>
+<button class="button" , onclick="restart()" >Restart</button>
+</p>
+
+
+<div id="main"> 
+
+</div>
+
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+
+<div id="hangman" >
+    <div class="box" id="head"></div>
+    <div class="box" id="leftArm"></div>
+    <div class="box" id="body"></div>
+    <div class="box" id="rightArm"></div>
+    <div class="box" id="leftLeg"></div>
+    <div class="box" id="rightLeg"></div>
+</div>
+
+<div id="reference">
+<li><a href="https://github.com/mmason33/HangmanJS/tree/master/assets/images">Ref for images</a> </li>
+  
+<li><a href="https://aysesenafeyiz.github.io/ileriProgramlama/HW2/Database.html">Ref jor JS</a></li>
+</div>
+
+<p>Prepared by <a href="https://github.com/AyseSenaFeyiz">Ayse Sena Feyiz</a> 
+</p>
+	
+<script src="https://aysesenafeyiz.github.io/ileriProgramlama/Project/Database.js"></script>
+<script>
+c=new Database();
+
+
+</script>
+
+
+<script>
+    title.innerText = document.title;
+	
+</script>
+
+</body>
+</html>
+
