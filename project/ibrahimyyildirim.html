@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title> TICKET BOOKING SYSTEM </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://ibrahimyyildirim.github.io/advancedProgramming/Project/seat.css">
+  <link rel="stylesheet" href="https://ibrahimyyildirim.github.io/advancedProgramming/Project/buton.css">
+ <link rel="stylesheet" href="https://ibrahimyyildirim.github.io/advancedProgramming/Project/formScreen.css">
+</head>
+
+<div class="header">
+    <h1>Ticket Booking System</h1>
+  </div>
+  <div class="canvas-wrap">
+    <canvas id="canvas"></canvas>
+  </div>
+
+<body onload="db.kontrol();satilanBilet(); openMessage();controlHours();">
+
+    <br>   
+    <div class="container">
+<div align="center"> 
+    <select onchange="temizle();db.kontrol();temizle2();satilanBilet();controlHours();" required="" id="movie1">
+    <option value="Goodfellas">Goodfellas</option>
+      <option value="The Great Gatsby">The Great Gatsby</option>
+      <option value="Predestination">Predestination</option>
+      <option value="Inception">Inception</option>
+      <option value="Focus">Focus</option>
+    </select>
+     
+     
+    <input class="date"onchange="temizle();db.kontrol();temizle2();satilanBilet();controlHours();" type="date" name="date" id="date" min="today" required="">
+     
+
+    <select onchange="temizle();db.kontrol();temizle2();satilanBilet();controlHours();" required="" id="session1">
+      <option value="11">11:00</option>
+      <option value="13">13:00</option>
+      <option value="16">17:00</option>
+      <option value="19">20:00</option>
+    </select>
+</div>
+<div class="seatSelection col-lg-12">
+    
+   <!-- <p><img src="screen.png" id="cog2" align="center"></p>-->
+   <b><p > P E R D E </p></b>
+    <div class="seatsChart col-lg-6">
+        <div class="seatRow">
+            <div class="seatRowNumber">
+                A
+            </div>
+            <div id="A-1" role="checkbox" class=" seatNumber ">1</div>
+            <div id="A-2" role="checkbox" class=" seatNumber ">2</div>
+            <div id="A-3" role="checkbox" class=" seatNumber ">3</div>
+            <div id="A-4" role="checkbox" class=" seatNumber ">4</div>
+            <div id="A-5" role="checkbox" class=" seatNumber ">5</div>
+            <div id="A-6" role="checkbox" class=" seatNumber ">6</div>
+            <div id="A-7" role="checkbox" class=" seatNumber ">7</div>
+            <div id="A-8" role="checkbox" class=" seatNumber ">8</div>
+            <div id="A-9" role="checkbox" class=" seatNumber ">9</div>
+            <div id="A-10" role="checkbox" class=" seatNumber ">10</div>
+            <div id="A-11" role="checkbox" class=" seatNumber ">11</div>
+            <div id="A-12" role="checkbox" class=" seatNumber ">12</div>
+        </div>
+        <div class="seatRow">
+            <div class="seatRowNumber">
+                B
+            </div>
+            <div id="B-1" role="checkbox" class=" seatNumber ">1</div>
+            <div id="B-2" role="checkbox" class=" seatNumber ">2</div>
+            <div id="B-3" role="checkbox" class=" seatNumber ">3</div>
+            <div id="B-4" role="checkbox" class=" seatNumber ">4</div>
+            <div id="B-5" role="checkbox" class=" seatNumber ">5</div>
+            <div id="B-6" role="checkbox" class=" seatNumber ">6</div>
+            <div id="B-7" role="checkbox" class=" seatNumber ">7</div>
+            <div id="B-8" role="checkbox" class=" seatNumber ">8</div>
+            <div id="B-9" role="checkbox" class=" seatNumber  ">9</div>
+            <div id="B-10" role="checkbox" class=" seatNumber ">10</div>
+            <div id="B-11" role="checkbox" class=" seatNumber ">11</div>
+            <div id="B-12" role="checkbox" class=" seatNumber ">12</div>
+            <div id="B-13" role="checkbox" class=" seatNumber  ">13</div>
+            <div id="B-14" role="checkbox" class=" seatNumber ">14</div>
+        </div>
+        <div class="seatRow">
+            <div class="seatRowNumber">
+                C
+            </div>
+            <div id="C-1" role="checkbox" class=" seatNumber ">1</div>
+            <div id="C-2" role="checkbox" class=" seatNumber ">2</div>
+            <div id="C-3" role="checkbox" class=" seatNumber ">3</div>
+            <div id="C-4" role="checkbox" class=" seatNumber ">4</div>
+            <div id="C-5" role="checkbox" class=" seatNumber ">5</div>
+            <div id="C-6" role="checkbox" class=" seatNumber ">6</div>
+            <div id="C-7" role="checkbox" class=" seatNumber ">7</div>
+            <div id="C-8" role="checkbox" class=" seatNumber ">8</div>
+            <div id="C-9" role="checkbox" class=" seatNumber ">9</div>
+            <div id="C-10" role="checkbox" class=" seatNumber ">10</div>
+            <div id="C-11" role="checkbox" class=" seatNumber ">11</div>
+            <div id="C-12" role="checkbox" class=" seatNumber ">12</div>
+            <div id="C-13" role="checkbox" class=" seatNumber ">13</div>
+            <div id="C-14" role="checkbox" class=" seatNumber ">14</div>
+  
+        </div>
+        <div class="seatRow">
+            <div class="seatRowNumber">
+                D
+            </div>
+            <div id="D-1" role="checkbox" class=" seatNumber ">1</div>
+            <div id="D-2" role="checkbox" class=" seatNumber ">2</div>
+            <div id="D-3" role="checkbox" class=" seatNumber ">3</div>
+            <div id="D-4" role="checkbox" class=" seatNumber ">4</div>
+            <div id="D-5" role="checkbox" class=" seatNumber ">5</div>
+            <div id="D-6" role="checkbox" class=" seatNumber ">6</div>
+            <div id="D-7" role="checkbox" class=" seatNumber ">7</div>
+            <div id="D-8" role="checkbox" class=" seatNumber ">8</div>
+            <div id="D-9" role="checkbox" class=" seatNumber ">9</div>
+            <div id="D-10" role="checkbox" class=" seatNumber ">10</div>
+            <div id="D-11" role="checkbox" class=" seatNumber ">11</div>
+            <div id="D-12" role="checkbox" class=" seatNumber ">12</div>     
+        </div>
+        <div class="seatRow">
+            <div class="seatRowNumber">
+                E
+            </div>
+            <div id="E-1" role="checkbox" class=" seatNumber ">1</div>
+            <div id="E-2" role="checkbox" class=" seatNumber ">2</div>
+            <div id="E-3" role="checkbox" class=" seatNumber ">3</div>
+            <div id="E-4" role="checkbox" class=" seatNumber ">4</div>
+            <div id="E-5" role="checkbox" class=" seatNumber ">5</div>
+            <div id="E-6" role="checkbox" class=" seatNumber  ">6</div>
+            <div id="E-7" role="checkbox" class=" seatNumber ">7</div>
+            <div id="E-8" role="checkbox" class=" seatNumber ">8</div>
+            <div id="E-9" role="checkbox" class=" seatNumber ">9</div>
+            <div id="E-10" role="checkbox" class=" seatNumber ">10</div>
+            <div id="E-11" role="checkbox" class=" seatNumber ">11</div>
+            <div id="E-12" role="checkbox" class=" seatNumber ">12</div> 
+              <img src="https://ibrahimyyildirim.github.io/advancedProgramming/Project/exit.png" id="cog2" width="14" height="40">
+        </div>
+    <div class="seatRow">
+            <div class="seatRowNumber">
+                F
+            </div>
+            <div id="F-1" role="checkbox" class=" seatNumber ">1</div>
+            <div id="F-2" role="checkbox" class=" seatNumber ">2</div>
+            <div id="F-3" role="checkbox" class=" seatNumber ">3</div>
+            <div id="F-4" role="checkbox" class=" seatNumber ">4</div>
+            <div id="F-5" role="checkbox" class=" seatNumber ">5</div>
+            <div id="F-6" role="checkbox" class=" seatNumber ">6</div>
+            <div id="F-7" role="checkbox" class=" seatNumber ">7</div>
+            <div id="F-8" role="checkbox" class=" seatNumber ">8</div>
+            <div id="F-9" role="checkbox" class=" seatNumber ">9</div>
+            <div id="F-10" role="checkbox" class=" seatNumber ">10</div>
+            <div id="F-11" role="checkbox" class=" seatNumber ">11</div>
+            <div id="F-12" role="checkbox" class=" seatNumber ">12</div>
+            <div id="F-13" role="checkbox" class=" seatNumber ">13</div>
+            <div id="F-14" role="checkbox" class=" seatNumber ">14</div>
+        </div>
+    <div class="seatRow">
+            <div class="seatRowNumber">
+                G
+            </div>
+            <div id="G-1" role="checkbox" class=" seatNumber ">1</div>
+            <div id="G-2" role="checkbox" class=" seatNumber ">2</div>
+            <div id="G-3" role="checkbox" class=" seatNumber ">3</div>
+            <div id="G-4" role="checkbox" class=" seatNumber ">4</div>
+            <div id="G-5" role="checkbox" class=" seatNumber ">5</div>
+            <div id="G-6" role="checkbox" class=" seatNumber ">6</div>
+            <div id="G-7" role="checkbox" class=" seatNumber ">7</div>
+            <div id="G-8" role="checkbox" class=" seatNumber ">8</div>
+            <div id="G-9" role="checkbox" class=" seatNumber ">9</div>
+            <div id="G-10" role="checkbox" class=" seatNumber ">10</div>
+            <div id="G-11" role="checkbox" class=" seatNumber ">11</div>
+            <div id="G-12" role="checkbox" class=" seatNumber ">12</div>
+            <div id="G-13" role="checkbox" class=" seatNumber ">13</div>
+            <div id="G-14" role="checkbox" class=" seatNumber ">14</div>
+        </div>
+    <div class="seatRow">
+            <div class="seatRowNumber">
+                H 
+
+            </div>
+            <div id="H-1" role="checkbox" class=" seatNumber ">1</div>
+            <div id="H-2" role="checkbox" class=" seatNumber ">2</div>
+            <div id="H-3" role="checkbox" class=" seatNumber ">3</div>
+            <div id="H-4" role="checkbox" class=" seatNumber ">4</div>
+            <div id="H-5" role="checkbox" class=" seatNumber ">5</div>
+            <div id="H-6" role="checkbox" class=" seatNumber ">6</div>
+            <div id="H-7" role="checkbox" class=" seatNumber ">7</div>
+            <div id="H-8" role="checkbox" class=" seatNumber ">8</div>
+            <div id="H-9" role="checkbox" class=" seatNumber ">9</div>
+            <div id="H-10" role="checkbox" class=" seatNumber ">10</div>
+            <div id="H-11" role="checkbox" class=" seatNumber ">11</div>
+            <div id="H-12" role="checkbox" class=" seatNumber ">12</div>
+            <div id="H-13" role="checkbox" class=" seatNumber ">13</div>
+            <div id="H-14" role="checkbox" class=" seatNumber ">14</div>
+        </div>
+    </div>
+
+<b> 
+</div>
+<div class="form-style-5">
+                     
+<form id="form" action="javascript:kontrolSat();db.kontrol();makeTable();satilanBilet();">
+<fieldset>
+<legend><span class="number">►</span> Bilet Bilgileri</legend>
+<input type="text" id="name" value="" placeholder="Ad Soyad *">
+<input type="email" id="email" value="" placeholder="E-mail *">
+ <legend><span class="number">✓</span> Seçili Koltuklar</legend><p id="koltukNumara" > - </p>
+ <legend><span class="number">₺</span> Toplam Tutar</legend><p id="koltukFiyat" > - ₺ </p>
+</fieldset>
+<p >Bilet adet fiyat: 25.00 ₺ </p>
+
+<input type="submit" value="Satın Al" />
+</form>
+
+    <table id="satilanBilet"> </table>
+    <p id="koltukNumara" > </p>
+    <script src="https://ibrahimyyildirim.github.io/advancedProgramming/Project/koltukSayac.js"></script>
+    <script src="https://ibrahimyyildirim.github.io/advancedProgramming/Project/biletTutar.js"></script>
+    <div align="center">
+    <button  id="myBtn" class="button"onclick="makeTable()" style="vertical-align:middle"><span>Bilet Çıktısı</span></button>
+  <button class="button"onclick="secimleriKaldir();temizle2();" style="vertical-align:middle"><span>Seçimleri Kaldır</span></button>
+  <button  id="myBtn2" class="button"onclick="satilanBilet();" style="vertical-align:middle"><span>Salon Bilgileri</span></button>
+</div>
+</div>
+
+
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>
+        <div align="center"><head>Bilet Çıktı Ekranı</head></div>
+    <table id="tabloBilet"> </table>
+    </p>
+  </div>
+</div>
+<div id="myModal2" class="modal2">
+  <div class="modal-content2">
+    <span class="close2">&times;</span>
+    <p>
+    <table id="satilanTablo"> </table>
+    </p>
+  </div>
+</div>
+<hr>
+</b>
+<p><i>Ref:</i>
+<a href="https://codepen.io/hectorfeliz/pen/QbvXLo">  Seats</a>,<a href="https://www.sanwebe.com/2014/08/css-html-forms-designs" 
+>  Form Screen</a>,<a href="https://codepen.io/cojdev/pen/PjYPKv"
+>  Header</a> 
+</p>
+
+    <script src="https://ibrahimyyildirim.github.io/advancedProgramming/Project/baslik.js"> </script>
+    <script src="https://ibrahimyyildirim.github.io/advancedProgramming/Project/currentDate.js"> </script>
+    <script src="https://ibrahimyyildirim.github.io/advancedProgramming/Project/pop_up.js"></script>
+    <script src="https://ibrahimyyildirim.github.io/advancedProgramming/Project/pop_up2.js"></script>
+    <script src="https://ibrahimyyildirim.github.io/advancedProgramming/Project/seat.js"></script>
+    <script>db= new database(); 
+</script>
+
+<script> 
+	var today = new Date();
+	var dd = today.getDate();
+    const currentTime=today.getHours();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+ 		if(dd<10){
+       		 dd='0'+dd
+    	} 
+    	if(mm<10){
+        	mm='0'+mm
+    	} 
+	today = yyyy+'-'+mm+'-'+dd;
+	document.getElementById("date").setAttribute("min", today);
+
+function openMessage(){
+    
+x = window.innerWidth;
+y = window.innerHeight;
+    if(y>x){
+alert("Kullandığınız cihazın ekran ölçülerine göre yatay kullanmanız önerilir.");
+}
+console.log("genişlik:"+x+"yükseklik:"+y)
+}
+
+
+</script>
+</body>
+</html>

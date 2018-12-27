@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>BİLİŞİM BİLGİ YARIŞMASI</title>
+	<style>
+body {
+	background-color:#1F2739; 
+	font-family:arial;
+	color:white;
+	margin: 2em auto 0;
+	max-width: 700px;
+}
+h2 {text-align:center;color:white;}
+#score {
+    text-align:center;
+	color:lime;	
+}
+.question {
+    font-family: "white";
+    font-size: 30px;
+    color: white;
+}
+#btn0, #btn1, #btn2, #btn3 {
+	cursor: pointer;
+    background-color: white;
+    width: 700px;
+    font-size: 20px;
+    color: #1F2739;
+    padding: 10px 10px;
+	text-align:left;
+}
+qnum {
+    color: white;
+    font-size: 18px;
+}
+#mistake { text-align:center; color:red;}
+#rtime { text-align:center; color:red;}
+.btn{text-align:center;}
+
+	</style>
+	
+</head>
+<body>
+<p id="quiz">
+	<br>
+	<h2>BİLİŞİM BİLGİ YARIŞMASI</h2>
+	<br>
+	<h4 id="score">DOĞRU SAYISI: 0</h4>
+	<h4 id="mistake">YANLIŞ SAYISI: 0</h4>
+	
+	<p class="btn">
+	<input type=button value="Restart" onClick="restart()"/>
+	</p>
+	
+	<p id="qnum">SORU: </p>
+	<p id="question"></p>
+	
+	<p class="buttons">
+		</p><button id="btn0">A) <span id="choice0"></span></button></p>
+		</p><button id="btn1">B) <span id="choice1"></span></button></p>
+		</p><button id="btn2">C) <span id="choice2"></span></button></p>
+		</p><button id="btn3">D) <span id="choice3"></span></button></p>
+    </p>
+</p>
+
+<br>
+<p id = "referanslar" style="color:magenta">References: </h4>
+<a href="https://www.w3schools.com/js/" style="color:white">w3schools</a>&nbsp;
+<a href="https://codepen.io/Siyanda/pen/Veajpw" style="color:white">Codepen</a>
+</p>
+<script src="https://sahinalcin.github.io/aptworks/PROJECT/game.js"></script>
+</body>
+</html>
