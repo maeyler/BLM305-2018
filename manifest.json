@@ -4,8 +4,8 @@
   "description": "Advanced Programming work files",
   "start_url": "/BLM305/",
   "display": "standalone",
-  "background_color": "yellow",
-  "theme_color": "yellow",
+  "background_color": "#fbc02d",
+  "theme_color": "#fbc02d",
   "icons": [
     {
       "src": "images/305A.png",
