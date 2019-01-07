@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Final Exam </title>
+</head>
+
+<script>
+"use strict";
+function report(x) {
+    out.innerText += x+'\n'
+    console.log(x)
+}
+function text(t) {
+    report(t.length+" chars")
+    //find number of lines in String t
+    let k = t.split('\n').length
+    report(k+" lines")
+}
+function response(r) {
+    report("response")
+    return r.text()
+}
+function read(f) {
+    fetch(f).then(response).then(text)
+    .catch(console.error)
+    report("start")
+}
+function noRep(a) {
+    let n = []
+    let add = (p) =>
+      {if (!n.includes(p)) n.push(p)}
+    for (let d of data) { 
+      add(d.nw); add(d.se) 
+    }
+    return n.length+' Points: '+n
+}
+function toMap(a) {
+    let m = new Map()
+    for (let k of a) {
+      let c = m.get(k)
+      if (!c) c = 0;
+      m.set(k, c+1)
+    }
+    //return m -- this is the expected answer
+    //to print m, we need another Array
+    let s = []
+    for (let k of m.keys()) 
+        s.push(k+' => '+m.get(k))
+    return s.join(', ')
+}
+class Point {
+  //Cartesian coordinates x, y
+  constructor(x, y) {
+    this.x = x
+    this.y = y
+  }
+  toString() {
+    return "("+this.x+","+ this.y+")"
+  }
+}
+
+class Rectangle {
+  //north-west and south-east corners  
+  constructor(nw, se) {
+    this.nw = nw
+    this.se = se
+  }
+  toString() {
+    return this.nw+":"+ this.se
+  }
+}
+</script>
+
+<body>
+
+<h2 id=title></h2>
+
+<div><h3>Q1</h3>
+<pre>
+let b1 = [11,13,13,11]
+let s1 = new Set()
+for (let x of b1) s1.add(x)
+b1.length == 4,  s1.size == 2
+Repetitions are removed
+</pre></div>
+
+<div><h3>Q2</h3>
+URL <input type=text id=url value="Final.txt">
+<input type=button value="Q2" onClick="read(url.value)">
+<pre id=out>
+let k = t.split('\n').length
+
+</pre>
+</div>
+
+<div><h3>Q3</h3>
+<pre id=out3>
+</pre></div>
+
+<div><h3>Q4</h3>
+<pre id=out4>
+nw  Point
+se.x  Number
+se.toString  Function
+se.y.toString()  String
+</pre></div>
+
+<div><h3>Q5</h3>
+<pre id=out5>
+p2 is Object
+p is Point 
+with toString method
+</pre></div>
+
+<div><h3>Q6</h3>
+<pre>
+&lt;div>
+&lt;b>Final&lt;/b> exam
+&lt;p>is easy&lt;/p>
+&lt;/div>
+</pre></div>
+
+<hr />
+<div>
+<b>Final</b> exam
+<p>is easy</p>
+</div>
+
+<script>
+    title.innerText = document.title
+    let b1 = [11,13,13,11]
+    let s1 = new Set(b1)
+    let p = new Point(3, 4)
+    let q = new Point(5, 8)
+    let r = new Rectangle(p, q)
+    out3.innerText = Point+'\n'+Rectangle+'\n'+'Rectangle '+r
+    let data = []; data.push(r);
+    data.push(new Rectangle(p, p))
+    data.push(new Rectangle(q, p))
+    data.push(new Rectangle(q, q))
+    out4.innerText += '\n'+noRep+'\n'+noRep(data)
+    let a = [305, "FSM", p, 305, "BLM", p, p, "BLM", "FSM", "BLM"]
+    out5.innerText += '\n'+toMap+'\n'+a+'\n'+toMap(a)
+</script>
+
+</body>
+</html>
