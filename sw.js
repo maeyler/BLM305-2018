@@ -1,6 +1,7 @@
-const CACHE ='JS'
+const CACHE ='JS2'
 
 function save(req, resp) {
+  if (!req.url.includes("github")) return resp;
   return caches.open(CACHE)
   .then(cache => {
     cache.put(req, resp.clone());
@@ -10,7 +11,7 @@ function save(req, resp) {
 }
 function fetchCB(e) { //fetch first
   let req = e.request
-  console.log('BLM', req.url);
+  console.log('AP', req.url);
   e.respondWith(
     fetch(req).then(r2 => save(req, r2))
     .catch(() => { return caches.match(req).then(r1 => r1) })
